@@ -1,7 +1,7 @@
 * {margin: 0; padding: 0;}
 
 body {
-    background: radial-gradient(circle, rgba(0,128,0,0.6) 0%, rgba(0,128,0,0.2) 100%);
+    
 }
 
 .navbar {
@@ -9,14 +9,19 @@ body {
     justify-content: flex-end;
     gap: 5px;
     padding: 25px 25px;
-    background: radial-gradient(circle, rgba(0,128,0,0.6) 0%, rgba(0,128,0,0.2) 100%);
+    background-color: #0D330E;
 }
 
+#logo-navbar{
+    background-color: #0D330E;
+    height: 80px;
+}
+    
+
 .navbar__btn {
+    color: aliceblue;
     padding: 8px 10px;
     background: none;
-    /* 
     border: none; 
-    */
     cursor: pointer;
 }
