@@ -22,3 +22,17 @@
     border: none; 
     cursor: pointer;
 }
+
+#login-btn{
+    color: aliceblue;
+    padding: 10px 10px 10px 10px;
+    background-color: #4CAF50;
+    border: none; 
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#logo-header{
+    background-image: -moz-element(#logo-navbar);
+    display: block;
+}
