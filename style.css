@@ -13,16 +13,18 @@
 #logo-navbar{
     background-color: #0D330E;
     text-align: left;
-    height: 80px;
+    height: 200px;
 }
     
 
 .navbar__btn {
     color: aliceblue;
     background: none;
-    padding: 8px 10px;
+    padding: 8px 20px 8px 20px;
     border: none; 
     cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
 }
 
 #login-btn{
@@ -34,7 +36,9 @@
     border-radius: 5px;
 }
 
-#logo-header{
+#imagem-header{
     height: 400px;
-    border-radius: 10px;
+    width: auto;
+    top: 0;
+    left: 0;
 }
