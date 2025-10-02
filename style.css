@@ -1,37 +1,40 @@
-* {margin: 0; padding: 0;}
+* {
+    margin: 0; padding: 0;
+}
 
 .navbar {
+    background-color: #0D330E;
     display: flex;
     justify-content: flex-end;
     gap: 5px;
     padding: 25px 25px;
-    background-color: #0D330E;
 }
 
 #logo-navbar{
-    text-align: left;
     background-color: #0D330E;
+    text-align: left;
     height: 80px;
 }
     
 
 .navbar__btn {
     color: aliceblue;
-    padding: 8px 10px;
     background: none;
+    padding: 8px 10px;
     border: none; 
     cursor: pointer;
 }
 
 #login-btn{
+    background-color: #4CAF50;
     color: aliceblue;
     padding: 10px 10px 10px 10px;
-    background-color: #4CAF50;
     border: none; 
     cursor: pointer;
     border-radius: 5px;
 }
 
 #logo-header{
-    
+    height: 400px;
+    border-radius: 10px;
 }
