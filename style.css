@@ -42,3 +42,11 @@
     top: 0;
     left: 0;
 }
+
+#main-section{
+    padding: 20px 50px 20px 50px;
+    text-align: justify;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+}
