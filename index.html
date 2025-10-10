@@ -1,6 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+    
+    <!-- Jquery -->
+    <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Capiclima</title>
@@ -8,72 +17,107 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-    <nav>
-        <!-- Navegação (Página Inicial, Sobre, Atividades, Contato, Oportunidades, Login) -->
-        <div class="navbar">
-            <img id="logo" src="./images/logo/CAPICLIMA - LOGO POSITIVO VERTICAL.png" alt="Logo do Coletivo CapiClima">
-            <a href="index.html"><button class="navbar__btn">Início</button></a>
-            <a href="sobre.html"><button class="navbar__btn">Sobre</button></a>
-            <a href="atividades.html"><button class="navbar__btn">Atividades</button></a>
-            <a href="contato.html"><button class="navbar__btn">Contato</button></a>
-            <a href="oportunidades.html"><button class="navbar__btn">Oportunidades</button></a>
-            <a href="login.html"><button id="login-btn">Login</button></a>
+
+    <!-- Navegação (Página Inicial, Sobre, Atividades, Contato, Oportunidades, Login) -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="index.html">
+            <img id="logo" src="./images/logo/CAPICLIMA - LOGO POSITIVO VERTICAL.png" height="60" alt="Logo do Coletivo CapiClima">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="index.html">Início</a></li>
+                <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
+                <li class="nav-item"><a class="nav-link" href="atividades.html">Atividades</a></li>
+                <li class="nav-item"><a class="nav-link" href="contato.html">Contato</a></li>
+                <li class="nav-item"><a class="nav-link" href="oportunidades.html">Oportunidades</a></li>
+                <li class="nav-item">
+                    <a href="login.html" class="btn btn-success ml-lg-2">Login</a>
+                </li>
+            </ul>
         </div>
     </nav>
-    <header>
-        <!-- Cabeçalho com imagem de fundo, título, subtítulo e botão "Saiba Mais" -->
-        <div class="header__content">
-            <img id="imagem-header" src="./images/geral/img header principal.png" alt="Imagem de fundo com foto de floresta e rio">
-            <h1 class="header__title">Junte-se a nós pela justiça climática!</h1>
-            <a href="sobre.html" class="header__btn">Saiba Mais</a>
+
+    <!-- Cabeçalho com imagem de fundo, título, subtítulo e botão "Saiba Mais" -->
+    <header class="text-center position-relative">
+        <img id="imagem-header" src="./images/geral/img header principal.png" class="img-fluid w-100" alt="Imagem de fundo com foto de floresta e rio">
+        <div class="position-absolute w-100 text-white" style="top: 40%; left: 0;">
+            <h1 class="header__title display-4 font-weight-bold">Junte-se a nós pela justiça climática!</h1>
+            <a href="sobre.html" class="btn btn-success btn-lg mt-3">Saiba Mais</a>
         </div>
     </header>
-    <main>
+
+    <main class="container my-5">
         <br><br>
         <!-- Seção principal com últimas ações e botão "Saiba mais" -->
         <section class="main-section">
-            <h2 class="main-section-title">Últimas Ações</h2>
-            <div class="main-activities">
-                <div class="activity">
-                    <img src="images/atividade1.jpg" alt="Atividade 1">
-                    <h3>Educação Ambiental</h3>
-                    <p>Promovemos workshops e palestras para conscientizar a comunidade sobre as mudanças climáticas e suas consequências.</p>
+            <h2 class="main-section-title text-center mb-4">Últimas Ações</h2>
+            <div class="row">
+                <!-- Atividade 1 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="images/atividade1.jpg" class="card-img-top" alt="Atividade 1">
+                        <div class="card-body">
+                            <h3 class="card-title">Educação Ambiental</h3>
+                            <p class="card-text">Promovemos workshops e palestras para conscientizar a comunidade sobre as mudanças climáticas e suas consequências.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="activity">
-                    <img src="images/atividade2.jpg" alt="Atividade 2">
-                    <h3>Projetos de Sustentabilidade</h3>
-                    <p>Desenvolvemos projetos que incentivam práticas sustentáveis, como reciclagem, economia de energia e conservação da água.</p>
+
+                <!-- Atividade 2 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="images/atividade2.jpg" class="card-img-top" alt="Atividade 2">
+                        <div class="card-body">
+                            <h3 class="card-title">Projetos de Sustentabilidade</h3>
+                            <p class="card-text">Desenvolvemos projetos que incentivam práticas sustentáveis, como reciclagem, economia de energia e conservação da água.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="activity">
-                    <img src="images/atividade3.jpg" alt="Atividade 3">
-                    <h3>Advocacia Climática</h3>
-                    <p>Trabalhamos para influenciar políticas públicas que promovam a justiça climática e a proteção do meio ambiente.</p>
+
+                <!-- Atividade 3 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="images/atividade3.jpg" class="card-img-top" alt="Atividade 3">
+                        <div class="card-body">
+                            <h3 class="card-title">Advocacia Climática</h3>
+                            <p class="card-text">Trabalhamos para influenciar políticas públicas que promovam a justiça climática e a proteção do meio ambiente.</p>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <a href="atividades.html"><button id="saiba-mais-btn">Saiba mais</button></a>
-                </div>
+            </div>
+
+            <!-- Botão Saiba mais -->
+            <div class="text-center mt-4">
+                <a href="atividades.html" class="btn btn-success btn-lg" id="saiba-mais-btn">Saiba mais</a>
             </div>
         </section>
     </main>
-    <section class="partners">
-        <!-- Seção de parceiros com logos -->
-        <h2 class="partners-title">Nossos Parceiros</h2>
-        <div class="partners-logos">
-            <img src="images/parceiros/logo1.png" alt="Logo do Parceiro 1">
-            <img src="images/parceiros/logo2.png" alt="Logo do Parceiro 2">
-            <img src="images/parceiros/logo3.png" alt="Logo do Parceiro 3">
-            <img src="images/parceiros/logo4.png" alt="Logo do Parceiro 4">
-        </div>
-    </footer>
-                <a href="https://www.facebook.com/capiclima" target="_blank">Facebook</a>
-                <a href="https://www.instagram.com/capiclima" target="_blank">Instagram</a>
-                <a href="https://www.twitter.com/capiclima" target="_blank">Twitter</a>
+
+    <!-- Seção de parceiros com logos -->
+    <section class="partners bg-light py-5">
+        <div class="container text-center">
+            <h2 class="partners-title mb-4">Nossos Parceiros</h2>
+            <div class="row justify-content-center">
+                <div class="col-6 col-md-3 mb-3"><img src="images/parceiros/logo1.png" class="img-fluid" alt="Logo do Parceiro 1"></div>
+                <div class="col-6 col-md-3 mb-3"><img src="images/parceiros/logo2.png" class="img-fluid" alt="Logo do Parceiro 2"></div>
+                <div class="col-6 col-md-3 mb-3"><img src="images/parceiros/logo3.png" class="img-fluid" alt="Logo do Parceiro 3"></div>
+                <div class="col-6 col-md-3 mb-3"><img src="images/parceiros/logo4.png" class="img-fluid" alt="Logo do Parceiro 4"></div>
             </div>
         </div>
-    </footer>
-</body>
+    </section>
 
-<script>
-    //vamo usar JQuery
-</script>
+    <!-- Rodapé -->
+    <footer class="bg-dark text-white text-center py-3">
+        <div class="container">
+            <p class="mb-2">Siga o CapiClima nas redes sociais:</p>
+            <a href="https://www.facebook.com/capiclima" target="_blank" class="text-white mx-2">Facebook</a> |
+            <a href="https://www.instagram.com/capiclima" target="_blank" class="text-white mx-2">Instagram</a> |
+            <a href="https://www.twitter.com/capiclima" target="_blank" class="text-white mx-2">Twitter</a>
+        </div>
+    </footer>
+
+</body>
 </html>
