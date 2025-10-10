@@ -75,3 +75,32 @@ body {
     padding: 20px;
     background-color: #0D330E;
 }
+
+.main-section .row {
+  background-color: #E54210;
+  padding: 30px;
+}
+
+/* Estilo dos cards */
+.card {
+  background-color: #0D330E;
+  color: #ffffff;
+  border: none;
+  border-radius: 15px;
+  overflow: hidden; 
+}
+
+/* Imagens dentro dos cards arredondadas */
+.card img {
+  border-radius: 50%;
+  width: 150px;        /* ajustável */
+  height: 150px;       /* ajustável */
+  object-fit: cover;   /* mantém o recorte bonito */
+  margin: 20px auto 0; /* centraliza e dá espaço */
+  display: block;
+}
+
+/* Centraliza conteúdo do card */
+.card-body {
+  text-align: center;
+}
