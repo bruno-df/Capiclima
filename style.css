@@ -11,7 +11,7 @@ body {
 }
 
 /* Navbar Styles */
-.navbar {
+.navbar-light {
     background-color: #0D330E;
     display: flex;
     justify-content: flex-end;
