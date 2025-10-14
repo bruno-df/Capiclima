@@ -90,7 +90,7 @@ body {
 }
 
 
-/* Estilo dos cards */
+/* Estilo dos cards INICIO */
 .card {
   background-color: #0D330E;
   color: #ffffff;
@@ -109,7 +109,49 @@ body {
   display: block;
 }
 
-/* Centraliza conteúdo do card */
-.card-body {
-  text-align: center;
-}
+/*card sobre*/
+
+ .custom-card {
+      border: 3px solid #ddd; /* borda grossinha */
+      border-radius: 15px;
+      background-color: #fff;
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+      align-items: stretch;
+      flex-wrap: wrap;
+    }
+
+    .img-container {
+      flex: 0 0 200px; /* largura fixa da imagem */
+      height: 200px;
+      overflow: hidden;
+      border-radius: 15px 0 0 15px;
+    }
+
+    .img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* mantém o formato fixo e não distorce */
+      border-radius: 15px 0 0 15px;
+    }
+
+    .card-body {
+      flex: 1;
+      padding: 20px;
+    }
+
+    /* Responsividade: em telas menores a imagem vai pra cima */
+    @media (max-width: 768px) {
+      .custom-card {
+        flex-direction: column;
+      }
+      .img-container {
+        flex: 0 0 100%;
+        height: 180px;
+        border-radius: 15px 15px 0 0;
+      }
+      .img-container img {
+        border-radius: 15px 15px 0 0;
+      }
+    }
