@@ -79,16 +79,10 @@ body {
 
 .main-section-bleed {
   background-color: #E54210;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-  width: 100vw;
+  width: 100%;
   padding: 60px 0;
   box-sizing: border-box;
 }
-
 
 /* Estilo dos cards INICIO */
 .card {
