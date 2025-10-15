@@ -20,6 +20,10 @@ body {
     gap: 10px;
 }
 
+.navbar .nav-link {
+    color: #F0F8FF !important;
+}
+
 /* Logo Styles */
 #logo{
     width: 200px;
@@ -102,4 +106,22 @@ body {
 /* Centraliza conteúdo do card */
 .card-body {
   text-align: center;
+}
+
+#navbar-about {
+    display: flex;
+    justify-content: center;
+    padding: 8px 8px 8px 8px;
+}
+
+#btnBackHome {
+    border-radius: 20px;
+    padding: 10px 16px;
+    background-color: #0D330E; 
+    color: white;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    left: 16px;
 }
