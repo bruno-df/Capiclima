@@ -192,8 +192,6 @@ body {
   overflow: hidden;
 }
 
-
-
 /* Conteúdo sobre a imagem */
 .header-content {
   position: absolute;
@@ -226,4 +224,25 @@ body {
     font-size: 1rem;
     padding: 10px 20px;
   }
+}
+
+#apoie-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 20px;
+  padding-top: 60px;
+}
+
+#apoie-qrCode {
+  max-width: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+#apoie-link {
+  text-decoration: none;
 }
