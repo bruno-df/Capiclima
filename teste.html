@@ -9,6 +9,7 @@
 
   <!-- Jquery -->
   <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+  <script src="js/include.js" defer></script>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,78 +21,213 @@
 
 <body>
   <div id="navbar"></div>
+  <!-- Abas de seleção de ano -->
+  <div class="text-center my-4">
+    <button class="btn btn-outline-success btn-ano" data-ano="todos">Todos</button>
+    <button class="btn btn-outline-success btn-ano" data-ano="2025">2025</button>
+    <button class="btn btn-outline-success btn-ano" data-ano="2024">2024</button>
+  </div>
+  <!-- ================= ANO 2025 ================= -->
+<div class="row justify-content-center card-item ano-2025">
 
-  <div class="container mb-5">
-    <div class="row justify-content-center card-item ano-2025">
-      <div class="col-lg-10 mb-4">
-        <div class="custom-card p-3 border rounded shadow-sm">
-          <div class="img-container mb-3">
-            <img src="./images/atividades/atividade2.png" alt="Atividade 2" class="img-fluid rounded">
-          </div>
-          <div class="card-body">
-            <h3>ATIVIDADE 04/2025 – OFICINA “DIREITOS LGBTQIAPN+ E CRISE AMBIENTAL: POR UMA AGENDA INCLUSIVA NA COP 30”</h3>
-            <p><b>Tipo da Atividade:</b> Formação</p>
-            <p><b>Data:</b> 04 de junho de 2025</p>
-            <p><b>Horário:</b> 09h às 11h</p>
-            <p><b>Local:</b> Instituto de Ciências Humanas e Sociais (ICHS) – UFMT</p>
+  <!-- ATIVIDADE 04/2025 -->
+  <div class="col-lg-10 mb-4">
+    <div class="custom-card p-3 border rounded shadow-sm">
+      <div class="img-container mb-3 text-center">
+        <img src="./images/atividades/atividade2.png" alt="Atividade 2" class="img-fluid rounded">
+      </div>
+      <div class="card-body">
+        <h3>ATIVIDADE 04/2025 – OFICINA “DIREITOS LGBTQIAPN+ E CRISE AMBIENTAL: POR UMA AGENDA INCLUSIVA NA COP 30”</h3>
+        <p><b>Tipo da Atividade:</b> Formação</p>
+        <p><b>Data:</b> 04 de junho de 2025</p>
+        <p><b>Horário:</b> 09h às 11h</p>
+        <p><b>Local:</b> Instituto de Ciências Humanas e Sociais (ICHS) – UFMT</p>
 
-            <hr>
+        <hr>
+        <h4><b>📌 Descrição Geral</b></h4>
+        <p>
+          A oficina integrou a programação da Virada Sustentável 2025 e foi organizada pelo Coletivo CapiClima,
+          com o objetivo de promover uma reflexão interseccional sobre a crise climática, articulando as pautas
+          de direitos LGBTQIAPN+ e justiça ambiental, visando uma agenda inclusiva para a COP 30.
+        </p>
 
-            <h4><b>📌 Descrição Geral</b></h4>
-            <p>
-              A oficina integrou a programação da Virada Sustentável 2025 e foi organizada pelo Coletivo CapiClima,
-              com o objetivo de promover uma reflexão interseccional sobre a crise climática,
-              articulando as pautas de direitos LGBTQIAPN+ e justiça ambiental.
-            </p>
+        <div class="extra-content">
+          <h4><b>🧩 Temas Debatidos</b></h4>
+          <p>
+            A oficina iniciou com a apresentação do Coletivo CapiClima e a importância da juventude e das populações
+            historicamente excluídas no debate climático. Em seguida, ocorreram palestras com especialistas:
+            Maria Conceição – Interseccionalidade e Justiça Climática, Júlia Spigolon Xavier – Por uma Agenda Inclusiva
+            na COP 30 e Pedro Dias – Direitos Humanos e a Urgência Climática. A programação incluiu a dinâmica
+            “Mapa da Injustiça Social em Cuiabá”, com debates sobre interseccionalidade, desigualdades sociais e
+            estratégias de inclusão política.
+          </p>
 
-            <!-- Conteúdo oculto -->
-            <div class="extra-content">
-              <h4><b>🧩 Temas Debatidos</b></h4>
-              <p>
-                A oficina iniciou com a apresentação do Coletivo CapiClima e a importância da juventude no debate climático.
-                Houve palestras com especialistas e uma dinâmica participativa “Mapa da Injustiça Social em Cuiabá”.
-              </p>
-              <p>
-                Foram debatidas interseccionalidade, desigualdades sociais e estratégias de inclusão política,
-                com propostas para uma agenda inclusiva na COP 30.
-              </p>
+          <h4><b>📍 Resultados e Encaminhamentos</b></h4>
+          <ul>
+            <li>Identificação de problemas ambientais locais (falta de acesso à água, queimadas, precarização da agricultura familiar).</li>
+            <li>Fortalecimento do diálogo entre sociedade civil, universidade e poder público.</li>
+            <li>Proposição de novas oficinas e articulação para garantir participação inclusiva na COP 30.</li>
+          </ul>
 
-              <h4><b>📍 Resultados e Encaminhamentos</b></h4>
-              <ul>
-                <li>Identificação de problemas ambientais locais.</li>
-                <li>Fortalecimento do diálogo entre sociedade civil e poder público.</li>
-                <li>Proposição de novas oficinas e participação na COP 30.</li>
-              </ul>
-
-              <h4><b>📸 Galeria de Fotos</b></h4>
-              <p>(Imagens ou galeria podem ser adicionadas aqui)</p>
-            </div>
-
-            <!-- Botão de abrir/fechar -->
-            <button class="btn btn-vermais">Ver mais</button>
-
-          </div>
+          <h4><b>📸 Galeria de Fotos</b></h4>
+          <p>(Imagens ou galeria podem ser adicionadas aqui)</p>
         </div>
+
+        <button class="btn btn-vermais btn-outline-success">Ver mais</button>
       </div>
     </div>
   </div>
 
-  <script>
+  <!-- ATIVIDADE 03/2025 -->
+  <div class="col-lg-10 mb-4">
+    <div class="custom-card p-3 border rounded shadow-sm">
+      <div class="img-container mb-3 text-center">
+        <img src="./images/atividades/atividade2.png" alt="Atividade 3" class="img-fluid rounded">
+      </div>
+      <div class="card-body">
+        <h3>ATIVIDADE 03/2025 – OFICINA DE FORMAÇÃO PARA A EQUIPE INTERDISCIPLINAR DA DEFENSORIA PÚBLICA DO ESTADO DE MATO GROSSO</h3>
+        <p><b>Tipo da Atividade:</b> Formação</p>
+        <p><b>Data:</b> 23 de maio de 2025</p>
+        <p><b>Horário:</b> 14h</p>
+        <p><b>Local:</b> Defensoria Pública do Estado de Mato Grosso</p>
+
+        <hr>
+        <h4><b>📌 Descrição Geral</b></h4>
+        <p>
+          A oficina teve como tema “Justiça Climática e Direitos Humanos: O papel da Defensoria Pública nas lutas por equidade ambiental”,
+          com o objetivo de aprofundar o debate sobre Justiça Climática e sua interface com os direitos humanos no contexto da atuação da Defensoria Pública.
+        </p>
+
+        <div class="extra-content">
+          <h4><b>🧩 Temas Debatidos</b></h4>
+          <p>
+            Durante a oficina, foi realizado um diálogo formativo sobre os desafios da promoção da Justiça Climática na Defensoria Pública,
+            com reflexões sobre o papel institucional na garantia dos direitos fundamentais diante da crise climática. Houve também trocas
+            de experiências com profissionais da equipe interdisciplinar, fortalecendo a compreensão sobre o tema e destacando a interseção
+            entre Justiça Social e Ambiental.
+          </p>
+
+          <h4><b>📍 Resultados e Encaminhamentos</b></h4>
+          <ul>
+            <li>Sensibilização da equipe sobre a importância de integrar a pauta socioambiental à atuação jurídica e psicossocial.</li>
+            <li>Fortalecimento das parcerias entre Defensoria Pública e organizações da sociedade civil.</li>
+            <li>Planejamento de novas formações e ações conjuntas voltadas à defesa dos grupos mais vulneráveis.</li>
+          </ul>
+
+          <h4><b>📸 Galeria de Fotos</b></h4>
+          <p>(Imagens ou galeria podem ser adicionadas aqui)</p>
+        </div>
+
+        <button class="btn btn-vermais btn-outline-success">Ver mais</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ATIVIDADE 02/2025 -->
+  <div class="col-lg-10 mb-4">
+    <div class="custom-card p-3 border rounded shadow-sm">
+      <div class="img-container mb-3 text-center">
+        <img src="./images/atividades/atividade2.png" alt="Atividade 2" class="img-fluid rounded">
+      </div>
+      <div class="card-body">
+        <h3>ATIVIDADE 02/2025 – RODA DE CONVERSA “JUVENTUDES MATO-GROSSENSES, MEIO AMBIENTE E JUSTIÇA CLIMÁTICA”</h3>
+        <p><b>Tipo da Atividade:</b> Formação</p>
+        <p><b>Data:</b> 21 de maio de 2025</p>
+        <p><b>Horário:</b> 14h</p>
+        <p><b>Local:</b> ADUFMAT - Cuiabá - MT</p>
+
+        <hr>
+        <h4><b>📌 Descrição Geral</b></h4>
+        <p>
+          A roda de conversa integrou a programação do LabNarra – Programa Amazônia de Pé, mediada por Augusta Cesária, bolsista do programa e cofundadora do Coletivo CapiClima.
+          O objetivo foi criar um espaço de escuta e troca de experiências entre jovens universitários, promovendo reflexões sobre os desafios socioambientais na Amazônia
+          e o protagonismo juvenil como agente de transformação.
+        </p>
+
+        <div class="extra-content">
+          <h4><b>🧩 Temas Debatidos</b></h4>
+          <p>
+            Exibição do curta-metragem “Nossos Sonhos Pela Janela”, produzido pela equipe independente Bora Fazer Filmes, trazendo reflexões sobre ancestralidade,
+            desigualdades territoriais e resistência frente às emergências climáticas. O debate abordou pertencimento, juventude amazônida e justiça climática.
+          </p>
+
+          <h4><b>📍 Resultados e Encaminhamentos</b></h4>
+          <ul>
+            <li>Fortalecimento da identidade e do papel das juventudes como protagonistas na luta climática.</li>
+            <li>Ampliação do diálogo sobre justiça climática, com perspectiva interseccional e territorializada.</li>
+            <li>Estímulo à criação de espaços formativos e afetivos para articulação de ações socioambientais.</li>
+          </ul>
+
+          <h4><b>📸 Galeria de Fotos</b></h4>
+          <p>(Imagens ou galeria podem ser adicionadas aqui)</p>
+        </div>
+
+        <button class="btn btn-vermais btn-outline-success">Ver mais</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ATIVIDADE 01/2025 -->
+  <div class="col-lg-10 mb-4">
+    <div class="custom-card p-3 border rounded shadow-sm">
+      <div class="img-container mb-3 text-center">
+        <img src="./images/atividades/atividade2.png" alt="Atividade 1" class="img-fluid rounded">
+      </div>
+      <div class="card-body">
+        <h3>ATIVIDADE 01/2025 – INSTAGRAM COMO FERRAMENTA DE EDUCAÇÃO POPULAR</h3>
+        <p><b>Tipo da Atividade:</b> Mobilização</p>
+        <p><b>Data:</b> Janeiro de 2025</p>
+
+        <hr>
+        <h4><b>📌 Descrição Geral</b></h4>
+        <p>
+          A ação utilizou as redes sociais como meio de mobilização e conscientização sobre temas de justiça climática,
+          ampliando o alcance das discussões ambientais e aproximando o público jovem das pautas socioambientais.
+        </p>
+
+        <div class="extra-content">
+          <h4><b>📸 Galeria de Fotos</b></h4>
+          <p>(Imagens ou galeria podem ser adicionadas aqui)</p>
+        </div>
+
+        <button class="btn btn-vermais btn-outline-success">Ver mais</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- ================= FIM ANO 2025 ================= -->
+  
+    <script>
     $(document).ready(function() {
-      $('.btn-vermais').click(function() {
-        var card = $(this).closest('.card-body');
-        var extraContent = card.find('.extra-content');
+      // Botão "Ver mais / Ver menos"
+      $('.btn-vermais').on('click', function() {
+        const cardBody = $(this).closest('.card-body');
+        const extraContent = cardBody.find('.extra-content');
 
-        // alterna visibilidade
-        extraContent.slideToggle();
+        extraContent.slideToggle(300);
+        $(this).text(function(i, oldText) {
+          return oldText === 'Ver mais' ? 'Ver menos' : 'Ver mais';
+        });
+      });
 
-        // muda texto do botão
-        if ($(this).text() === 'Ver mais') {
-          $(this).text('Ver menos');
+      // Filtro de anos
+      $('.btn-ano').on('click', function() {
+        const anoSelecionado = $(this).data('ano');
+
+        $('.btn-ano').removeClass('active');
+        $(this).addClass('active');
+
+        if (anoSelecionado === 'todos') {
+          $('.card-item').fadeIn(300);
         } else {
-          $(this).text('Ver mais');
+          $('.card-item').hide();
+          $('.ano-' + anoSelecionado).fadeIn(300);
         }
       });
+
+      // Exibir "Todos" por padrão
+      $('.btn-ano[data-ano="todos"]').click();
     });
   </script>
 

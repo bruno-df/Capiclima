@@ -51,11 +51,9 @@ body {
 }
 
 
-/* Imagem principal da página home */
-#imagem-header{
-    background-size: cover;
+#imagem-header {
     width: 100%;
-    height: 100%;
+    height: auto;
     object-fit: cover;
 }
 
@@ -151,17 +149,69 @@ body {
       }
     }
     
-  .extra-content {
-      display: none;
-      margin-top: 15px;
+    .extra-content {
+      display: none; /* escondido por padrão */
     }
-    .btn-vermais {
+    .btn-ano.active {
       background-color: #069460;
       color: white;
-      border: none;
-      margin-top: 10px;
     }
-    .btn-vermais:hover {
+    .btn-ano:hover {
       background-color: #057a50;
     }
 
+#main-section h2 {
+  font-size: 28px;
+  color: #069460;
+  margin-bottom: 10px;
+}
+
+#main-section p {
+  max-width: 800px;
+  margin: 0 auto 30px auto;
+  line-height: 1.5;
+  font-size: 18px;
+}
+
+/* Container geral */
+.header-overlay {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+
+
+/* Conteúdo sobre a imagem */
+.header-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 20px;
+}
+
+/* Texto e botão */
+.header__title {
+  font-size: 2.5rem;
+}
+
+/* Ajustes para telas menores */
+@media (max-width: 768px) {
+  .header__title {
+    font-size: 1.8rem;
+    padding: 0 10px;
+  }
+
+  .header-content {
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+  }
+
+  .btn-lg {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+}
