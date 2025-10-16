@@ -8,26 +8,38 @@ body {
     background-color: #F0F8FF;
     color: #333;
     line-height: 1.6;
+    padding-top: 56px;
+}
+@media (max-width: 768px) {
+  body {
+    padding-top: 56px; /* adjust for mobile navbar height */
+  }
 }
 
-/* Navbar Styles */
 .navbar-light {
     background-color: #0D330E;
-    display: flex;
-    justify-content: flex-end;
-    padding: 25px 25px;
+    padding: 8px 16px; /* thinner */
     align-items: center;
     gap: 10px;
+    
 }
 .navbar-light .nav-link {
   color: #ffffff !important;
 }
-/* Logo Styles */
-#logo{
-    width: 200px;
-    height: auto;
-    margin-right: auto;
+
+/* Logo */
+#logo {
+    height: 48px;
+    width: auto;
+    transition: height 0.2s;
 }
+
+@media (max-width: 768px) {
+  #logo {
+    height: 36px;
+  }
+}
+
     
 /* Navbar Button Styles */
 .navbar__btn {
