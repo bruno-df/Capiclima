@@ -23,3 +23,9 @@ $(function() {
     });
   });
 });
+
+$(function () {
+  $("#footer").load("footer.html", function () {
+    console.log("Footer carregado com sucesso!");
+  });
+});

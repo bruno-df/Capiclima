@@ -273,3 +273,22 @@ body {
     background-color: #0D330E;
     text-align: left;
 }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1; /* Faz o main ocupar todo o espaço disponível */
+}
+
+#flex-contatoCapiclima {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 60px;
+}
