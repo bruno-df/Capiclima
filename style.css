@@ -227,3 +227,24 @@ body {
     padding: 10px 20px;
   }
 }
+
+/* Estilo da tabela - pg oportunidades */
+
+#table-oportunidades {
+    margin: 0 auto;
+    width: 80%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#table-oportunidades th,
+#table-oportunidades td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+}
+
+#table-oportunidades th {
+    color: #F0F8FF;
+    background-color: #0D330E;
+    text-align: left;
+}
