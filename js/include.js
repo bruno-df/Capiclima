@@ -4,7 +4,7 @@ $(function() {
 
 $(function() {
   // Carrega a navbar e só depois executa o destaque
-  $("#navbar").load("navbar.html", function() {
+  $("#navbar").load("inject/navbar.html", function() {
     var path = window.location.pathname.split("/").pop();
     if (path === "" || path === "/") path = "index.html"; // padrão para home
 
@@ -25,7 +25,7 @@ $(function() {
 });
 
 $(function () {
-  $("#footer").load("footer.html", function () {
+  $("#footer").load("inject/footer.html", function () {
     console.log("Footer carregado com sucesso!");
   });
 });
