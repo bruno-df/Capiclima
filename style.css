@@ -317,5 +317,10 @@ main {
   .footer-right {
     margin-top: 10px;
     text-align: center;
+    background-color: #0D330E;
   }
+}
+
+.footer-custom {
+  background-color: #0D330E;
 }
