@@ -290,3 +290,32 @@ main {
   justify-content: center;
   padding-top: 60px;
 }
+
+.container-footer {
+  display: flex;
+  justify-content: space-between; /* separa os lados */
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem; /* um pouco de respiro nas bordas */
+}
+
+.footer-left {
+  text-align: left;
+}
+
+.footer-right {
+  text-align: right;
+}
+
+@media (max-width: 768px) {
+  .container-footer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-right {
+    margin-top: 10px;
+    text-align: center;
+  }
+}
