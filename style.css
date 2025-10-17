@@ -54,8 +54,8 @@ body {
 
 .navbar-nav .nav-link.active,
 .btn.active {
-  background-color: #E54210 !important;
-  color: #fff !important;
+  
+  color: #000000!important;
   border-radius: 5px;
 }
 
@@ -113,9 +113,7 @@ body {
 /* Imagens dentro dos cards arredondadas */
 .card img {
   border-radius: 50%;
-  width: 150px;        /* ajustável */
-  height: 150px;       /* ajustável */
-  object-fit: cover;   /* mantém o recorte bonito */
+ 
   margin: 20px auto 0; /* centraliza e dá espaço */
   display: block;
 }
@@ -138,12 +136,12 @@ body {
       overflow: hidden;
       border-radius: 15px 0 0 15px;
       display: flex;
-
     }
+   
 
     .img-container img {
-      width: 250px;
-      height: 250px;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
     }
 
