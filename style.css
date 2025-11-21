@@ -231,21 +231,56 @@ body {
   }
 }
 
-#apoie-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  gap: 20px;
-  padding-top: 60px;
+
+.apoie-card { 
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  border: none;
+  /* reduz 10% o tamanho do card */
+  width: 70%;
+  max-width: 100%;
+  margin: 0 auto; /* centraliza dentro da coluna */
+  display: block;
 }
 
-#apoie-qrCode {
-  max-width: 700px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
+/* imagem ocupa 100% do card reduzido (assim o card "segue" a imagem) */
+.apoie-card .card-img-top {
+  width: 100%;
+  height: auto;        /* mantém proporção */
+  object-fit: contain; /* não corta a imagem */
+  display: block;
+  background-color: #ffffff;
+  border-radius: 0 !important;
+  margin: 0 !important;
+  padding: 0;
+}
+
+/* Corpo laranja com texto legível */
+.apoie-card .card-body {
+  background: linear-gradient(90deg, #E54210 0%, #FF7A3D 100%);
+  color: #fff;
+  padding: 1rem 1.25rem;
+  text-align: center;
+}
+
+/* mantém comportamento em telas pequenas */
+@media (max-width: 576px) {
+  .apoie-card {
+    width: 90%;
+  }
+  .apoie-card .card-img-top {
+    height: auto;
+  }
+}
+
+/* Leve espaçamento caso haja outro conteúdo */
+#apoie-container h1 {
+  font-size: 1.75rem;
+  color: #0D330E;
+}
+.apoie-card .card-img-top {
+  border-radius: 0 !important;
 }
 
 #apoie-link {
@@ -253,24 +288,55 @@ body {
 /* Estilo da tabela - pg oportunidades */
 }
 
+/* Tornar a tabela fluida e permitir rolagem horizontal em telas pequenas */
 #table-oportunidades {
     margin: 0 auto;
-    width: 80%;
+    width: 100%;
+    max-width: 1200px; /* limita largura em telas grandes */
     border-collapse: collapse;
     margin-top: 20px;
+    display: table;
 }
 
+/* Melhor legibilidade e quebra de palavras */
 #table-oportunidades th,
 #table-oportunidades td {
-    padding: 12px 15px;
+    padding: 12px 10px;
     border: 1px solid #ddd;
+    vertical-align: middle;
+    word-break: break-word;
+    white-space: normal;
 }
 
-#table-oportunidades th {
-    color: #F0F8FF;
+/* Ajustes visuais para cabeçalho */
+#table-oportunidades thead th {
     background-color: #0D330E;
+    color: #F0F8FF;
     text-align: left;
 }
+
+/* Em telas pequenas reduz padding e fonte para caber melhor */
+@media (max-width: 576px) {
+  #table-oportunidades th,
+  #table-oportunidades td {
+    padding: 8px 6px;
+    font-size: 0. nine rem;
+  }
+  /* garante que o container pai permita rolagem horizontal (também ativado pelo .table-responsive) */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Pequeno refinamento: links não estouram a célula */
+#table-oportunidades a {
+  word-break: break-all;
+  color: #069460;
+  text-decoration: underline;
+}
+
+
 
 html, body {
   height: 100%;

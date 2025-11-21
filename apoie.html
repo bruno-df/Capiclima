@@ -30,19 +30,26 @@
 <body>
     <main class="flex-fill">
     <div id="navbar"></div>
-    <div id="apoie-container">
-        <h1>Apoie o Coletivo CapiClima</h1>
-        <div id="apoie-qrCode">
-            <img src="./images/geral/qrCodeBackground.png" alt="QR Code para doações">
-            <p>
+
+    <!-- Modificado: layout responsivo com card laranja usando o qrcode-pix.jpeg -->
+    <div id="apoie-container" class="container py-5">
+      <h1 class="text-center mb-4">Apoie o Coletivo CapiClima</h1>
+
+      <div class="row justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+          <div class="card apoie-card text-white">
+            <img src="./images/geral/qrcode-pix.jpeg" class="card-img-top" alt="QR Code para doações">
+            <div class="card-body">
+              <p class="card-text mb-0">
                 Contribua com o Coletivo CapiClima e apoie nossas ações de sustentabilidade
                 e educação ambiental. Qualquer valor faz a diferença!
-            </p>
-        </div><br>
-        <a href="https://www.catarse.me/capiclima" target="_blank" id="apoie-link">
-            Apoie também nosso projeto no Catarse
-        </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+
     </main>
 <div id="footer"></div>
 </body>
