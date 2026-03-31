@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Atividades - CapiClima{% endblock %}
+{% block meta_description %}Atividades e projetos do Coletivo CapiClima{% endblock %}
+
+{% block content %}
+
+<div style="margin-top: 100px;"></div>
+
+<div class="container py-5">
+    <h1 class="mb-4">Atividades do CapiClima</h1>
+    
+    <div class="row mb-5">
+        <div class="col-lg-8">
+            <p class="lead">
+                Conheça as atividades que realizamos em prol da justiça climática e educação ambiental.
+            </p>
+        </div>
+    </div>
+
+    {# Filtros por ano #}
+    <div class="mb-4">
+        <button class="btn btn-outline-success active" data-year="all">Todas</button>
+        <button class="btn btn-outline-success" data-year="2025">2025</button>
+        <button class="btn btn-outline-success" data-year="2024">2024</button>
+    </div>
+
+    {# Grid de atividades #}
+    <div class="row" id="atividades-container">
+        {# TODO: Implementar imagens com Cloudinary #}
+        {% for year in anos %}
+            <div class="col-md-6 col-lg-4 mb-4 atividade-card" data-year="{{ year }}">
+                <div class="card h-100 shadow-sm">
+                    {# <img src="{% static 'images/atividades/' %}{{ year }}/exemplo.jpg" 
+                         class="card-img-top" 
+                         alt="Atividade {{ year }}"
+                         style="height: 250px; object-fit: cover;"> #}
+                    <div class="card-body">
+                        <h5 class="card-title">Atividade de {{ year }}</h5>
+                        <p class="card-text">
+                            Descrição breve da atividade e seu impacto na comunidade.
+                        </p>
+                        <small class="text-muted">
+                            <i class="fas fa-calendar-alt"></i> 2025 | 
+                            <i class="fas fa-map-marker-alt"></i> Cuiabá, MT
+                        </small>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <p class="text-center text-muted">Nenhuma atividade cadastrada yet.</p>
+            </div>
+        {% endfor %}
+
+        {# Atividades estatais #}
+        <div class="col-md-6 col-lg-4 mb-4 atividade-card" data-year="2025">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body d-flex flex-column justify-content-center align-items-center" 
+                     style="height: 250px; background: linear-gradient(135deg, #28a745, #20c997);">
+                    <i class="fas fa-leaf fa-5x text-white mb-3"></i>
+                    <h5 class="card-title text-white text-center">Atividade 2025</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">Atividade de educação ambiental e engajamento comunitário.</p>
+                    <small class="text-muted">
+                        <i class="fas fa-calendar-alt"></i> Jan 2025 | 
+                        <i class="fas fa-map-marker-alt"></i> Cuiabá, MT
+                    </small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% block extra_js %}
+<script>
+    document.querySelectorAll('[data-year]').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const year = this.dataset.year;
+            
+            // Atualizar botton ativo
+            document.querySelectorAll('[data-year]').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Filtrar cards
+            document.querySelectorAll('.atividade-card').forEach(card => {
+                if (year === 'all' || card.dataset.year === year) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}
+
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Capiclima - Início{% endblock %}
+{% block meta_description %}Bem-vindo ao Coletivo CapiClima - Lusitada para justiça climática{% endblock %}
+
+{% block content %}
+
+{# Cabeçalho com imagem de fundo e conteúdo #}
+<header class="text-center position-relative" style="margin-top: 80px;">
+    <div class="header-overlay">
+        {# TODO: Implementar header com Cloudinary #}
+        {# <img id="imagem-header"
+             src="{% static 'images/geral/img header principal.png' %}"
+             class="img-fluid w-100"
+             alt="Imagem de fundo com foto de floresta e rio"
+             style="max-height: 500px; object-fit: cover;"> #}
+        <div class="header-content text-white position-absolute w-100 h-100 d-flex flex-column justify-content-center align-items-center"
+             style="top: 0; left: 0; background: rgba(0, 0, 0, 0.4); min-height: 500px;">
+            <h1 class="header__title display-4 fw-bold">
+                Junte-se a nós pela justiça climática!
+            </h1>
+            <a href="{% url 'sobre' %}" class="btn btn-success btn-lg mt-3">Saiba Mais</a>
+        </div>
+    </div>
+</header>
+
+{# Seção principal com últimas ações #}
+<section id="main-section" class="py-5">
+    <div class="container">
+        <br>
+        <h2 class="text-center mb-4"><b>JUVENTUDES EM AÇÃO</b></h2>
+        <p class="text-center">
+            Conheça as iniciativas e atividades que estamos desenvolvendo pelo meio ambiente e pela educação.
+        </p>
+        
+        <div class="row mt-4">
+            {# TODO: Implementar imagens com Cloudinary #}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    {# <img src="{% static 'images/atividades/2025/exemplo.jpg' %}" 
+                         class="card-img-top" 
+                         alt="Atividade 1"> #}
+                    <div class="card-body">
+                        <h5 class="card-title">Atividade 1</h5>
+                        <p class="card-text">Descrição breve da atividade realizada.</p>
+                        <a href="{% url 'atividades' %}" class="btn btn-sm btn-success">Ver Mais</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    {# <img src="{% static 'images/atividades/2025/exemplo.jpg' %}" 
+                         class="card-img-top" 
+                         alt="Atividade 2"> #}
+                    <div class="card-body">
+                        <h5 class="card-title">Atividade 2</h5>
+                        <p class="card-text">Descrição breve da atividade realizada.</p>
+                        <a href="{% url 'atividades' %}" class="btn btn-sm btn-success">Ver Mais</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-4 mb-4">
+                <div class="card h-100 shadow-sm">
+                    {# <img src="{% static 'images/atividades/2025/exemplo.jpg' %}" 
+                         class="card-img-top" 
+                         alt="Atividade 3"> #}
+                    <div class="card-body">
+                        <h5 class="card-title">Atividade 3</h5>
+                        <p class="card-text">Descrição breve da atividade realizada.</p>
+                        <a href="{% url 'atividades' %}" class="btn btn-sm btn-success">Ver Mais</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

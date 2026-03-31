@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Sobre - CapiClima{% endblock %}
+{% block meta_description %}Conheça a história e missão do Coletivo CapiClima{% endblock %}
+
+{% block content %}
+
+<div style="margin-top: 100px;"></div>
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <h1 class="mb-4">Sobre o CapiClima</h1>
+            
+            <section class="mb-5">
+                <h3>Quem Somos?</h3>
+                <p>
+                    O Coletivo CapiClima é uma organização voluntária criada em abril de 2024 com o objetivo de 
+                    mobilizar a juventude para ações de justiça climática e educação ambiental.
+                </p>
+            </section>
+
+            <section class="mb-5">
+                <h3>Nossa Missão</h3>
+                <ul class="list-unstyled">
+                    <li><i class="fas fa-leaf text-success"></i> <strong>Educação:</strong> Promover conscientização ambiental</li>
+                    <li><i class="fas fa-leaf text-success"></i> <strong>Juventude:</strong> Engajar jovens em ações climáticas</li>
+                    <li><i class="fas fa-leaf text-success"></i> <strong>Comunidade:</strong> Construir redes de apoio e resistência</li>
+                </ul>
+            </section>
+
+            <section class="mb-5">
+                <h3>Números que Falam</h3>
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">11</h5>
+                                <p class="card-text">Voluntários na Coordenação</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">2026</h5>
+                                <p class="card-text">Meta de Crescimento</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">∞</h5>
+                                <p class="card-text">Possibilidades</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h3>Quer Fazer Parte?</h3>
+                <p>Entre em contato conosco! Estamos sempre em busca de novos voluntários.</p>
+                <a href="{% url 'oportunidades' %}" class="btn btn-success btn-lg">
+                    <i class="fas fa-handshake"></i> Conheça as Oportunidades
+                </a>
+            </section>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block meta_description %}CapiClima - Juventude, Educação e Meio Ambiente{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}CapiClima, Meio Ambiente, Juventude, Educação{% endblock %}">
+    
+    {# Favicon - TODO: Implementar com Cloudinary #}
+    {# <link rel="icon" href="{% static 'images/logo/Copy of FONTE K2D (FIGMA).png' %}"> #}
+    
+    {# Bootstrap 4 #}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" 
+          integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" 
+          crossorigin="anonymous">
+    
+    {# Font Awesome #}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    {# CSS Personalizado #}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    
+    {# CSS Extra por página #}
+    {% block extra_css %}{% endblock %}
+
+    <title>{% block title %}CapiClima - Juventude, Educação e Meio Ambiente{% endblock %}</title>
+</head>
+<body>
+    
+    {# Barra de Navegação #}
+    {% include "includes/navbar.html" %}
+
+    {# Conteúdo Principal (renderizado pelos templates filhos) #}
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    {# Rodapé #}
+    {% include "includes/footer.html" %}
+
+    {# Scripts #}
+    {% include "includes/scripts.html" %}
+    
+    {# Scripts Extra por página #}
+    {% block extra_js %}{% endblock %}
+
+</body>
+</html>
