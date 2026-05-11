@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Colaboradores — CapiClima{% endblock %}
+{% block meta_description %}Conheça os colaboradores e a equipe do Coletivo CapiClima.{% endblock %}
+
+{% block content %}
+
+{# Page Header #}
+<section class="page-header">
+    <div class="container">
+        <h1>Colaboradores do CapiClima</h1>
+        <p>Conheça as pessoas que fazem o CapiClima acontecer.</p>
+    </div>
+</section>
+
+<section class="section-padding">
+    <div class="container">
+
+        {% for membro in equipe %}
+            <div class="row mb-4">
+                <div class="col-lg-8 mx-auto">
+                    <div class="colaborador-card d-flex">
+                        <div class="colaborador-foto flex-shrink-0">
+                            {% if membro.foto %}
+                                <img src="{{ membro.foto.url }}" alt="{{ membro.nome }}">
+                            {% elif membro.foto_local %}
+                                <img src="{% static membro.foto_local %}" alt="{{ membro.nome }}">
+                            {% else %}
+                                <div class="foto-placeholder">
+                                    <i class="fas fa-user fa-3x"></i>
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="colaborador-info">
+                            <h4>{{ membro.nome }}</h4>
+                            <p class="cargo-text">{{ membro.cargo }}</p>
+                            {% if membro.bio %}
+                                <p class="bio-text">{{ membro.bio }}</p>
+                            {% endif %}
+                            <div class="social-links">
+                                {% if membro.linkedin %}
+                                    <a href="{{ membro.linkedin }}" target="_blank" rel="noopener">
+                                        <i class="fab fa-linkedin"></i>
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <div class="col-12">
+                <div class="empty-state">
+                    <i class="fas fa-users"></i>
+                    <h5>Equipe em construção</h5>
+                    <p>Em breve você conhecerá nosso time!</p>
+                </div>
+            </div>
+        {% endfor %}
+
+    </div>
+</section>
+
+{% endblock %}

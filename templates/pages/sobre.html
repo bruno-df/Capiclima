@@ -1,74 +1,140 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Sobre - CapiClima{% endblock %}
-{% block meta_description %}Conheça a história e missão do Coletivo CapiClima{% endblock %}
+{% block title %}Sobre — CapiClima{% endblock %}
+{% block meta_description %}Conheça a história, missão e equipe do Coletivo CapiClima.{% endblock %}
 
 {% block content %}
 
-<div style="margin-top: 100px;"></div>
+{# Page Header #}
+<section class="page-header">
+    <div class="container">
+        <h1>Sobre o CapiClima</h1>
+        <p>Conheça nossa história e a equipe que faz tudo acontecer.</p>
+    </div>
+</section>
 
-<div class="container py-5">
-    <div class="row">
-        <div class="col-lg-8 mx-auto">
-            <h1 class="mb-4">Sobre o CapiClima</h1>
-            
-            <section class="mb-5">
-                <h3>Quem Somos?</h3>
-                <p>
-                    O Coletivo CapiClima é uma organização voluntária criada em abril de 2024 com o objetivo de 
-                    mobilizar a juventude para ações de justiça climática e educação ambiental.
-                </p>
-            </section>
-
-            <section class="mb-5">
-                <h3>Nossa Missão</h3>
-                <ul class="list-unstyled">
-                    <li><i class="fas fa-leaf text-success"></i> <strong>Educação:</strong> Promover conscientização ambiental</li>
-                    <li><i class="fas fa-leaf text-success"></i> <strong>Juventude:</strong> Engajar jovens em ações climáticas</li>
-                    <li><i class="fas fa-leaf text-success"></i> <strong>Comunidade:</strong> Construir redes de apoio e resistência</li>
-                </ul>
-            </section>
-
-            <section class="mb-5">
-                <h3>Números que Falam</h3>
-                <div class="row text-center">
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">11</h5>
-                                <p class="card-text">Voluntários na Coordenação</p>
-                            </div>
-                        </div>
+{# ==================== CONTEÚDOS DINÂMICOS ==================== #}
+<section class="section-padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                {% for conteudo in conteudos %}
+                    <div class="mb-5">
+                        <h3 class="mb-3">
+                            {% if conteudo.icone %}
+                                <i class="{{ conteudo.icone }} me-2" style="color:var(--color-primary-light);"></i>
+                            {% endif %}
+                            {{ conteudo.titulo_secao }}
+                        </h3>
+                        {% if conteudo.imagem %}
+                            <img src="{{ conteudo.imagem.url }}" alt="{{ conteudo.titulo_secao }}"
+                                 class="img-fluid rounded-3 mb-3 shadow-sm" style="max-height:350px;width:100%;object-fit:cover;">
+                        {% endif %}
+                        <div class="rich-text">{{ conteudo.texto_informativo|safe }}</div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">2026</h5>
-                                <p class="card-text">Meta de Crescimento</p>
-                            </div>
-                        </div>
+                {% empty %}
+                    {# Conteúdo estático fallback #}
+                    <div class="mb-5">
+                        <h3><i class="fas fa-users me-2" style="color:var(--color-primary-light);"></i> Quem Somos?</h3>
+                        <p>O Coletivo CapiClima é uma organização voluntária criada em abril de 2024 com o objetivo de mobilizar a juventude para ações de justiça climática e educação ambiental.</p>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">∞</h5>
-                                <p class="card-text">Possibilidades</p>
-                            </div>
-                        </div>
+                    <div class="mb-5">
+                        <h3><i class="fas fa-bullseye me-2" style="color:var(--color-primary-light);"></i> Nossa Missão</h3>
+                        <ul>
+                            <li><strong>Educação:</strong> Promover conscientização ambiental</li>
+                            <li><strong>Juventude:</strong> Engajar jovens em ações climáticas</li>
+                            <li><strong>Comunidade:</strong> Construir redes de apoio e resistência</li>
+                        </ul>
                     </div>
-                </div>
-            </section>
-
-            <section>
-                <h3>Quer Fazer Parte?</h3>
-                <p>Entre em contato conosco! Estamos sempre em busca de novos voluntários.</p>
-                <a href="{% url 'oportunidades' %}" class="btn btn-success btn-lg">
-                    <i class="fas fa-handshake"></i> Conheça as Oportunidades
-                </a>
-            </section>
+                {% endfor %}
+            </div>
         </div>
     </div>
-</div>
+</section>
+
+{# ==================== STATS ==================== #}
+<section class="stats-section">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-6 col-md-4">
+                <div class="stat-item">
+                    <span class="stat-number">11</span>
+                    <span class="stat-label">Voluntários na Coordenação</span>
+                </div>
+            </div>
+            <div class="col-6 col-md-4">
+                <div class="stat-item">
+                    <span class="stat-number">2024</span>
+                    <span class="stat-label">Ano de Fundação</span>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="stat-item">
+                    <span class="stat-number">∞</span>
+                    <span class="stat-label">Possibilidades</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# ==================== EQUIPE ==================== #}
+<section class="section-padding">
+    <div class="container">
+        <div class="section-header">
+            <h2>Nossa Equipe</h2>
+            <p>Conheça as pessoas que fazem o CapiClima acontecer.</p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            {% for membro in equipe %}
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card-equipe">
+                        {% if membro.foto %}
+                            <img src="{{ membro.foto.url }}" alt="{{ membro.nome }}">
+                        {% elif membro.foto_local %}
+                            <img src="{% static membro.foto_local %}" alt="{{ membro.nome }}">
+                        {% else %}
+                            <div style="width:110px;height:110px;border-radius:50%;background:linear-gradient(135deg,var(--color-primary),var(--color-primary-light));display:inline-flex;align-items:center;justify-content:center;margin-bottom:1rem;">
+                                <i class="fas fa-user fa-2x text-white"></i>
+                            </div>
+                        {% endif %}
+                        <h5>{{ membro.nome }}</h5>
+                        <p class="cargo">{{ membro.cargo }}</p>
+                        {% if membro.bio %}
+                            <p class="bio">{{ membro.bio|truncatewords:15 }}</p>
+                        {% endif %}
+                        {% if membro.linkedin %}
+                            <a href="{{ membro.linkedin }}" target="_blank" rel="noopener"
+                               class="btn btn-cap btn-outline-cap btn-sm mt-2" style="font-size:0.8rem;padding:0.3rem 1rem;">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <div class="empty-state">
+                        <i class="fas fa-users"></i>
+                        <h5>Equipe em construção</h5>
+                        <p>Em breve você conhecerá nosso time!</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{# CTA #}
+<section class="cta-section">
+    <div class="container">
+        <h3>Quer Fazer Parte?</h3>
+        <p>Entre em contato conosco! Estamos sempre em busca de novos voluntários.</p>
+        <a href="{% url 'ong:oportunidades' %}" class="btn btn-cap btn-accent-cap">
+            <i class="fas fa-handshake"></i> Conheça as Oportunidades
+        </a>
+    </div>
+</section>
 
 {% endblock %}

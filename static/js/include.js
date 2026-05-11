@@ -1,31 +1,18 @@
-$(function() {
-  $("#navbar").load("navbar.html");
-});
+/**
+ * CapiClima — JavaScript (Vanilla, sem jQuery)
+ */
+document.addEventListener('DOMContentLoaded', () => {
 
-$(function() {
-  // Carrega a navbar e só depois executa o destaque
-  $("#navbar").load("inject/navbar.html", function() {
-    var path = window.location.pathname.split("/").pop();
-    if (path === "" || path === "/") path = "index.html"; // padrão para home
+    // Fechar navbar mobile ao clicar em link
+    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+    const navCollapse = document.getElementById('navbarNav');
+    if (navCollapse) {
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                const bsCollapse = bootstrap.Collapse.getInstance(navCollapse);
+                if (bsCollapse) bsCollapse.hide();
+            });
+        });
+    }
 
-    // Para links normais
-    $('.navbar-nav .nav-link').each(function() {
-      if ($(this).attr('href') === path) {
-        $(this).addClass('active');
-      }
-    });
-
-    // Para o botão Apoie, se for um <a> fora do ul
-    $('.btn[href]').each(function() {
-      if ($(this).attr('href') === path) {
-        $(this).addClass('active');
-      }
-    });
-  });
-});
-
-$(function () {
-  $("#footer").load("inject/footer.html", function () {
-    console.log("Footer carregado com sucesso!");
-  });
 });

@@ -2,6 +2,9 @@ asgiref==3.11.1
 cloudinary==1.40.0
 dj-database-url==3.1.2
 django==6.0.3
+django-cloudinary-storage==0.3.0
+django-ckeditor-5==0.2.15
+Pillow==11.2.1
 psycopg2-binary==2.9.11
 python-dotenv==1.2.2
 sqlparse==0.5.5

@@ -1,101 +1,107 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Atividades - CapiClima{% endblock %}
-{% block meta_description %}Atividades e projetos do Coletivo CapiClima{% endblock %}
+{% block title %}Atividades — CapiClima{% endblock %}
+{% block meta_description %}Atividades e projetos do Coletivo CapiClima pela justiça climática.{% endblock %}
 
 {% block content %}
 
-<div style="margin-top: 100px;"></div>
+{# Page Header #}
+<section class="page-header">
+    <div class="container">
+        <h1>Atividades do CapiClima</h1>
+        <p>Conheça as atividades que realizamos em prol da justiça climática.</p>
+    </div>
+</section>
 
-<div class="container py-5">
-    <h1 class="mb-4">Atividades do CapiClima</h1>
-    
-    <div class="row mb-5">
-        <div class="col-lg-8">
-            <p class="lead">
-                Conheça as atividades que realizamos em prol da justiça climática e educação ambiental.
-            </p>
+<section class="section-padding">
+    <div class="container">
+
+        {# Filtros por ano #}
+        {% if anos %}
+        <div class="filter-bar">
+            <a href="{% url 'ong:atividades' %}"
+               class="btn btn-cap btn-outline-cap btn-sm {% if not ano_selecionado %}active{% endif %}">
+                Todas
+            </a>
+            {% for ano in anos %}
+                <a href="{% url 'ong:atividades' %}?ano={{ ano.year }}"
+                   class="btn btn-cap btn-outline-cap btn-sm {% if ano_selecionado == ano.year|stringformat:'d' %}active{% endif %}">
+                    {{ ano.year }}
+                </a>
+            {% endfor %}
         </div>
-    </div>
+        {% endif %}
 
-    {# Filtros por ano #}
-    <div class="mb-4">
-        <button class="btn btn-outline-success active" data-year="all">Todas</button>
-        <button class="btn btn-outline-success" data-year="2025">2025</button>
-        <button class="btn btn-outline-success" data-year="2024">2024</button>
-    </div>
-
-    {# Grid de atividades #}
-    <div class="row" id="atividades-container">
-        {# TODO: Implementar imagens com Cloudinary #}
-        {% for year in anos %}
-            <div class="col-md-6 col-lg-4 mb-4 atividade-card" data-year="{{ year }}">
-                <div class="card h-100 shadow-sm">
-                    {# <img src="{% static 'images/atividades/' %}{{ year }}/exemplo.jpg" 
-                         class="card-img-top" 
-                         alt="Atividade {{ year }}"
-                         style="height: 250px; object-fit: cover;"> #}
-                    <div class="card-body">
-                        <h5 class="card-title">Atividade de {{ year }}</h5>
-                        <p class="card-text">
-                            Descrição breve da atividade e seu impacto na comunidade.
-                        </p>
-                        <small class="text-muted">
-                            <i class="fas fa-calendar-alt"></i> 2025 | 
-                            <i class="fas fa-map-marker-alt"></i> Cuiabá, MT
-                        </small>
+        {# Grid de atividades #}
+        <div class="row g-4">
+            {% for atividade in atividades %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card-cap">
+                        {% if atividade.imagem %}
+                            <img src="{{ atividade.imagem.url }}" class="card-img-top" alt="{{ atividade.nome }}">
+                        {% elif atividade.imagem_local %}
+                            <img src="{% static atividade.imagem_local %}" class="card-img-top" alt="{{ atividade.nome }}">
+                        {% else %}
+                            <div class="card-img-top d-flex align-items-center justify-content-center"
+                                 style="background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));">
+                                <i class="fas fa-leaf fa-3x text-white"></i>
+                            </div>
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ atividade.nome }}</h5>
+                            <p class="card-text">{{ atividade.descricao|striptags|truncatewords:25 }}</p>
+                            <div class="card-meta">
+                                <span><i class="fas fa-calendar-alt"></i> {{ atividade.data|date:"d/m/Y" }}</span>
+                                {% if atividade.local %}
+                                    <span><i class="fas fa-map-marker-alt"></i> {{ atividade.local }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        {% empty %}
-            <div class="col-12">
-                <p class="text-center text-muted">Nenhuma atividade cadastrada yet.</p>
-            </div>
-        {% endfor %}
-
-        {# Atividades estatais #}
-        <div class="col-md-6 col-lg-4 mb-4 atividade-card" data-year="2025">
-            <div class="card h-100 shadow-sm">
-                <div class="card-body d-flex flex-column justify-content-center align-items-center" 
-                     style="height: 250px; background: linear-gradient(135deg, #28a745, #20c997);">
-                    <i class="fas fa-leaf fa-5x text-white mb-3"></i>
-                    <h5 class="card-title text-white text-center">Atividade 2025</h5>
+            {% empty %}
+                <div class="col-12">
+                    <div class="empty-state">
+                        <i class="fas fa-calendar-xmark"></i>
+                        <h5>Nenhuma atividade encontrada</h5>
+                        <p>{% if ano_selecionado %}Não há atividades cadastradas para {{ ano_selecionado }}.{% else %}Ainda não há atividades cadastradas.{% endif %}</p>
+                        {% if ano_selecionado %}
+                            <a href="{% url 'ong:atividades' %}" class="btn btn-cap btn-outline-cap btn-sm mt-2">Ver todas</a>
+                        {% endif %}
+                    </div>
                 </div>
-                <div class="card-body">
-                    <p class="card-text">Atividade de educação ambiental e engajamento comunitário.</p>
-                    <small class="text-muted">
-                        <i class="fas fa-calendar-alt"></i> Jan 2025 | 
-                        <i class="fas fa-map-marker-alt"></i> Cuiabá, MT
-                    </small>
-                </div>
-            </div>
+            {% endfor %}
         </div>
 
-    </div>
-</div>
+        {# Paginação #}
+        {% if is_paginated %}
+        <nav class="mt-5 d-flex justify-content-center" aria-label="Paginação">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?{% if ano_selecionado %}ano={{ ano_selecionado }}&{% endif %}page={{ page_obj.previous_page_number }}">
+                            <i class="fas fa-chevron-left"></i>
+                        </a>
+                    </li>
+                {% endif %}
+                {% for num in page_obj.paginator.page_range %}
+                    <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                        <a class="page-link" href="?{% if ano_selecionado %}ano={{ ano_selecionado }}&{% endif %}page={{ num }}">{{ num }}</a>
+                    </li>
+                {% endfor %}
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?{% if ano_selecionado %}ano={{ ano_selecionado }}&{% endif %}page={{ page_obj.next_page_number }}">
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+        {% endif %}
 
-{% block extra_js %}
-<script>
-    document.querySelectorAll('[data-year]').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const year = this.dataset.year;
-            
-            // Atualizar botton ativo
-            document.querySelectorAll('[data-year]').forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Filtrar cards
-            document.querySelectorAll('.atividade-card').forEach(card => {
-                if (year === 'all' || card.dataset.year === year) {
-                    card.style.display = '';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-    });
-</script>
-{% endblock %}
+    </div>
+</section>
 
 {% endblock %}

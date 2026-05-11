@@ -40,19 +40,21 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'cloudinary',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
+    'cloudinary',
+    'django_ckeditor_5',
     'apps.ong',
 ]
 
@@ -78,6 +80,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'apps.ong.context_processors.configuracao_site',
             ],
         },
     },
@@ -89,27 +92,23 @@ WSGI_APPLICATION = 'capiclima.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',
-#    }
-#}
-#
-
-# NOVA CONFIGURAÇÃO SEGURA PARA O SUPABASE
-DATABASES = {
-    'default': dj_database_url.config(
-        # O Django vai procurar automaticamente o link no seu ficheiro .env
-        default=os.environ.get('DATABASE_URL'),
-        
-        # Estas duas opções abaixo são vitais para o PostgreSQL/Supabase. 
-        # Mantêm a ligação aberta durante 10 minutos (600 segundos) para não 
-        # sobrecarregar o servidor a cada clique que um utilizador der no site.
-        conn_max_age=600,
-        conn_health_checks=True,
-    )
-}
+# Se DATABASE_URL estiver configurado, usa Supabase (produção).
+# Caso contrário, usa SQLite localmente (desenvolvimento).
+if os.environ.get('DATABASE_URL'):
+    DATABASES = {
+        'default': dj_database_url.config(
+            default=os.environ.get('DATABASE_URL'),
+            conn_max_age=600,
+            conn_health_checks=True,
+        )
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Configurações do Cloudinary
 CLOUDINARY_STORAGE = {
@@ -169,3 +168,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Media files (User uploads)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
+# ============================================
+# CKEditor 5 — Configuração do Editor de Texto
+# ============================================
+CKEDITOR_5_CONFIGS = {
+    'default': {
+        'toolbar': [
+            'heading', '|',
+            'bold', 'italic', 'underline', 'strikethrough', '|',
+            'bulletedList', 'numberedList', '|',
+            'link', 'blockQuote', '|',
+            'undo', 'redo',
+        ],
+        'language': 'pt-br',
+    },
+}
+
+# Caminho para upload de arquivos do CKEditor
+CKEDITOR_5_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'

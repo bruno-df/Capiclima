@@ -1,112 +1,105 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Apoie - CapiClima{% endblock %}
-{% block meta_description %}Como apoiar o Coletivo CapiClima{% endblock %}
+{% block title %}Apoie — CapiClima{% endblock %}
+{% block meta_description %}Como apoiar o Coletivo CapiClima. Contribua com a justiça climática!{% endblock %}
 
 {% block content %}
 
-<div style="margin-top: 100px;"></div>
-
-<div class="container py-5">
-    <div class="row mb-5">
-        <div class="col-lg-8 mx-auto text-center">
-            <h1 class="mb-4">Apoie o CapiClima</h1>
-            <p class="lead">
-                Sua contribuição nos ajuda a manter atividades e expandir nosso impacto pelo clima!
-            </p>
-        </div>
+{# Page Header #}
+<section class="page-header">
+    <div class="container">
+        <h1>Apoie o CapiClima</h1>
+        <p>Sua contribuição nos ajuda a expandir nosso impacto pelo clima!</p>
     </div>
+</section>
 
-    <div class="row">
-        {# Formas de Apoio #}
-        <div class="col-lg-8 mx-auto">
-            
-            <h3 class="mb-4">Formas de Apoio</h3>
+<section class="section-padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
 
-            {# Voluntariado #}
-            <div class="card mb-4 border-left border-success" style="border-left-width: 5px;">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <i class="fas fa-handshake text-success"></i> Voluntariado
-                    </h5>
-                    <p class="card-text">
-                        Doe seu tempo e expertise! Conheça as oportunidades de voluntariado no CapiClima.
-                    </p>
-                    <a href="{% url 'oportunidades' %}" class="btn btn-success btn-sm">Ver Oportunidades</a>
+                <div class="section-header">
+                    <h2>Formas de Apoio</h2>
                 </div>
-            </div>
 
-            {# Doação Financeira #}
-            <div class="card mb-4 border-left border-success" style="border-left-width: 5px;">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <i class="fas fa-heart text-success"></i> Doação Financeira
-                    </h5>
-                    <p class="card-text">
-                        Sua doação financia oficinas, materiais educativos e eventos comunitários.
-                    </p>
-                    <div class="mt-3">
-                        <p><strong>Pix:</strong> coletivocapiclima@gmail.com</p>
-                        <p><strong>Banco:</strong> Informações serão fornecidas por email</p>
-                        <p>Entre em contato para mais detalhes.</p>
-                    </div>
-                </div>
-            </div>
-
-            {# Parcerias #}
-            <div class="card mb-4 border-left border-success" style="border-left-width: 5px;">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <i class="fas fa-building text-success"></i> Parcerias Empresariais
-                    </h5>
-                    <p class="card-text">
-                        Sua empresa pode apoiar nossas iniciativas através de parcerias estratégicas e patrocínios.
-                    </p>
-                    <p>Nos envie uma mensagem para discutir possibilidades!</p>
-                </div>
-            </div>
-
-            {# Compartilhe #}
-            <div class="card border-left border-success mb-4" style="border-left-width: 5px;">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <i class="fas fa-share-alt text-success"></i> Compartilhe
-                    </h5>
-                    <p class="card-text">
-                        Espalhe a palavra! Compartilhe nosso trabalho nas redes sociais e com seus amigos.
-                    </p>
-                    <div class="mt-3">
-                        <a href="https://www.instagram.com/capiclima" target="_blank" class="btn btn-sm btn-outline-success">
-                            <i class="fab fa-instagram"></i> Instagram
-                        </a>
-                        <a href="https://www.twitter.com/capiclima" target="_blank" class="btn btn-sm btn-outline-success">
-                            <i class="fab fa-twitter"></i> Twitter
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-
-    {# CTA Final #}
-    <div class="row mt-5">
-        <div class="col-lg-8 mx-auto text-center">
-            <div class="bg-light p-5 rounded">
-                <h3>Pronto para fazer a diferença?</h3>
-                <p>Entre em contato conosco!</p>
-                <div>
-                    <a href="mailto:coletivocapiclima@gmail.com" class="btn btn-success btn-lg mr-2">
-                        <i class="fas fa-envelope"></i> Email
-                    </a>
-                    <a href="https://wa.me/5565999194450" target="_blank" class="btn btn-success btn-lg">
-                        <i class="fab fa-whatsapp"></i> WhatsApp
+                {# Voluntariado #}
+                <div class="apoie-method">
+                    <h5><i class="fas fa-handshake"></i> Voluntariado</h5>
+                    <p>Doe seu tempo e expertise! Conheça as oportunidades de voluntariado no CapiClima.</p>
+                    <a href="{% url 'ong:oportunidades' %}" class="btn btn-cap btn-primary-cap btn-sm">
+                        Ver Oportunidades
                     </a>
                 </div>
+
+                {# Doação Financeira #}
+                <div class="apoie-method">
+                    <h5><i class="fas fa-heart"></i> Doação Financeira</h5>
+                    <p>Sua doação financia oficinas, materiais educativos e eventos comunitários.</p>
+                    {% if config_site.chave_pix %}
+                        <div class="pix-box mt-3">
+                            <p class="mb-2"><strong>Chave Pix:</strong></p>
+                            <p class="pix-key mb-0">{{ config_site.chave_pix }}</p>
+                            {% if config_site.qrcode_pix %}
+                                <img src="{{ config_site.qrcode_pix.url }}" alt="QR Code Pix"
+                                     class="img-fluid mt-3" style="max-width:200px;">
+                            {% endif %}
+                        </div>
+                    {% else %}
+                        <div class="pix-box mt-3">
+                            <p class="mb-2"><strong>Chave Pix:</strong></p>
+                            <p class="pix-key mb-0">coletivocapiclima@gmail.com</p>
+                        </div>
+                    {% endif %}
+                </div>
+
+                {# Parcerias #}
+                <div class="apoie-method">
+                    <h5><i class="fas fa-building"></i> Parcerias Empresariais</h5>
+                    <p>Sua empresa pode apoiar nossas iniciativas através de parcerias estratégicas e patrocínios.</p>
+                    <p class="text-muted">Nos envie uma mensagem para discutir possibilidades!</p>
+                </div>
+
+                {# Compartilhe #}
+                <div class="apoie-method">
+                    <h5><i class="fas fa-share-nodes"></i> Compartilhe</h5>
+                    <p>Espalhe a palavra! Compartilhe nosso trabalho nas redes sociais e com seus amigos.</p>
+                    <div class="d-flex flex-wrap gap-2 mt-2">
+                        {% if config_site.instagram_url %}
+                            <a href="{{ config_site.instagram_url }}" target="_blank" class="btn btn-cap btn-outline-cap btn-sm">
+                                <i class="fab fa-instagram"></i> Instagram
+                            </a>
+                        {% endif %}
+                        {% if config_site.twitter_url %}
+                            <a href="{{ config_site.twitter_url }}" target="_blank" class="btn btn-cap btn-outline-cap btn-sm">
+                                <i class="fab fa-x-twitter"></i> Twitter
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
-</div>
+</section>
+
+{# CTA Final #}
+<section class="cta-section">
+    <div class="container">
+        <h3>Pronto para fazer a diferença?</h3>
+        <p>Entre em contato conosco!</p>
+        <div class="d-flex flex-wrap gap-2 justify-content-center">
+            <a href="mailto:{{ config_site.email|default:'coletivocapiclima@gmail.com' }}" class="btn btn-cap btn-accent-cap">
+                <i class="fas fa-envelope"></i> E-mail
+            </a>
+            {% if config_site.whatsapp %}
+            <a href="https://wa.me/{{ config_site.whatsapp }}" target="_blank"
+               class="btn btn-cap" style="background:rgba(255,255,255,0.15);color:#fff;border:2px solid rgba(255,255,255,0.4);">
+                <i class="fab fa-whatsapp"></i> WhatsApp
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</section>
 
 {% endblock %}
