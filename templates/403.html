@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Acesso negado - CapiClima{% endblock %}
+
+{% block content %}
+<section class="page-header">
+    <div class="container">
+        <h1>Acesso negado</h1>
+        <p>Voce nao tem permissao para acessar esta area.</p>
+    </div>
+</section>
+
+<section class="section-padding">
+    <div class="container text-center">
+        <p>Entre em contato com a administracao do site caso precise editar conteudo.</p>
+        <a href="{% url 'ong:index' %}" class="btn btn-cap btn-primary-cap">Voltar ao site</a>
+    </div>
+</section>
+{% endblock %}
