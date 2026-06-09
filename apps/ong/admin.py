@@ -1,116 +1,174 @@
 from django.contrib import admin
-from .models import DestaqueInicio, ConteudoSobre, Atividade, MembroEquipe, ConfiguracaoSite
+from django.utils.html import format_html
+
+from .models import (
+    Atividade,
+    ConteudoSobre,
+    DestaqueInicio,
+    MembroEquipe,
+    Opportunity,
+    SiteConfig,
+    SiteSection,
+)
+from .permissions import user_has_cms_access
 
 
-# ============================================
-# Branding do Admin
-# ============================================
-admin.site.site_header = "CapiClima — Painel de Gestão"
-admin.site.site_title = "CapiClima Admin"
-admin.site.index_title = "Gerenciar Conteúdo do Site"
+admin.site.site_header = "CapiClima - Painel de Gestao"
+admin.site.site_title = "CapiClima CMS"
+admin.site.index_title = "Gerenciar conteudo do site"
+admin.site.has_permission = lambda request: user_has_cms_access(request.user)
 
 
-# ============================================
-# Admin: Destaques da Página Inicial
-# ============================================
+class ImagePreviewMixin:
+    readonly_fields = ("imagem_preview",)
+
+    @admin.display(description="Preview")
+    def imagem_preview(self, obj):
+        image = self._get_preview_image(obj)
+        if not image:
+            return "Sem imagem"
+        try:
+            url = image.url
+        except (AttributeError, ValueError):
+            return "Sem imagem"
+        return format_html(
+            '<a href="{}" target="_blank" rel="noopener">'
+            '<img src="{}" style="max-width:180px;max-height:120px;object-fit:cover;border-radius:6px;" />'
+            "</a>",
+            url,
+            url,
+        )
+
+    def _get_preview_image(self, obj):
+        for field_name in ("imagem", "foto", "logo", "qrcode_pix", "favicon"):
+            image = getattr(obj, field_name, None)
+            if image:
+                return image
+        return None
+
+
+@admin.register(SiteSection)
+class SiteSectionAdmin(ImagePreviewMixin, admin.ModelAdmin):
+    list_display = ("nome", "slug", "titulo", "ativo", "ordem", "atualizado_em")
+    list_editable = ("ativo", "ordem")
+    list_filter = ("ativo",)
+    search_fields = ("nome", "slug", "titulo", "texto_principal")
+    prepopulated_fields = {"slug": ("nome",)}
+    fieldsets = (
+        ("Identificacao", {"fields": ("nome", "slug", "ativo", "ordem")}),
+        ("Conteudo", {"fields": ("titulo", "texto_principal", "imagem", "imagem_preview")}),
+        ("Chamada", {"fields": ("botao_texto", "botao_url"), "classes": ("collapse",)}),
+    )
+
+
+@admin.register(Opportunity)
+class OpportunityAdmin(admin.ModelAdmin):
+    list_display = ("titulo", "data_inicio", "data_fim", "ativo", "ordem", "esta_aberta")
+    list_editable = ("ativo", "ordem")
+    list_filter = ("ativo", "data_inicio", "data_fim")
+    search_fields = ("titulo", "descricao", "link")
+    date_hierarchy = "data_inicio"
+    fieldsets = (
+        ("Oportunidade", {"fields": ("titulo", "descricao", "link")}),
+        ("Datas e exibicao", {"fields": ("data_inicio", "data_fim", "ativo", "ordem")}),
+    )
+
+
 @admin.register(DestaqueInicio)
-class DestaqueInicioAdmin(admin.ModelAdmin):
-    list_display = ('titulo', 'subtitulo', 'ativo', 'ordem')
-    list_editable = ('ativo', 'ordem')
-    list_filter = ('ativo',)
-    search_fields = ('titulo', 'subtitulo')
+class DestaqueInicioAdmin(ImagePreviewMixin, admin.ModelAdmin):
+    list_display = ("titulo", "subtitulo", "ativo", "ordem")
+    list_editable = ("ativo", "ordem")
+    list_filter = ("ativo",)
+    search_fields = ("titulo", "subtitulo")
+    fieldsets = (
+        ("Conteudo do banner", {"fields": ("titulo", "subtitulo", "imagem", "imagem_preview")}),
+        ("Exibicao", {"fields": ("ativo", "ordem")}),
+    )
 
 
-# ============================================
-# Admin: Conteúdos da Página Sobre
-# ============================================
 @admin.register(ConteudoSobre)
-class ConteudoSobreAdmin(admin.ModelAdmin):
-    list_display = ('titulo_secao', 'icone', 'ordem')
-    list_editable = ('ordem',)
-    search_fields = ('titulo_secao',)
+class ConteudoSobreAdmin(ImagePreviewMixin, admin.ModelAdmin):
+    list_display = ("titulo_secao", "icone", "ordem")
+    list_editable = ("ordem",)
+    search_fields = ("titulo_secao", "texto_informativo")
     fieldsets = (
-        ('Conteúdo', {
-            'fields': ('titulo_secao', 'texto_informativo', 'imagem')
-        }),
-        ('Aparência', {
-            'fields': ('icone', 'ordem'),
-            'description': 'Use ícones do Font Awesome. Ex: fas fa-leaf'
-        }),
+        ("Conteudo", {"fields": ("titulo_secao", "texto_informativo", "imagem", "imagem_preview")}),
+        (
+            "Aparencia",
+            {
+                "fields": ("icone", "ordem"),
+                "description": "Use icones do Font Awesome. Ex: fas fa-leaf",
+            },
+        ),
     )
 
 
-# ============================================
-# Admin: Atividades
-# ============================================
 @admin.register(Atividade)
-class AtividadeAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'data', 'local', 'destaque')
-    list_editable = ('destaque',)
-    list_filter = ('data', 'destaque')
-    search_fields = ('nome', 'descricao', 'local')
-    date_hierarchy = 'data'
+class AtividadeAdmin(ImagePreviewMixin, admin.ModelAdmin):
+    list_display = ("nome", "tipo", "data", "local", "ativo", "destaque")
+    list_editable = ("ativo", "destaque")
+    list_filter = ("ativo", "destaque", "tipo", "data")
+    search_fields = ("nome", "descricao", "local", "tipo")
+    date_hierarchy = "data"
     fieldsets = (
-        ('Informações da Atividade', {
-            'fields': ('nome', 'data', 'local', 'descricao', 'imagem')
-        }),
-        ('Exibição', {
-            'fields': ('destaque',),
-            'description': 'Marque "Destaque" para exibir esta atividade na página inicial.'
-        }),
+        (
+            "Informacoes da atividade",
+            {"fields": ("nome", "tipo", "data", "horario", "local", "descricao")},
+        ),
+        ("Imagem", {"fields": ("imagem", "imagem_local", "imagem_preview")}),
+        ("Exibicao", {"fields": ("ativo", "destaque")}),
     )
 
 
-# ============================================
-# Admin: Membros da Equipe
-# ============================================
 @admin.register(MembroEquipe)
-class MembroEquipeAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'cargo', 'ordem')
-    list_editable = ('ordem',)
-    search_fields = ('nome', 'cargo')
+class MembroEquipeAdmin(ImagePreviewMixin, admin.ModelAdmin):
+    list_display = ("nome", "cargo", "ordem")
+    list_editable = ("ordem",)
+    search_fields = ("nome", "cargo", "bio")
     fieldsets = (
-        ('Dados Pessoais', {
-            'fields': ('nome', 'cargo', 'foto', 'bio')
-        }),
-        ('Links', {
-            'fields': ('linkedin',),
-            'classes': ('collapse',),
-        }),
-        ('Exibição', {
-            'fields': ('ordem',)
-        }),
+        ("Dados pessoais", {"fields": ("nome", "cargo", "foto", "foto_local", "imagem_preview", "bio")}),
+        ("Links", {"fields": ("instagram", "linkedin"), "classes": ("collapse",)}),
+        ("Exibicao", {"fields": ("ordem",)}),
     )
 
 
-# ============================================
-# Admin: Configuração do Site (Singleton)
-# ============================================
-@admin.register(ConfiguracaoSite)
-class ConfiguracaoSiteAdmin(admin.ModelAdmin):
+@admin.register(SiteConfig)
+class SiteConfigAdmin(ImagePreviewMixin, admin.ModelAdmin):
+    readonly_fields = ("imagem_preview", "logo_preview", "qrcode_preview")
     fieldsets = (
-        ('Identidade do Site', {
-            'fields': ('nome_site', 'slogan', 'logo', 'favicon')
-        }),
-        ('Contato', {
-            'fields': ('email', 'telefone', 'whatsapp', 'endereco')
-        }),
-        ('Redes Sociais', {
-            'fields': ('instagram_url', 'twitter_url', 'facebook_url', 'youtube_url')
-        }),
-        ('Doações', {
-            'fields': ('chave_pix', 'qrcode_pix'),
-            'description': 'Informações de Pix exibidas na página "Apoie".'
-        }),
-        ('Rodapé', {
-            'fields': ('texto_rodape',)
-        }),
+        ("Identidade do site", {"fields": ("nome_site", "slogan", "logo", "logo_preview", "favicon")}),
+        ("Contato", {"fields": ("email", "telefone", "whatsapp", "endereco")}),
+        ("Redes sociais", {"fields": ("instagram_url", "twitter_url", "facebook_url", "youtube_url")}),
+        ("Doacoes", {"fields": ("chave_pix", "qrcode_pix", "qrcode_preview")}),
+        ("Rodape", {"fields": ("texto_rodape",)}),
     )
+
+    @admin.display(description="Logo atual")
+    def logo_preview(self, obj):
+        return self._render_field_preview(obj, "logo")
+
+    @admin.display(description="QR Code atual")
+    def qrcode_preview(self, obj):
+        return self._render_field_preview(obj, "qrcode_pix")
+
+    def _render_field_preview(self, obj, field_name):
+        image = getattr(obj, field_name, None)
+        if not image:
+            return "Sem imagem"
+        try:
+            url = image.url
+        except (AttributeError, ValueError):
+            return "Sem imagem"
+        return format_html(
+            '<a href="{}" target="_blank" rel="noopener">'
+            '<img src="{}" style="max-width:180px;max-height:120px;object-fit:contain;border-radius:6px;" />'
+            "</a>",
+            url,
+            url,
+        )
 
     def has_add_permission(self, request):
-        """Impede criação de mais de 1 configuração."""
-        return not ConfiguracaoSite.objects.exists()
+        return not SiteConfig.objects.exists()
 
     def has_delete_permission(self, request, obj=None):
-        """Impede exclusão da configuração."""
         return False
