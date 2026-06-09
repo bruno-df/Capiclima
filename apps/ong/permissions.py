@@ -5,6 +5,9 @@ COLLABORATOR_MODEL_NAMES = (
     "destaqueinicio",
     "membroequipe",
     "opportunity",
+    "secaoapoie",
+    "secaohome",
+    "secaosobre",
     "siteconfig",
     "sitesection",
 )
