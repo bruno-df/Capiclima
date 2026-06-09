@@ -9,12 +9,51 @@
 {# Page Header #}
 <section class="page-header">
     <div class="container">
-        <h1>Sobre o CapiClima</h1>
+        <h1>{{ secao_sobre.titulo|default:"Sobre o CapiClima" }}</h1>
         <p>Conheça nossa história e a equipe que faz tudo acontecer.</p>
     </div>
 </section>
 
-{# ==================== CONTEÚDOS DINÂMICOS ==================== #}
+{# ==================== CONTEÚDO PRINCIPAL (SecaoSobre) ==================== #}
+{% if secao_sobre.texto_principal %}
+<section class="section-padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                {% if secao_sobre.imagem %}
+                    <img src="{{ secao_sobre.imagem.url }}" alt="{{ secao_sobre.titulo }}"
+                         class="img-fluid rounded-3 mb-4 shadow-sm" style="max-height:350px;width:100%;object-fit:cover;">
+                {% endif %}
+                <div class="rich-text">{{ secao_sobre.texto_principal|safe }}</div>
+
+                {% if secao_sobre.missao %}
+                <div class="mt-4">
+                    <h3><i class="fas fa-bullseye me-2" style="color:var(--color-primary-light);"></i> Missão</h3>
+                    <div class="rich-text">{{ secao_sobre.missao|safe }}</div>
+                </div>
+                {% endif %}
+
+                {% if secao_sobre.visao %}
+                <div class="mt-4">
+                    <h3><i class="fas fa-eye me-2" style="color:var(--color-primary-light);"></i> Visão</h3>
+                    <div class="rich-text">{{ secao_sobre.visao|safe }}</div>
+                </div>
+                {% endif %}
+
+                {% if secao_sobre.valores %}
+                <div class="mt-4">
+                    <h3><i class="fas fa-gem me-2" style="color:var(--color-primary-light);"></i> Valores</h3>
+                    <div class="rich-text">{{ secao_sobre.valores|safe }}</div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{# ==================== CONTEÚDOS DINÂMICOS (ConteudoSobre) ==================== #}
+{% if conteudos %}
 <section class="section-padding">
     <div class="container">
         <div class="row justify-content-center">
@@ -33,25 +72,36 @@
                         {% endif %}
                         <div class="rich-text">{{ conteudo.texto_informativo|safe }}</div>
                     </div>
-                {% empty %}
-                    {# Conteúdo estático fallback #}
-                    <div class="mb-5">
-                        <h3><i class="fas fa-users me-2" style="color:var(--color-primary-light);"></i> Quem Somos?</h3>
-                        <p>O Coletivo CapiClima é uma organização voluntária criada em abril de 2024 com o objetivo de mobilizar a juventude para ações de justiça climática e educação ambiental.</p>
-                    </div>
-                    <div class="mb-5">
-                        <h3><i class="fas fa-bullseye me-2" style="color:var(--color-primary-light);"></i> Nossa Missão</h3>
-                        <ul>
-                            <li><strong>Educação:</strong> Promover conscientização ambiental</li>
-                            <li><strong>Juventude:</strong> Engajar jovens em ações climáticas</li>
-                            <li><strong>Comunidade:</strong> Construir redes de apoio e resistência</li>
-                        </ul>
-                    </div>
                 {% endfor %}
             </div>
         </div>
     </div>
 </section>
+{% endif %}
+
+{# Fallback se nem SecaoSobre nem ConteudoSobre tem conteudo #}
+{% if not secao_sobre.texto_principal and not conteudos %}
+<section class="section-padding">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="mb-5">
+                    <h3><i class="fas fa-users me-2" style="color:var(--color-primary-light);"></i> Quem Somos?</h3>
+                    <p>O Coletivo CapiClima é uma organização voluntária criada em abril de 2024 com o objetivo de mobilizar a juventude para ações de justiça climática e educação ambiental.</p>
+                </div>
+                <div class="mb-5">
+                    <h3><i class="fas fa-bullseye me-2" style="color:var(--color-primary-light);"></i> Nossa Missão</h3>
+                    <ul>
+                        <li><strong>Educação:</strong> Promover conscientização ambiental</li>
+                        <li><strong>Juventude:</strong> Engajar jovens em ações climáticas</li>
+                        <li><strong>Comunidade:</strong> Construir redes de apoio e resistência</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
 
 {# ==================== STATS ==================== #}
 <section class="stats-section">

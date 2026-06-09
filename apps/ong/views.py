@@ -6,7 +6,9 @@ from .models import (
     DestaqueInicio,
     MembroEquipe,
     Opportunity,
-    SiteSection,
+    SecaoApoie,
+    SecaoHome,
+    SecaoSobre,
 )
 
 
@@ -23,11 +25,8 @@ class IndexView(TemplateView):
             destaque=True, ativo=True
         )[:3]
 
-        # Secoes editaveis da home
-        _sections = SiteSection.objects.filter(ativo=True)
-        context["secao_juventudes"] = _sections.filter(slug="home-juventudes").first()
-        context["secao_parceiros"] = _sections.filter(slug="home-parceiros").first()
-        context["secao_cta"] = _sections.filter(slug="home-cta").first()
+        # Secao editavel da home (singleton)
+        context["secao_home"] = SecaoHome.load()
         return context
 
 
@@ -39,6 +38,7 @@ class SobreView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Sobre"
+        context["secao_sobre"] = SecaoSobre.load()
         context["conteudos"] = ConteudoSobre.objects.all()
         context["equipe"] = MembroEquipe.objects.all()
         return context
@@ -97,21 +97,12 @@ class ColaboradoresView(TemplateView):
 
 
 class ApoieView(TemplateView):
-    """Pagina Como Apoiar — com dados dinamicos do SiteConfig."""
+    """Pagina Como Apoiar — com dados dinamicos do SecaoApoie e SiteConfig."""
 
     template_name = "pages/apoie.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Apoie"
-        # Secoes editaveis da pagina Apoie
-        _sections = SiteSection.objects.filter(ativo=True)
-        context["secao_voluntariado"] = _sections.filter(
-            slug="apoie-voluntariado"
-        ).first()
-        context["secao_doacao"] = _sections.filter(slug="apoie-doacao").first()
-        context["secao_parcerias"] = _sections.filter(slug="apoie-parcerias").first()
-        context["secao_compartilhe"] = _sections.filter(
-            slug="apoie-compartilhe"
-        ).first()
+        context["secao_apoie"] = SecaoApoie.load()
         return context
