@@ -105,12 +105,20 @@
                         {% if membro.bio %}
                             <p class="bio">{{ membro.bio|truncatewords:15 }}</p>
                         {% endif %}
-                        {% if membro.linkedin %}
-                            <a href="{{ membro.linkedin }}" target="_blank" rel="noopener"
-                               class="btn btn-cap btn-outline-cap btn-sm mt-2" style="font-size:0.8rem;padding:0.3rem 1rem;">
-                                <i class="fab fa-linkedin"></i> LinkedIn
-                            </a>
-                        {% endif %}
+                        <div class="d-flex gap-2 justify-content-center mt-2">
+                            {% if membro.instagram %}
+                                <a href="{{ membro.instagram }}" target="_blank" rel="noopener"
+                                   class="btn btn-cap btn-outline-cap btn-sm" style="font-size:0.8rem;padding:0.3rem 1rem;">
+                                    <i class="fab fa-instagram"></i> Instagram
+                                </a>
+                            {% endif %}
+                            {% if membro.linkedin %}
+                                <a href="{{ membro.linkedin }}" target="_blank" rel="noopener"
+                                   class="btn btn-cap btn-outline-cap btn-sm" style="font-size:0.8rem;padding:0.3rem 1rem;">
+                                    <i class="fab fa-linkedin"></i> LinkedIn
+                                </a>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             {% empty %}

@@ -48,8 +48,17 @@
 <section class="section-padding">
     <div class="container">
         <div class="section-header">
-            <h2>Juventudes em Ação</h2>
-            <p>Conheça as iniciativas que estamos desenvolvendo pelo meio ambiente e pela educação.</p>
+            {% if secao_juventudes %}
+                <h2>{{ secao_juventudes.titulo|default:"Juventudes em Ação" }}</h2>
+                {% if secao_juventudes.texto_principal %}
+                    <div class="rich-text">{{ secao_juventudes.texto_principal|safe }}</div>
+                {% else %}
+                    <p>Conheça as iniciativas que estamos desenvolvendo pelo meio ambiente e pela educação.</p>
+                {% endif %}
+            {% else %}
+                <h2>Juventudes em Ação</h2>
+                <p>Conheça as iniciativas que estamos desenvolvendo pelo meio ambiente e pela educação.</p>
+            {% endif %}
         </div>
 
         <div class="row g-4">
@@ -99,6 +108,37 @@
     </div>
 </section>
 
+{# ==================== PARCEIROS ==================== #}
+{% if secao_parceiros %}
+<section class="section-padding" style="background:var(--color-surface);">
+    <div class="container text-center">
+        <div class="section-header">
+            <h2>{{ secao_parceiros.titulo|default:"Nossos Parceiros" }}</h2>
+        </div>
+        {% if secao_parceiros.imagem %}
+            <img src="{{ secao_parceiros.imagem.url }}" alt="{{ secao_parceiros.titulo }}"
+                 class="img-fluid" style="max-height:200px;">
+        {% else %}
+            <img src="{% static 'images/geral/CAPICLIMA - APOIADORES.png' %}" alt="Apoiadores"
+                 class="img-fluid" style="max-height:200px;">
+        {% endif %}
+        {% if secao_parceiros.texto_principal %}
+            <div class="rich-text mt-3">{{ secao_parceiros.texto_principal|safe }}</div>
+        {% endif %}
+    </div>
+</section>
+{% else %}
+<section class="section-padding" style="background:var(--color-surface);">
+    <div class="container text-center">
+        <div class="section-header">
+            <h2>Nossos Parceiros</h2>
+        </div>
+        <img src="{% static 'images/geral/CAPICLIMA - APOIADORES.png' %}" alt="Apoiadores"
+             class="img-fluid" style="max-height:200px;">
+    </div>
+</section>
+{% endif %}
+
 {# ==================== STATS ==================== #}
 <section class="stats-section">
     <div class="container">
@@ -134,8 +174,17 @@
 {# ==================== CTA ==================== #}
 <section class="cta-section">
     <div class="container">
-        <h3>Quer fazer a diferença?</h3>
-        <p>Junte-se ao CapiClima e seja parte da transformação climática!</p>
+        {% if secao_cta %}
+            <h3>{{ secao_cta.titulo|default:"Quer fazer a diferença?" }}</h3>
+            {% if secao_cta.texto_principal %}
+                <div class="rich-text">{{ secao_cta.texto_principal|safe }}</div>
+            {% else %}
+                <p>Junte-se ao CapiClima e seja parte da transformação climática!</p>
+            {% endif %}
+        {% else %}
+            <h3>Quer fazer a diferença?</h3>
+            <p>Junte-se ao CapiClima e seja parte da transformação climática!</p>
+        {% endif %}
         <div>
             <a href="{% url 'ong:oportunidades' %}" class="btn btn-cap btn-accent-cap me-2">
                 <i class="fas fa-handshake"></i> Seja Voluntário

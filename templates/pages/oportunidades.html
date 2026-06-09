@@ -18,101 +18,53 @@
     <div class="container">
         <div class="row g-4">
 
-            {# Oportunidade 1 #}
-            <div class="col-lg-6">
-                <div class="card-oportunidade">
-                    <div class="card-header-op">
-                        <h5><i class="fas fa-chalkboard-user"></i> Educador Ambiental</h5>
-                    </div>
-                    <div class="card-body">
-                        <p><strong>Descrição:</strong> Desenvolver e ministrar oficinas de educação ambiental em escolas e comunidades.</p>
-                        <p class="mb-2"><strong>Requisitos:</strong></p>
-                        <ul class="mb-3">
-                            <li>Paixão por meio ambiente</li>
-                            <li>Comunicação clara</li>
-                            <li>Disponibilidade 2h/semana</li>
-                        </ul>
-                        <a href="mailto:{{ config_site.email|default:'coletivocapiclima@gmail.com' }}?subject=Interesse em: Educador Ambiental"
-                           class="btn btn-cap btn-primary-cap btn-sm">
-                            <i class="fas fa-paper-plane"></i> Candidatar-se
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            {# Oportunidade 2 #}
-            <div class="col-lg-6">
-                <div class="card-oportunidade">
-                    <div class="card-header-op">
-                        <h5><i class="fas fa-laptop"></i> Gestor de Redes Sociais</h5>
-                    </div>
-                    <div class="card-body">
-                        <p><strong>Descrição:</strong> Gerenciar conteúdo e comunicação nas redes sociais do CapiClima.</p>
-                        <p class="mb-2"><strong>Requisitos:</strong></p>
-                        <ul class="mb-3">
-                            <li>Experiência com redes sociais</li>
-                            <li>Criatividade</li>
-                            <li>Disponibilidade 4h/semana</li>
-                        </ul>
-                        <a href="mailto:{{ config_site.email|default:'coletivocapiclima@gmail.com' }}?subject=Interesse em: Gestor de Redes Sociais"
-                           class="btn btn-cap btn-primary-cap btn-sm">
-                            <i class="fas fa-paper-plane"></i> Candidatar-se
-                        </a>
+            {% for oportunidade in oportunidades %}
+                <div class="col-lg-6">
+                    <div class="card-oportunidade">
+                        <div class="card-header-op">
+                            <h5><i class="fas fa-bullhorn"></i> {{ oportunidade.titulo }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="rich-text mb-3">{{ oportunidade.descricao|safe }}</div>
+                            {% if oportunidade.data_inicio or oportunidade.data_fim %}
+                                <p class="mb-2 text-muted" style="font-size:0.9rem;">
+                                    <i class="fas fa-calendar-alt me-1"></i>
+                                    {% if oportunidade.data_inicio %}{{ oportunidade.data_inicio|date:"d/m/Y" }}{% endif %}
+                                    {% if oportunidade.data_inicio and oportunidade.data_fim %} — {% endif %}
+                                    {% if oportunidade.data_fim %}{{ oportunidade.data_fim|date:"d/m/Y" }}{% endif %}
+                                </p>
+                            {% endif %}
+                            {% if oportunidade.link %}
+                                <a href="{{ oportunidade.link }}" target="_blank" rel="noopener"
+                                   class="btn btn-cap btn-primary-cap btn-sm">
+                                    <i class="fas fa-external-link-alt"></i> Inscreva-se
+                                </a>
+                            {% else %}
+                                <a href="mailto:{{ config_site.email|default:'coletivocapiclima@gmail.com' }}?subject=Interesse em: {{ oportunidade.titulo|urlencode }}"
+                                   class="btn btn-cap btn-primary-cap btn-sm">
+                                    <i class="fas fa-paper-plane"></i> Candidatar-se
+                                </a>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            {# Oportunidade 3 #}
-            <div class="col-lg-6">
-                <div class="card-oportunidade">
-                    <div class="card-header-op">
-                        <h5><i class="fas fa-chart-line"></i> Analista de Projetos</h5>
-                    </div>
-                    <div class="card-body">
-                        <p><strong>Descrição:</strong> Acompanhar e avaliar projetos de sustentabilidade.</p>
-                        <p class="mb-2"><strong>Requisitos:</strong></p>
-                        <ul class="mb-3">
-                            <li>Pensamento analítico</li>
-                            <li>Excel/Planilhas</li>
-                            <li>Disponibilidade 3h/semana</li>
-                        </ul>
-                        <a href="mailto:{{ config_site.email|default:'coletivocapiclima@gmail.com' }}?subject=Interesse em: Analista de Projetos"
-                           class="btn btn-cap btn-primary-cap btn-sm">
-                            <i class="fas fa-paper-plane"></i> Candidatar-se
-                        </a>
+            {% empty %}
+                <div class="col-12">
+                    <div class="empty-state">
+                        <i class="fas fa-door-open"></i>
+                        <h5>Sem oportunidades no momento</h5>
+                        <p>Novas oportunidades serão publicadas em breve. Fique ligado!</p>
                     </div>
                 </div>
-            </div>
-
-            {# Oportunidade 4 #}
-            <div class="col-lg-6">
-                <div class="card-oportunidade">
-                    <div class="card-header-op">
-                        <h5><i class="fas fa-users"></i> Mobilizador Comunitário</h5>
-                    </div>
-                    <div class="card-body">
-                        <p><strong>Descrição:</strong> Engajar e mobilizar a comunidade local em ações climáticas.</p>
-                        <p class="mb-2"><strong>Requisitos:</strong></p>
-                        <ul class="mb-3">
-                            <li>Liderança</li>
-                            <li>Empatia</li>
-                            <li>Disponibilidade 5h/semana</li>
-                        </ul>
-                        <a href="mailto:{{ config_site.email|default:'coletivocapiclima@gmail.com' }}?subject=Interesse em: Mobilizador Comunitário"
-                           class="btn btn-cap btn-primary-cap btn-sm">
-                            <i class="fas fa-paper-plane"></i> Candidatar-se
-                        </a>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
 
         </div>
 
         {# Info box #}
         <div class="row mt-5">
             <div class="col-lg-8 mx-auto">
-                <div class="apoie-method" style="border-left-color:var(--color-accent);">
-                    <h5><i class="fas fa-info-circle" style="color:var(--color-accent);"></i> Não encontrou a oportunidade certa?</h5>
+                <div class="apoie-method" style="border-left-color:var(--color-primary-light);">
+                    <h5><i class="fas fa-info-circle" style="color:var(--color-primary-light);"></i> Não encontrou a oportunidade certa?</h5>
                     <p>Entre em contato conosco! Podemos conversar sobre outras possibilidades de contribuir.</p>
                     <div class="d-flex flex-wrap gap-2 mt-3">
                         <a href="mailto:{{ config_site.email|default:'coletivocapiclima@gmail.com' }}" class="btn btn-cap btn-primary-cap btn-sm">

@@ -39,8 +39,15 @@
                                 <p class="bio-text">{{ membro.bio }}</p>
                             {% endif %}
                             <div class="social-links">
+                                {% if membro.instagram %}
+                                    <a href="{{ membro.instagram }}" target="_blank" rel="noopener"
+                                       aria-label="Instagram de {{ membro.nome }}">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                {% endif %}
                                 {% if membro.linkedin %}
-                                    <a href="{{ membro.linkedin }}" target="_blank" rel="noopener">
+                                    <a href="{{ membro.linkedin }}" target="_blank" rel="noopener"
+                                       aria-label="LinkedIn de {{ membro.nome }}">
                                         <i class="fab fa-linkedin"></i>
                                     </a>
                                 {% endif %}
