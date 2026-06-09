@@ -13,7 +13,6 @@ from .models import (
     SecaoHome,
     SecaoSobre,
     SiteConfig,
-    SiteSection,
 )
 from .permissions import user_has_cms_access
 
@@ -279,17 +278,3 @@ class SiteConfigAdmin(SingletonAdminMixin, ImagePreviewMixin, admin.ModelAdmin):
         )
 
 
-# ===== SiteSection legado (mantido temporariamente) =====
-
-@admin.register(SiteSection)
-class SiteSectionAdmin(ImagePreviewMixin, admin.ModelAdmin):
-    list_display = ("nome", "slug", "titulo", "ativo", "ordem", "atualizado_em")
-    list_editable = ("ativo", "ordem")
-    list_filter = ("ativo",)
-    search_fields = ("nome", "slug", "titulo", "texto_principal")
-    prepopulated_fields = {"slug": ("nome",)}
-    fieldsets = (
-        ("Identificacao", {"fields": ("nome", "slug", "ativo", "ordem")}),
-        ("Conteudo", {"fields": ("titulo", "texto_principal", "imagem", "imagem_preview")}),
-        ("Chamada", {"fields": ("botao_texto", "botao_url"), "classes": ("collapse",)}),
-    )

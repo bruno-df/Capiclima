@@ -36,3 +36,9 @@ ENV/
 __MACOSX/
 .DS_Store
 Thumbs.db
+
+# =========================
+# Arquivos locais de trabalho
+# =========================
+AGENTS.md
+FIXES.md
