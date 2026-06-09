@@ -12,6 +12,9 @@ from apps.ong.models import (
     Atividade,
     MembroEquipe,
     Opportunity,
+    SecaoApoie,
+    SecaoHome,
+    SecaoSobre,
     SiteConfig,
     SiteSection,
 )
@@ -24,6 +27,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         self._seed_config()
         self._seed_groups()
+        self._seed_singletons()
         self._seed_sections()
         self._seed_equipe()
         self._seed_atividades()
@@ -50,7 +54,18 @@ class Command(BaseCommand):
         )
 
     # ------------------------------------------------------------------ #
-    # Secoes editaveis do site
+    # Singletons dedicados (novos modelos)
+    # ------------------------------------------------------------------ #
+    def _seed_singletons(self):
+        home = SecaoHome.load()
+        self.stdout.write(f"  SecaoHome: {home} -- OK")
+        sobre = SecaoSobre.load()
+        self.stdout.write(f"  SecaoSobre: {sobre} -- OK")
+        apoie = SecaoApoie.load()
+        self.stdout.write(f"  SecaoApoie: {apoie} -- OK")
+
+    # ------------------------------------------------------------------ #
+    # Secoes editaveis do site (legado, mantido por compatibilidade)
     # ------------------------------------------------------------------ #
     def _seed_sections(self):
         sections = [
