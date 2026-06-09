@@ -195,7 +195,26 @@ class MembroEquipe(models.Model):
         ordering = ["ordem"]
 
 
-class SiteConfig(models.Model):
+class SingletonMixin(models.Model):
+    """Mixin para modelos que devem ter exatamente 1 registro."""
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        self.pk = 1
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        return None
+
+    @classmethod
+    def load(cls):
+        obj, _created = cls.objects.get_or_create(pk=1)
+        return obj
+
+
+class SiteConfig(SingletonMixin):
     nome_site = models.CharField("Nome do Site", max_length=100, default="CapiClima")
     slogan = models.CharField(
         "Slogan",
@@ -209,6 +228,7 @@ class SiteConfig(models.Model):
         blank=True,
         null=True,
         validators=[image_extension_validator],
+        help_text="Logo principal do site. Recomendado: PNG com fundo transparente.",
     )
     favicon = CloudinaryField(
         "Favicon",
@@ -216,6 +236,7 @@ class SiteConfig(models.Model):
         blank=True,
         null=True,
         validators=[image_extension_validator],
+        help_text="Ícone exibido na aba do navegador. Recomendado: 32×32px.",
     )
     email = models.EmailField(
         "E-mail de Contato",
@@ -244,6 +265,7 @@ class SiteConfig(models.Model):
         max_length=100,
         blank=True,
         default="coletivocapiclima@gmail.com",
+        help_text="Chave Pix para doações (e-mail, CPF, telefone ou aleatória).",
     )
     qrcode_pix = CloudinaryField(
         "QR Code Pix",
@@ -251,6 +273,7 @@ class SiteConfig(models.Model):
         blank=True,
         null=True,
         validators=[image_extension_validator],
+        help_text="Imagem do QR Code para pagamento via Pix.",
     )
     texto_rodape = models.CharField(
         "Texto do Rodape",
@@ -262,21 +285,161 @@ class SiteConfig(models.Model):
     def __str__(self):
         return self.nome_site
 
-    def save(self, *args, **kwargs):
-        self.pk = 1
-        super().save(*args, **kwargs)
-
-    def delete(self, *args, **kwargs):
-        return None
-
-    @classmethod
-    def load(cls):
-        obj, _created = cls.objects.get_or_create(pk=1)
-        return obj
-
     class Meta:
         verbose_name = "Configuracao do Site"
         verbose_name_plural = "Configuracao do Site"
+
+
+
+
+class SecaoHome(SingletonMixin):
+    """Conteúdo editável da página inicial."""
+
+    titulo_principal = models.CharField(
+        "Título principal (hero)", max_length=160, blank=True,
+        help_text="Título exibido no banner principal da home.",
+    )
+    subtitulo = models.CharField(
+        "Subtítulo (hero)", max_length=250, blank=True,
+        help_text="Frase complementar abaixo do título principal.",
+    )
+    imagem_banner = CloudinaryField(
+        "Imagem do banner",
+        folder="home/",
+        blank=True,
+        null=True,
+        validators=[image_extension_validator],
+        help_text="Imagem de fundo do hero. Recomendado: 1920×800px.",
+    )
+
+    texto_juventudes = CKEditor5Field(
+        "Texto — Juventudes em Ação", config_name="default", blank=True,
+        help_text="Texto da seção 'Juventudes em Ação' na home.",
+    )
+    titulo_juventudes = models.CharField(
+        "Título — Juventudes em Ação", max_length=160, blank=True,
+        default="Juventudes em Ação",
+    )
+    imagem_juventudes = CloudinaryField(
+        "Imagem — Juventudes",
+        folder="home/",
+        blank=True,
+        null=True,
+        validators=[image_extension_validator],
+    )
+
+    titulo_parceiros = models.CharField(
+        "Título — Parceiros", max_length=160, blank=True,
+        default="Nossos Parceiros",
+    )
+    texto_parceiros = CKEditor5Field(
+        "Texto — Parceiros", config_name="default", blank=True,
+    )
+    imagem_parceiros = CloudinaryField(
+        "Imagem — Parceiros",
+        folder="home/",
+        blank=True,
+        null=True,
+        validators=[image_extension_validator],
+        help_text="Logotipos dos parceiros/apoiadores.",
+    )
+
+    titulo_cta = models.CharField(
+        "Título — CTA", max_length=160, blank=True,
+        default="Quer fazer a diferença?",
+        help_text="Chamada para ação no final da home.",
+    )
+    texto_cta = CKEditor5Field(
+        "Texto — CTA", config_name="default", blank=True,
+    )
+    link_cta = models.CharField(
+        "URL do botão CTA", max_length=250, blank=True,
+        help_text="Link do botão principal da CTA.",
+    )
+
+    def __str__(self):
+        return "Página Inicial"
+
+    class Meta:
+        verbose_name = "Página Inicial"
+        verbose_name_plural = "Página Inicial"
+
+
+class SecaoSobre(SingletonMixin):
+    """Conteúdo editável da página Sobre."""
+
+    titulo = models.CharField(
+        "Título da página", max_length=160, blank=True,
+        default="Sobre o CapiClima",
+    )
+    texto_principal = CKEditor5Field(
+        "Texto principal", config_name="default", blank=True,
+        help_text="Texto institucional 'Quem Somos', missão, visão.",
+    )
+    imagem = CloudinaryField(
+        "Imagem institucional",
+        folder="sobre/",
+        blank=True,
+        null=True,
+        validators=[image_extension_validator],
+    )
+    missao = CKEditor5Field(
+        "Missão", config_name="default", blank=True,
+    )
+    visao = CKEditor5Field(
+        "Visão", config_name="default", blank=True,
+    )
+    valores = CKEditor5Field(
+        "Valores", config_name="default", blank=True,
+    )
+
+    def __str__(self):
+        return "Página Sobre"
+
+    class Meta:
+        verbose_name = "Página Sobre"
+        verbose_name_plural = "Página Sobre"
+
+
+class SecaoApoie(SingletonMixin):
+    """Conteúdo editável da página Apoie."""
+
+    texto_voluntariado = CKEditor5Field(
+        "Texto — Voluntariado", config_name="default", blank=True,
+        help_text="Descrição da seção de voluntariado.",
+    )
+    link_voluntariado = models.CharField(
+        "Link — Voluntariado", max_length=250, blank=True,
+        default="/oportunidades/",
+        help_text="URL do botão de voluntariado.",
+    )
+    texto_doacao = CKEditor5Field(
+        "Texto — Doação", config_name="default", blank=True,
+        help_text="Descrição da seção de doação financeira.",
+    )
+    link_doacao = models.CharField(
+        "Link — Doação", max_length=250, blank=True,
+        help_text="URL do botão de doação (opcional).",
+    )
+    texto_parcerias = CKEditor5Field(
+        "Texto — Parcerias", config_name="default", blank=True,
+        help_text="Descrição da seção de parcerias empresariais.",
+    )
+    link_parcerias = models.CharField(
+        "Link — Parcerias", max_length=250, blank=True,
+        help_text="URL do botão de parcerias (opcional).",
+    )
+    texto_compartilhe = CKEditor5Field(
+        "Texto — Compartilhe", config_name="default", blank=True,
+        help_text="Descrição da seção 'Compartilhe'.",
+    )
+
+    def __str__(self):
+        return "Página Apoie"
+
+    class Meta:
+        verbose_name = "Página Apoie"
+        verbose_name_plural = "Página Apoie"
 
 
 # Backwards-compatible import name used by the partial migration already present.
