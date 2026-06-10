@@ -106,7 +106,7 @@ Assets mapeados:
 - Atividades antigas/destaque: `1-coletivo-sarau-e-tempo-de-caju-cba.jpg`, `2-vs-conf-infantojuvenil-bsb.jpeg`, `3-vc-i-cupula-jovens-lideres-da-amazonia-legal.jpeg`, `4-vc-simul-ue.jpeg`
 - Atividades 2024: `atividade-012024.jpeg`, `atividade-022024.jpeg`, `atividade-032024.jpeg`, `atividade-042024.jpeg`, `atividade-052024.jpeg`, `atividade-062024.png`, `atividade-072024.jpeg`
 - Atividades 2025: `atividade-012025.jpeg`, `atividade-022025.jpg`, `atividade-032025.jpeg`, `atividade-042025.png`
-- Iconografia: `[Amazonia de Pe] Iconografia_1.png`, `_5.png`, `_10.png`, `_11.png`, `_12.png`, `_13.png`
+- Iconografia: `amazonia_de_pe_iconografia_1.png`, `amazonia_de_pe_iconografia_5.png`, `amazonia_de_pe_iconografia_10.png`, `amazonia_de_pe_iconografia_11.png`, `amazonia_de_pe_iconografia_12.png`, `amazonia_de_pe_iconografia_13.png`
 
 ## Secoes e abas identificadas
 
