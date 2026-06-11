@@ -622,3 +622,33 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 575px) {
     .hero-content h1 { font-size: 1.5rem; }
 }
+
+.oportunidades-table {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.oportunidades-table thead th {
+    background: var(--color-primary);
+    color: #fff;
+    font-weight: 700;
+    border: none;
+    white-space: nowrap;
+}
+
+.oportunidades-table tbody td {
+    vertical-align: middle;
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+.oportunidade-descricao {
+    max-width: 420px;
+    color: var(--color-text);
+}
+
+@media (max-width: 768px) {
+    .oportunidades-table {
+        min-width: 850px;
+    }
+}

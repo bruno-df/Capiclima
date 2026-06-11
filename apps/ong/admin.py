@@ -211,14 +211,68 @@ class SecaoApoieAdmin(SingletonAdminMixin, admin.ModelAdmin):
 
 @admin.register(Opportunity)
 class OpportunityAdmin(admin.ModelAdmin):
-    list_display = ("titulo", "data_inicio", "data_fim", "ativo", "ordem", "esta_aberta")
-    list_editable = ("ativo", "ordem")
-    list_filter = ("ativo", "data_inicio", "data_fim")
-    search_fields = ("titulo", "descricao", "link")
-    date_hierarchy = "data_inicio"
+    list_display = (
+        "titulo",
+        "tipo",
+        "data_fim",
+        "ativo",
+        "ordem",
+        "esta_aberta",
+    )
+
+    list_editable = (
+        "tipo",
+        "data_fim",
+        "ativo",
+        "ordem",
+    )
+
+    list_filter = (
+        "ativo",
+        "tipo",
+        "data_fim",
+    )
+
+    search_fields = (
+        "titulo",
+        "tipo",
+        "descricao",
+        "link",
+    )
+
+    date_hierarchy = "data_fim"
+
     fieldsets = (
-        ("Oportunidade", {"fields": ("titulo", "descricao", "link")}),
-        ("Datas e exibicao", {"fields": ("data_inicio", "data_fim", "ativo", "ordem")}),
+        (
+            "Dados da oportunidade",
+            {
+                "fields": (
+                    "titulo",
+                    "tipo",
+                    "descricao",
+                )
+            },
+        ),
+        (
+            "Inscrição",
+            {
+                "fields": (
+                    "link",
+                    "data_inicio",
+                    "data_fim",
+                ),
+                "description": "Se o link ficar vazio, o botão de inscrição não será exibido no site.",
+            },
+        ),
+        (
+            "Exibição no site",
+            {
+                "fields": (
+                    "ativo",
+                    "ordem",
+                )
+            },
+        ),
     )
 
 

@@ -55,13 +55,49 @@ class SiteSection(models.Model):
 
 
 class Opportunity(models.Model):
-    titulo = models.CharField("Titulo", max_length=180)
-    descricao = CKEditor5Field("Descricao", config_name="default")
-    link = models.URLField("Link para inscricao", blank=True)
-    data_inicio = models.DateField("Data de inicio", blank=True, null=True)
-    data_fim = models.DateField("Data de fim", blank=True, null=True)
+    titulo = models.CharField("Oportunidade", max_length=180)
+
+    tipo = models.CharField(
+        "Tipo",
+        max_length=80,
+        blank=True,
+        default="",
+        help_text="Ex: Voluntariado, Oficina, Curso, Evento, Seleção, Edital.",
+    )
+
+    descricao = CKEditor5Field(
+        "Descrição",
+        config_name="default",
+        blank=True,
+        help_text="Texto curto explicando a oportunidade.",
+    )
+
+    link = models.URLField(
+        "Link de inscrição",
+        blank=True,
+        help_text="Cole aqui o link do formulário ou página de inscrição.",
+    )
+
+    data_inicio = models.DateField(
+        "Início da inscrição",
+        blank=True,
+        null=True,
+    )
+
+    data_fim = models.DateField(
+        "Término da inscrição",
+        blank=True,
+        null=True,
+    )
+
     ativo = models.BooleanField("Ativo?", default=True)
-    ordem = models.PositiveIntegerField("Ordem de exibicao", default=0)
+
+    ordem = models.PositiveIntegerField(
+        "Ordem de exibição",
+        default=0,
+        help_text="Menor número aparece primeiro.",
+    )
+
     criado_em = models.DateTimeField("Criado em", auto_now_add=True)
     atualizado_em = models.DateTimeField("Atualizado em", auto_now=True)
 
@@ -81,9 +117,9 @@ class Opportunity(models.Model):
         )
 
     class Meta:
-        verbose_name = "Oportunidade"
-        verbose_name_plural = "Oportunidades"
-        ordering = ["ordem", "data_inicio", "data_fim", "titulo"]
+        verbose_name = "Oportunidades — Item da Planilha"
+        verbose_name_plural = "Oportunidades — Planilha de Inscrições"
+        ordering = ["ordem", "data_fim", "titulo"]
 
 
 class DestaqueInicio(models.Model):

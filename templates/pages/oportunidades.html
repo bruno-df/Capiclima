@@ -2,83 +2,89 @@
 {% load static %}
 
 {% block title %}Oportunidades - CapiClima{% endblock %}
-{% block meta_description %}Oportunidades de voluntariado no Coletivo CapiClima. Faça a diferença!{% endblock %}
+{% block meta_description %}Oportunidades, inscrições e formas de participação no Coletivo CapiClima.{% endblock %}
 
 {% block content %}
 
-{# Page Header #}
 <section class="page-header">
     <div class="container">
-        <h1>Oportunidades de Voluntariado</h1>
-        <p>Quer fazer a diferença? Junte-se ao CapiClima!</p>
+        <h1>Oportunidades</h1>
+        <p>Confira as inscrições, chamadas e formas de participação abertas no CapiClima.</p>
     </div>
 </section>
 
 <section class="section-padding">
     <div class="container">
-        <div class="row g-4">
 
-            {% for oportunidade in oportunidades %}
-                <div class="col-lg-6">
-                    <div class="card-oportunidade">
-                        <div class="card-header-op">
-                            <h5><i class="fas fa-bullhorn"></i> {{ oportunidade.titulo }}</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="rich-text mb-3">{{ oportunidade.descricao|safe }}</div>
-                            {% if oportunidade.data_inicio or oportunidade.data_fim %}
-                                <p class="mb-2 text-muted" style="font-size:0.9rem;">
-                                    <i class="fas fa-calendar-alt me-1"></i>
-                                    {% if oportunidade.data_inicio %}{{ oportunidade.data_inicio|date:"d/m/Y" }}{% endif %}
-                                    {% if oportunidade.data_inicio and oportunidade.data_fim %} — {% endif %}
-                                    {% if oportunidade.data_fim %}{{ oportunidade.data_fim|date:"d/m/Y" }}{% endif %}
-                                </p>
-                            {% endif %}
-                            {% if oportunidade.link %}
-                                <a href="{{ oportunidade.link }}" target="_blank" rel="noopener"
-                                   class="btn btn-cap btn-primary-cap btn-sm">
-                                    <i class="fas fa-external-link-alt"></i> Inscreva-se
-                                </a>
-                            {% else %}
-                                <a href="mailto:{{ config_site.email|default:'coletivocapiclima@gmail.com' }}?subject=Interesse em: {{ oportunidade.titulo|urlencode }}"
-                                   class="btn btn-cap btn-primary-cap btn-sm">
-                                    <i class="fas fa-paper-plane"></i> Candidatar-se
-                                </a>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            {% empty %}
-                <div class="col-12">
-                    <div class="empty-state">
-                        <i class="fas fa-door-open"></i>
-                        <h5>Sem oportunidades no momento</h5>
-                        <p>Novas oportunidades serão publicadas em breve. Fique ligado!</p>
-                    </div>
-                </div>
-            {% endfor %}
+        {% if oportunidades %}
+            <div class="table-responsive shadow-sm rounded-3">
+                <table class="table table-hover align-middle mb-0 oportunidades-table">
+                    <thead>
+                        <tr>
+                            <th>Oportunidade</th>
+                            <th>Tipo</th>
+                            <th>Descrição</th>
+                            <th>Término de inscrição</th>
+                            <th class="text-center">Link de inscrição</th>
+                        </tr>
+                    </thead>
 
-        </div>
+                    <tbody>
+                        {% for oportunidade in oportunidades %}
+                            <tr>
+                                <td>
+                                    <strong>{{ oportunidade.titulo }}</strong>
+                                </td>
 
-        {# Info box #}
-        <div class="row mt-5">
-            <div class="col-lg-8 mx-auto">
-                <div class="apoie-method" style="border-left-color:var(--color-primary-light);">
-                    <h5><i class="fas fa-info-circle" style="color:var(--color-primary-light);"></i> Não encontrou a oportunidade certa?</h5>
-                    <p>Entre em contato conosco! Podemos conversar sobre outras possibilidades de contribuir.</p>
-                    <div class="d-flex flex-wrap gap-2 mt-3">
-                        <a href="mailto:{{ config_site.email|default:'coletivocapiclima@gmail.com' }}" class="btn btn-cap btn-primary-cap btn-sm">
-                            <i class="fas fa-envelope"></i> E-mail
-                        </a>
-                        {% if config_site.whatsapp %}
-                        <a href="https://wa.me/{{ config_site.whatsapp }}" target="_blank" class="btn btn-cap btn-accent-cap btn-sm">
-                            <i class="fab fa-whatsapp"></i> WhatsApp
-                        </a>
-                        {% endif %}
-                    </div>
-                </div>
+                                <td>
+                                    {% if oportunidade.tipo %}
+                                        <span class="badge rounded-pill text-bg-success">
+                                            {{ oportunidade.tipo }}
+                                        </span>
+                                    {% else %}
+                                        <span class="text-muted">Não informado</span>
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    <div class="oportunidade-descricao">
+                                        {{ oportunidade.descricao|striptags|truncatewords:28 }}
+                                    </div>
+                                </td>
+
+                                <td>
+                                    {% if oportunidade.data_fim %}
+                                        {{ oportunidade.data_fim|date:"d/m/Y" }}
+                                    {% else %}
+                                        <span class="text-muted">Sem prazo definido</span>
+                                    {% endif %}
+                                </td>
+
+                                <td class="text-center">
+                                    {% if oportunidade.link %}
+                                        <a href="{{ oportunidade.link }}"
+                                           target="_blank"
+                                           rel="noopener noreferrer"
+                                           class="btn btn-cap btn-primary-cap btn-sm">
+                                            Inscrever-se
+                                        </a>
+                                    {% else %}
+                                        <span class="text-muted">Indisponível</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
-        </div>
+
+        {% else %}
+            <div class="empty-state">
+                <i class="fas fa-door-open"></i>
+                <h5>Sem oportunidades no momento</h5>
+                <p>Novas oportunidades serão publicadas em breve. Fique ligado!</p>
+            </div>
+        {% endif %}
 
     </div>
 </section>
