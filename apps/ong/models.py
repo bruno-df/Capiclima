@@ -96,6 +96,24 @@ class DestaqueInicio(models.Model):
         null=True,
         validators=[image_extension_validator],
     )
+    texto_botao = models.CharField(
+        "Texto do botão",
+        max_length=80,
+        blank=True,
+        default="",
+        help_text="Ex: Saiba mais, Inscreva-se, Ver atividade.",
+    )
+    link_botao = models.CharField(
+        "Link do botão",
+        max_length=250,
+        blank=True,
+        default="",
+        help_text="Pode ser um link interno, como /atividades/, ou externo.",
+    )
+    abrir_nova_aba = models.BooleanField(
+        "Abrir link em nova aba?",
+        default=False,
+    )
     ativo = models.BooleanField(
         "Ativo?",
         default=True,

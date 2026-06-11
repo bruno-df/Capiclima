@@ -20,7 +20,9 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Inicio"
-        context["destaques"] = DestaqueInicio.objects.filter(ativo=True)
+        context["destaques"] = DestaqueInicio.objects.filter(
+            ativo=True
+        ).order_by("ordem", "id")
         context["atividades_destaque"] = Atividade.objects.filter(
             destaque=True, ativo=True
         )[:3]

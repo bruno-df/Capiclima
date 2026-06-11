@@ -149,13 +149,42 @@ class AtividadeAdmin(ImagePreviewMixin, admin.ModelAdmin):
 
 @admin.register(DestaqueInicio)
 class DestaqueInicioAdmin(ImagePreviewMixin, admin.ModelAdmin):
-    list_display = ("titulo", "subtitulo", "ativo", "ordem")
+    list_display = ("titulo", "ativo", "ordem", "link_botao")
     list_editable = ("ativo", "ordem")
     list_filter = ("ativo",)
-    search_fields = ("titulo", "subtitulo")
+    search_fields = ("titulo", "subtitulo", "link_botao")
     fieldsets = (
-        ("Conteudo do banner", {"fields": ("titulo", "subtitulo", "imagem", "imagem_preview")}),
-        ("Exibicao", {"fields": ("ativo", "ordem")}),
+        (
+            "Conteúdo do banner",
+            {
+                "fields": (
+                    "titulo",
+                    "subtitulo",
+                    "imagem",
+                    "imagem_preview",
+                )
+            },
+        ),
+        (
+            "Botão do banner",
+            {
+                "fields": (
+                    "texto_botao",
+                    "link_botao",
+                    "abrir_nova_aba",
+                ),
+                "description": "Se o link ficar vazio, o botão não aparece no banner.",
+            },
+        ),
+        (
+            "Exibição",
+            {
+                "fields": (
+                    "ativo",
+                    "ordem",
+                )
+            },
+        ),
     )
 
 

@@ -6,46 +6,102 @@
 
 {% block content %}
 
-{# ==================== HERO SECTION ==================== #}
+{# ==================== HERO SECTION / CARROSSEL ==================== #}
 <section class="hero-section">
+
     {% if destaques %}
-        {% with destaque=destaques.first %}
-            {% if destaque.imagem %}
-                <img src="{{ destaque.imagem.url }}" alt="{{ destaque.titulo }}" class="hero-bg">
-            {% elif secao_home.imagem_banner %}
-                <img src="{{ secao_home.imagem_banner.url }}" alt="Banner" class="hero-bg">
-            {% else %}
-                <img src="{% static 'images/geral/img header principal.png' %}" alt="Floresta" class="hero-bg">
+        <div id="homeHeroCarousel" class="carousel slide carousel-fade h-100" data-bs-ride="carousel">
+
+            {% if destaques|length > 1 %}
+                <div class="carousel-indicators">
+                    {% for destaque in destaques %}
+                        <button type="button"
+                                data-bs-target="#homeHeroCarousel"
+                                data-bs-slide-to="{{ forloop.counter0 }}"
+                                class="{% if forloop.first %}active{% endif %}"
+                                {% if forloop.first %}aria-current="true"{% endif %}
+                                aria-label="Slide {{ forloop.counter }}">
+                        </button>
+                    {% endfor %}
+                </div>
             {% endif %}
-        {% endwith %}
-    {% elif secao_home.imagem_banner %}
-        <img src="{{ secao_home.imagem_banner.url }}" alt="Banner" class="hero-bg">
+
+            <div class="carousel-inner h-100">
+                {% for destaque in destaques %}
+                    <div class="carousel-item h-100 {% if forloop.first %}active{% endif %}">
+
+                        {% if destaque.imagem %}
+                            <img src="{{ destaque.imagem.url }}" alt="{{ destaque.titulo }}" class="hero-bg">
+                        {% elif secao_home.imagem_banner %}
+                            <img src="{{ secao_home.imagem_banner.url }}" alt="{{ destaque.titulo }}" class="hero-bg">
+                        {% else %}
+                            <img src="{% static 'images/geral/img header principal.png' %}" alt="{{ destaque.titulo }}" class="hero-bg">
+                        {% endif %}
+
+                        <div class="hero-overlay"></div>
+
+                        <div class="hero-content">
+                            <h1>{{ destaque.titulo }}</h1>
+
+                            {% if destaque.subtitulo %}
+                                <p>{{ destaque.subtitulo }}</p>
+                            {% endif %}
+
+                            {% if destaque.link_botao %}
+                                <a href="{{ destaque.link_botao }}"
+                                   class="btn btn-hero"
+                                   {% if destaque.abrir_nova_aba %}target="_blank" rel="noopener noreferrer"{% endif %}>
+                                    {{ destaque.texto_botao|default:"Saiba Mais" }}
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            {% if destaques|length > 1 %}
+                <button class="carousel-control-prev" type="button" data-bs-target="#homeHeroCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+
+                <button class="carousel-control-next" type="button" data-bs-target="#homeHeroCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Próximo</span>
+                </button>
+            {% endif %}
+        </div>
+
     {% else %}
-        <img src="{% static 'images/geral/img header principal.png' %}" alt="Floresta" class="hero-bg">
-    {% endif %}
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-        {% if destaques %}
-            {% with destaque=destaques.first %}
-                <h1>{{ destaque.titulo }}</h1>
-                {% if destaque.subtitulo %}
-                    <p>{{ destaque.subtitulo }}</p>
-                {% endif %}
-            {% endwith %}
-        {% elif secao_home.titulo_principal %}
-            <h1>{{ secao_home.titulo_principal }}</h1>
+
+        {% if secao_home.imagem_banner %}
+            <img src="{{ secao_home.imagem_banner.url }}" alt="Banner" class="hero-bg">
+        {% else %}
+            <img src="{% static 'images/geral/img header principal.png' %}" alt="Floresta" class="hero-bg">
+        {% endif %}
+
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            {% if secao_home.titulo_principal %}
+                <h1>{{ secao_home.titulo_principal }}</h1>
+            {% else %}
+                <h1>Junte-se a nós pela justiça climática!</h1>
+            {% endif %}
+
             {% if secao_home.subtitulo %}
                 <p>{{ secao_home.subtitulo }}</p>
+            {% else %}
+                <p>Mobilizando a juventude para ações de educação ambiental e transformação social.</p>
             {% endif %}
-        {% else %}
-            <h1>Junte-se a nós pela justiça climática!</h1>
-            <p>Mobilizando a juventude para ações de educação ambiental e transformação social.</p>
-        {% endif %}
-        <a href="{% url 'ong:sobre' %}" class="btn btn-hero">
-            Saiba Mais
-        </a>
-    </div>
-    {# Wave divider #}
+
+            <a href="{% url 'ong:sobre' %}" class="btn btn-hero">
+                Saiba Mais
+            </a>
+        </div>
+
+    {% endif %}
+
     <div class="hero-shapes">
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
             <path d="M0,60 C360,120 1080,0 1440,60 L1440,120 L0,120 Z" fill="var(--color-bg)"/>
