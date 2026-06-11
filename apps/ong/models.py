@@ -1,4 +1,4 @@
-from django.core.validators import FileExtensionValidator
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.db.models import Q
 from django.utils import timezone
@@ -8,9 +8,23 @@ from django_ckeditor_5.fields import CKEditor5Field
 
 
 ALLOWED_IMAGE_EXTENSIONS = ["jpg", "jpeg", "png", "webp"]
-image_extension_validator = FileExtensionValidator(
-    allowed_extensions=ALLOWED_IMAGE_EXTENSIONS
-)
+
+
+def image_extension_validator(value):
+    if not value or isinstance(value, bool):
+        return
+
+    name = getattr(value, "name", "")
+
+    if not name:
+        return
+
+    extension = name.split(".")[-1].lower()
+
+    if extension not in ALLOWED_IMAGE_EXTENSIONS:
+        raise ValidationError(
+            f"Formato de imagem inválido. Use: {', '.join(ALLOWED_IMAGE_EXTENSIONS)}."
+        )
 
 
 class SiteSection(models.Model):
