@@ -46,77 +46,103 @@
 
                         <div class="atividade-planilha-body">
 
-                            <div class="atividade-img-container">
-                                {% if atividade.imagem %}
-                                    <img src="{{ atividade.imagem.url }}"
-                                         alt="{{ atividade.nome }}"
-                                         class="atividade-img">
-                                {% elif atividade.imagem_local %}
-                                    <img src="{% static atividade.imagem_local %}"
-                                         alt="{{ atividade.nome }}"
-                                         class="atividade-img">
-                                {% else %}
-                                    <div class="img-placeholder">
-                                        <i class="fas fa-image"></i>
-                                        <span>Imagem indisponível</span>
+                            <div class="atividade-compacta">
+
+                                <div class="atividade-thumb">
+                                    {% if atividade.imagem %}
+                                        <img src="{{ atividade.imagem.url }}"
+                                             alt="{{ atividade.nome }}">
+                                    {% elif atividade.imagem_local %}
+                                        <img src="{% static atividade.imagem_local %}"
+                                             alt="{{ atividade.nome }}">
+                                    {% else %}
+                                        <div class="img-placeholder img-placeholder-small">
+                                            <i class="fas fa-image"></i>
+                                            <span>Sem imagem</span>
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="atividade-compacta-conteudo">
+
+                                    <div class="atividade-info-grid atividade-info-grid-compacta">
+                                        {% if atividade.tipo %}
+                                            <div class="atividade-info-item">
+                                                <strong>Tipo da Atividade:</strong>
+                                                <span>{{ atividade.tipo }}</span>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if atividade.data %}
+                                            <div class="atividade-info-item">
+                                                <strong>Data:</strong>
+                                                <span>{{ atividade.data|date:"d/m/Y" }}</span>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if atividade.horario %}
+                                            <div class="atividade-info-item">
+                                                <strong>Horário:</strong>
+                                                <span>{{ atividade.horario }}</span>
+                                            </div>
+                                        {% endif %}
+
+                                        {% if atividade.local %}
+                                            <div class="atividade-info-item">
+                                                <strong>Local:</strong>
+                                                <span>{{ atividade.local }}</span>
+                                            </div>
+                                        {% endif %}
                                     </div>
-                                {% endif %}
-                            </div>
 
-                            <div class="atividade-info-grid">
-                                {% if atividade.tipo %}
-                                    <div class="atividade-info-item">
-                                        <strong>Tipo da Atividade:</strong>
-                                        <span>{{ atividade.tipo }}</span>
+                                    <h4 class="atividade-subtitulo">
+                                        📌 Descrição Geral
+                                    </h4>
+
+                                    <div class="atividade-resumo">
+                                        {{ atividade.descricao|striptags|truncatewords:35 }}
                                     </div>
-                                {% endif %}
 
-                                {% if atividade.data %}
-                                    <div class="atividade-info-item">
-                                        <strong>Data:</strong>
-                                        <span>{{ atividade.data|date:"d/m/Y" }}</span>
-                                    </div>
-                                {% endif %}
+                                    <button class="btn btn-vermais btn-outline-success mt-3"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#atividade-extra-{{ atividade.id }}"
+                                            aria-expanded="false"
+                                            aria-controls="atividade-extra-{{ atividade.id }}">
+                                        Ver mais
+                                    </button>
 
-                                {% if atividade.horario %}
-                                    <div class="atividade-info-item">
-                                        <strong>Horário:</strong>
-                                        <span>{{ atividade.horario }}</span>
-                                    </div>
-                                {% endif %}
-
-                                {% if atividade.local %}
-                                    <div class="atividade-info-item">
-                                        <strong>Local:</strong>
-                                        <span>{{ atividade.local }}</span>
-                                    </div>
-                                {% endif %}
-                            </div>
-
-                            <hr>
-
-                            <h4 class="atividade-subtitulo">
-                                📌 Descrição Geral
-                            </h4>
-
-                            <div class="atividade-resumo">
-                                {{ atividade.descricao|striptags|truncatewords:45 }}
-                            </div>
-
-                            <div class="collapse atividade-extra" id="atividade-extra-{{ atividade.id }}">
-                                <div class="rich-text mt-3">
-                                    {{ atividade.descricao|safe }}
                                 </div>
                             </div>
 
-                            <button class="btn btn-vermais btn-outline-success mt-3"
-                                    type="button"
-                                    data-bs-toggle="collapse"
-                                    data-bs-target="#atividade-extra-{{ atividade.id }}"
-                                    aria-expanded="false"
-                                    aria-controls="atividade-extra-{{ atividade.id }}">
-                                Ver mais
-                            </button>
+                            <div class="collapse atividade-extra" id="atividade-extra-{{ atividade.id }}">
+
+                                <div class="atividade-img-container atividade-img-container-grande">
+                                    {% if atividade.imagem %}
+                                        <img src="{{ atividade.imagem.url }}"
+                                             alt="{{ atividade.nome }}"
+                                             class="atividade-img">
+                                    {% elif atividade.imagem_local %}
+                                        <img src="{% static atividade.imagem_local %}"
+                                             alt="{{ atividade.nome }}"
+                                             class="atividade-img">
+                                    {% else %}
+                                        <div class="img-placeholder">
+                                            <i class="fas fa-image"></i>
+                                            <span>Imagem indisponível</span>
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <h4 class="atividade-subtitulo mt-4">
+                                    📌 Descrição Completa
+                                </h4>
+
+                                <div class="rich-text">
+                                    {{ atividade.descricao|safe }}
+                                </div>
+
+                            </div>
 
                         </div>
                     </div>

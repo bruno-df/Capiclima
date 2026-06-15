@@ -685,42 +685,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ============================================
-   ATIVIDADES — cards com imagem e toggle
-   ============================================ */
-.atividade-card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    overflow: hidden;
-}
-.atividade-card .img-container {
-    max-height: 400px;
-    overflow: hidden;
-}
-.atividade-card .img-container img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-.atividade-card .card-body {
-    padding: 1.25rem;
-}
-.atividade-card h3 {
-    font-size: 1.1rem;
-    color: var(--color-primary);
-    margin-bottom: 0.75rem;
-}
-.atividade-card .extra-content {
-    display: none;
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--color-border);
-}
-.atividade-card .extra-content.show {
-    display: block;
-}
-
-/* ============================================
    RICH TEXT CONTENT
    ============================================ */
 .rich-text p { margin-bottom: 1rem; }
