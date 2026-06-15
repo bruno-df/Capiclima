@@ -653,7 +653,7 @@ h1, h2, h3, h4, h5, h6 {
    ============================================ */
 .colaborador-card {
     background: var(--color-surface);
-    border: 2px solid var(--color-text-muted);
+    border: none;
     border-radius: var(--radius-md);
     padding: 0;
     gap: 0;
@@ -972,7 +972,7 @@ h1, h2, h3, h4, h5, h6 {
 .colaborador-card {
     display: flex;
     background: #fff;
-    border: 4px solid #000;
+    border: none;
     border-radius: 14px;
     overflow: hidden;
     min-height: 280px;
@@ -983,7 +983,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 300px;
     min-height: 280px;
     background: #f8f9fa;
-    border-right: 4px solid #000;
+    border-right: none;
     overflow: hidden;
 }
 
@@ -1075,7 +1075,7 @@ h1, h2, h3, h4, h5, h6 {
         flex: none;
         min-height: 320px;
         border-right: none;
-        border-bottom: 4px solid #000;
+        border-bottom: none;
     }
 
     .colaborador-img-container img {
