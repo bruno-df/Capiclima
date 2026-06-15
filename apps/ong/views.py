@@ -1,4 +1,5 @@
-from django.views.generic import ListView, TemplateView
+from django.http import JsonResponse
+from django.views.generic import ListView, TemplateView, View
 
 from .models import (
     Atividade,
@@ -26,6 +27,10 @@ class IndexView(TemplateView):
         context["atividades_destaque"] = Atividade.objects.filter(
             destaque=True, ativo=True
         )[:3]
+
+        # Contadores em tempo real
+        context["total_atividades"] = Atividade.objects.filter(ativo=True).count()
+        context["total_colaboradores"] = MembroEquipe.objects.count()
 
         # Secao editavel da home (singleton)
         context["secao_home"] = SecaoHome.load()
@@ -108,3 +113,14 @@ class ApoieView(TemplateView):
         context["title"] = "Apoie"
         context["secao_apoie"] = SecaoApoie.load()
         return context
+
+
+class StatsAPIView(View):
+    """Endpoint JSON para contadores em tempo real da home."""
+
+    def get(self, request, *args, **kwargs):
+        data = {
+            "total_atividades": Atividade.objects.filter(ativo=True).count(),
+            "total_colaboradores": MembroEquipe.objects.count(),
+        }
+        return JsonResponse(data)

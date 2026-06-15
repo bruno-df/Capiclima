@@ -10,4 +10,5 @@ urlpatterns = [
     path('oportunidades/', views.OportunidadesView.as_view(), name='oportunidades'),
     path('colaboradores/', views.ColaboradoresView.as_view(), name='colaboradores'),
     path('apoie/', views.ApoieView.as_view(), name='apoie'),
+    path('api/stats/', views.StatsAPIView.as_view(), name='api_stats'),
 ]

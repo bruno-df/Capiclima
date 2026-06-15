@@ -202,28 +202,34 @@
 </div>
 
 {# ==================== STATS ==================== #}
-<section class="stats-section">
+<section class="stats-section" data-stats-url="{% url 'ong:api_stats' %}">
     <div class="container">
-        <div class="row g-4">
-            <div class="col-6 col-md-3">
-                <div class="stat-item">
-                    <span class="stat-number">11</span>
-                    <span class="stat-label">Voluntários</span>
+        <div class="row g-4 justify-content-center">
+            <div class="col-6 col-md">
+                <div class="stat-item" data-stat="atividades">
+                    <span class="stat-number" data-target="{{ total_atividades }}" id="stat-atividades">0</span>
+                    <span class="stat-label">Atividades</span>
                 </div>
             </div>
-            <div class="col-6 col-md-3">
+            <div class="col-6 col-md">
+                <div class="stat-item" data-stat="colaboradores">
+                    <span class="stat-number" data-target="{{ total_colaboradores }}" id="stat-colaboradores">0</span>
+                    <span class="stat-label">Colaboradores</span>
+                </div>
+            </div>
+            <div class="col-6 col-md">
                 <div class="stat-item">
                     <span class="stat-number">2024</span>
                     <span class="stat-label">Ano de Fundação</span>
                 </div>
             </div>
-            <div class="col-6 col-md-3">
+            <div class="col-6 col-md">
                 <div class="stat-item">
                     <span class="stat-number">∞</span>
                     <span class="stat-label">Possibilidades</span>
                 </div>
             </div>
-            <div class="col-6 col-md-3">
+            <div class="col-6 col-md">
                 <div class="stat-item">
                     <span class="stat-number">🌱</span>
                     <span class="stat-label">Crescendo</span>
