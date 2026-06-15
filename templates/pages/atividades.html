@@ -34,7 +34,7 @@
 
         <div class="row justify-content-center g-4">
             {% for atividade in atividades %}
-                <div class="col-lg-10">
+                <div class="col-lg-11">
                     <div class="atividade-planilha-card">
 
                         <div class="atividade-planilha-header">
@@ -95,14 +95,6 @@
                                         {% endif %}
                                     </div>
 
-                                    <h4 class="atividade-subtitulo">
-                                        📌 Descrição Geral
-                                    </h4>
-
-                                    <div class="atividade-resumo">
-                                        {{ atividade.descricao|striptags|truncatewords:35 }}
-                                    </div>
-
                                     <button class="btn btn-vermais btn-outline-success mt-3"
                                             type="button"
                                             data-bs-toggle="collapse"
@@ -117,15 +109,15 @@
 
                             <div class="collapse atividade-extra" id="atividade-extra-{{ atividade.id }}">
 
-                                <div class="atividade-img-container atividade-img-container-grande">
+                                <div class="atividade-img-container-grande">
                                     {% if atividade.imagem %}
                                         <img src="{{ atividade.imagem.url }}"
                                              alt="{{ atividade.nome }}"
-                                             class="atividade-img">
+                                             class="atividade-img-grande">
                                     {% elif atividade.imagem_local %}
                                         <img src="{% static atividade.imagem_local %}"
                                              alt="{{ atividade.nome }}"
-                                             class="atividade-img">
+                                             class="atividade-img-grande">
                                     {% else %}
                                         <div class="img-placeholder">
                                             <i class="fas fa-image"></i>
@@ -134,13 +126,36 @@
                                     {% endif %}
                                 </div>
 
-                                <h4 class="atividade-subtitulo mt-4">
-                                    📌 Descrição Completa
-                                </h4>
-
-                                <div class="rich-text">
-                                    {{ atividade.descricao|safe }}
+                                <div class="atividade-detalhe-bloco">
+                                    <h4 class="atividade-subtitulo">
+                                         Descrição da Atividade
+                                    </h4>
+                                    <div class="rich-text">
+                                        {{ atividade.descricao|safe }}
+                                    </div>
                                 </div>
+
+                                {% if atividade.temas_debatidos %}
+                                    <div class="atividade-detalhe-bloco">
+                                        <h4 class="atividade-subtitulo">
+                                             Temas Debatidos
+                                        </h4>
+                                        <div class="rich-text">
+                                            {{ atividade.temas_debatidos|safe }}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                {% if atividade.resultados_encaminhamentos %}
+                                    <div class="atividade-detalhe-bloco">
+                                        <h4 class="atividade-subtitulo">
+                                             Resultados e Encaminhamentos
+                                        </h4>
+                                        <div class="rich-text">
+                                            {{ atividade.resultados_encaminhamentos|safe }}
+                                        </div>
+                                    </div>
+                                {% endif %}
 
                             </div>
 
@@ -148,7 +163,7 @@
                     </div>
                 </div>
             {% empty %}
-                <div class="col-lg-10">
+                <div class="col-lg-11">
                     <div class="empty-state">
                         <i class="fas fa-calendar-xmark"></i>
                         <h5>Nenhuma atividade encontrada</h5>
