@@ -110,7 +110,7 @@
 </section>
 
 {# ==================== JUVENTUDES EM AÇÃO ==================== #}
-<section class="section-padding">
+<section class="section-padding" style="padding-bottom: 0;">
     <div class="container">
         <div class="section-header">
             <h2>{{ secao_home.titulo_juventudes|default:"Juventudes em Ação" }}</h2>
@@ -120,50 +120,59 @@
                 <p>Conheça as iniciativas que estamos desenvolvendo pelo meio ambiente e pela educação.</p>
             {% endif %}
         </div>
+    </div>
+</section>
 
+{# ---- Onda SVG de transição (teste2.svg) ---- #}
+<img src="{% static 'images/geral/teste2.svg' %}" alt="Transição decorativa" class="w-100 d-block" style="margin-bottom: -4px;">
+
+{# ---- Seção laranja + cards ---- #}
+<section class="main-section-bleed">
+    <div class="container">
+        <h2 class="text-center text-white mb-4" style="padding-top: 1.5rem;"><b>Nossas ações</b></h2>
         <div class="row g-4">
-            {% for atividade in atividades_destaque %}
-                <div class="col-md-6 col-lg-4">
-                    <div class="card-cap">
-                        {% if atividade.imagem %}
-                            <img src="{{ atividade.imagem.url }}" class="card-img-top" alt="{{ atividade.nome }}">
-                        {% elif atividade.imagem_local %}
-                            <img src="{% static atividade.imagem_local %}" class="card-img-top" alt="{{ atividade.nome }}">
-                        {% else %}
-                            <div class="card-img-top d-flex align-items-center justify-content-center"
-                                 style="background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));">
-                                <i class="fas fa-leaf fa-3x text-white"></i>
-                            </div>
-                        {% endif %}
-                        <div class="card-body">
-                            <h5 class="card-title">{{ atividade.nome }}</h5>
-                            <p class="card-text">{{ atividade.descricao|striptags|truncatewords:20 }}</p>
-                            <div class="card-meta">
-                                <span><i class="fas fa-calendar-alt"></i> {{ atividade.data|date:"d/m/Y" }}</span>
-                                {% if atividade.local %}
-                                    <span><i class="fas fa-map-marker-alt"></i> {{ atividade.local }}</span>
-                                {% endif %}
+                {% for atividade in atividades_destaque %}
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card-cap">
+                            {% if atividade.imagem %}
+                                <img src="{{ atividade.imagem.url }}" class="card-img-top" alt="{{ atividade.nome }}">
+                            {% elif atividade.imagem_local %}
+                                <img src="{% static atividade.imagem_local %}" class="card-img-top" alt="{{ atividade.nome }}">
+                            {% else %}
+                                <div class="card-img-top d-flex align-items-center justify-content-center"
+                                     style="background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));">
+                                    <i class="fas fa-leaf fa-3x text-white"></i>
+                                </div>
+                            {% endif %}
+                            <div class="card-body">
+                                <h5 class="card-title">{{ atividade.nome }}</h5>
+                                <p class="card-text">{{ atividade.descricao|striptags|truncatewords:20 }}</p>
+                                <div class="card-meta">
+                                    <span><i class="fas fa-calendar-alt"></i> {{ atividade.data|date:"d/m/Y" }}</span>
+                                    {% if atividade.local %}
+                                        <span><i class="fas fa-map-marker-alt"></i> {{ atividade.local }}</span>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            {% empty %}
-                <div class="col-12">
-                    <div class="empty-state">
-                        <i class="fas fa-seedling"></i>
-                        <h5>Em breve novas atividades!</h5>
-                        <p>Estamos preparando ações incríveis. Fique ligado!</p>
+                {% empty %}
+                    <div class="col-12">
+                        <div class="empty-state" style="color: rgba(255,255,255,0.7);">
+                            <i class="fas fa-seedling"></i>
+                            <h5 style="color: #fff;">Em breve novas atividades!</h5>
+                            <p>Estamos preparando ações incríveis. Fique ligado!</p>
+                        </div>
                     </div>
-                </div>
-            {% endfor %}
-        </div>
-
-        {% if atividades_destaque %}
-            <div class="text-center mt-5">
-                <a href="{% url 'ong:atividades' %}" class="btn btn-cap btn-outline-cap">
-                    Ver Todas as Atividades
-                </a>
+                {% endfor %}
             </div>
+
+            {% if atividades_destaque %}
+                <div class="text-center mt-4 pb-3">
+                    <a href="{% url 'ong:atividades' %}" class="btn btn-cap" style="background-color: #28a745; color: #fff;">
+                        Saiba mais
+                    </a>
+                </div>
         {% endif %}
     </div>
 </section>
@@ -186,6 +195,11 @@
         {% endif %}
     </div>
 </section>
+
+{# ---- Onda SVG de transição (teste3.svg) ---- #}
+<div style="background-color: hsl(0, 0%, 100%);">
+    <img src="{% static 'images/geral/teste3.svg' %}" alt="Transição decorativa" class="w-100 d-block" style="margin-bottom: -4px;">
+</div>
 
 {# ==================== STATS ==================== #}
 <section class="stats-section">
@@ -220,8 +234,9 @@
 </section>
 
 {# ==================== CTA ==================== #}
-<section class="cta-section">
-    <div class="container">
+<section class="cta-section" style="position: relative; overflow: hidden; min-height: 320px;">
+    <img src="{% static 'images/geral/CAPICLIMA - HEADER 2.png' %}" alt="Imagem decorativa" class="w-100" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; opacity: 0.4; z-index: 0;">
+    <div class="container" style="position: relative; z-index: 1;">
         <h3>{{ secao_home.titulo_cta|default:"Quer fazer a diferença?" }}</h3>
         {% if secao_home.texto_cta %}
             <div class="rich-text">{{ secao_home.texto_cta|safe }}</div>
