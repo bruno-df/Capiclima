@@ -177,6 +177,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 .section-alt { background-color: var(--color-surface); }
 
+/* ---- Seção Laranja (Juventudes em Ação — layout antigo) ---- */
+.main-section-bleed {
+    background-color: #E54210;
+    width: 100%;
+    padding: 2rem 0 0;
+}
+.main-section-bleed h2 {
+    color: #FFF;
+    font-family: var(--font-heading);
+}
+.activity-cards-section {
+    background-color: #0D330E;
+    padding: 1.5rem 0 2rem;
+}
+
 /* ============================================
    CARDS — Simples, sem sombras exageradas
    ============================================ */
@@ -380,7 +395,7 @@ h1, h2, h3, h4, h5, h6 {
    ============================================ */
 .cta-section {
     background-color: var(--color-primary);
-    padding: 3rem 0;
+    padding: 5rem 0;
     text-align: center;
 }
 .cta-section h3 {
