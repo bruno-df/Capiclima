@@ -18,41 +18,57 @@
     <div class="container">
 
         {% for membro in equipe %}
-            <div class="row mb-4">
-                <div class="col-lg-8 mx-auto">
-                    <div class="colaborador-card d-flex">
-                        <div class="colaborador-foto flex-shrink-0">
-                            {% if membro.foto %}
-                                <img src="{{ membro.foto.url }}" alt="{{ membro.nome }}">
-                            {% elif membro.foto_local %}
-                                <img src="{% static membro.foto_local %}" alt="{{ membro.nome }}">
-                            {% else %}
-                                <div class="foto-placeholder">
-                                    <i class="fas fa-user fa-3x"></i>
-                                </div>
-                            {% endif %}
-                        </div>
-                        <div class="colaborador-info">
-                            <h4>{{ membro.nome }}</h4>
-                            <p class="cargo-text">{{ membro.cargo }}</p>
-                            {% if membro.bio %}
-                                <p class="bio-text">{{ membro.bio }}</p>
-                            {% endif %}
-                            <div class="social-links">
-                                {% if membro.instagram %}
-                                    <a href="{{ membro.instagram }}" target="_blank" rel="noopener"
-                                       aria-label="Instagram de {{ membro.nome }}">
-                                        <i class="fab fa-instagram"></i>
-                                    </a>
-                                {% endif %}
-                                {% if membro.linkedin %}
-                                    <a href="{{ membro.linkedin }}" target="_blank" rel="noopener"
-                                       aria-label="LinkedIn de {{ membro.nome }}">
-                                        <i class="fab fa-linkedin"></i>
-                                    </a>
-                                {% endif %}
+            <div class="col-12 mb-4">
+                <div class="colaborador-card">
+
+                    <div class="colaborador-img-container">
+                        {% if membro.foto %}
+                            <img src="{{ membro.foto.url }}" alt="{{ membro.nome }}">
+                        {% elif membro.foto_local %}
+                            <img src="{% static membro.foto_local %}" alt="{{ membro.nome }}">
+                        {% else %}
+                            <div class="colaborador-img-placeholder">
+                                <i class="fas fa-user"></i>
                             </div>
-                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="colaborador-card-body">
+
+                        <h3 class="colaborador-nome">
+                            {{ membro.nome }}
+
+                            {% if membro.instagram %}
+                                <a href="{{ membro.instagram }}"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   class="colaborador-social"
+                                   title="Instagram">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                            {% endif %}
+
+                            {% if membro.linkedin %}
+                                <a href="{{ membro.linkedin }}"
+                                   target="_blank"
+                                   rel="noopener noreferrer"
+                                   class="colaborador-social"
+                                   title="LinkedIn">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                            {% endif %}
+                        </h3>
+
+                        {% if membro.cargo %}
+                            <h5 class="colaborador-cargo">{{ membro.cargo }}</h5>
+                        {% endif %}
+
+                        {% if membro.bio %}
+                            <p class="colaborador-bio">
+                                {{ membro.bio }}
+                            </p>
+                        {% endif %}
+
                     </div>
                 </div>
             </div>

@@ -152,9 +152,6 @@
                         {% endif %}
                         <h5>{{ membro.nome }}</h5>
                         <p class="cargo">{{ membro.cargo }}</p>
-                        {% if membro.bio %}
-                            <p class="bio">{{ membro.bio|truncatewords:15 }}</p>
-                        {% endif %}
                         <div class="d-flex gap-2 justify-content-center mt-2">
                             {% if membro.instagram %}
                                 <a href="{{ membro.instagram }}" target="_blank" rel="noopener"
