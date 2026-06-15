@@ -203,6 +203,19 @@ class Atividade(models.Model):
     data = models.DateField("Data de Realizacao")
     horario = models.CharField("Horario", max_length=80, blank=True)
     descricao = CKEditor5Field("Descricao da Atividade", config_name="default")
+    temas_debatidos = CKEditor5Field(
+        "Temas debatidos",
+        config_name="default",
+        blank=True,
+        help_text="Conteúdo exibido ao clicar em Ver mais.",
+    )
+
+    resultados_encaminhamentos = CKEditor5Field(
+        "Resultados e encaminhamentos",
+        config_name="default",
+        blank=True,
+        help_text="Lista ou texto com resultados da atividade.",
+    )
     imagem = CloudinaryField(
         "Foto da Atividade",
         folder="atividades/",

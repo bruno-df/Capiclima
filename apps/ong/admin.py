@@ -132,18 +132,81 @@ class SecaoHomeAdmin(SingletonAdminMixin, ImagePreviewMixin, admin.ModelAdmin):
 
 @admin.register(Atividade)
 class AtividadeAdmin(ImagePreviewMixin, admin.ModelAdmin):
-    list_display = ("nome", "tipo", "data", "local", "ativo", "destaque")
-    list_editable = ("ativo", "destaque")
-    list_filter = ("ativo", "destaque", "tipo", "data")
-    search_fields = ("nome", "descricao", "local", "tipo")
+    list_display = (
+        "nome",
+        "tipo",
+        "data",
+        "local",
+        "destaque",
+        "ativo",
+    )
+
+    list_editable = (
+        "destaque",
+        "ativo",
+    )
+
+    list_filter = (
+        "ativo",
+        "destaque",
+        "tipo",
+        "data",
+    )
+
+    search_fields = (
+        "nome",
+        "tipo",
+        "local",
+        "descricao",
+        "temas_debatidos",
+        "resultados_encaminhamentos",
+    )
+
     date_hierarchy = "data"
+
     fieldsets = (
         (
-            "Informacoes da atividade",
-            {"fields": ("nome", "tipo", "data", "horario", "local", "descricao")},
+            "Informações principais",
+            {
+                "fields": (
+                    "nome",
+                    "tipo",
+                    "data",
+                    "horario",
+                    "local",
+                )
+            },
         ),
-        ("Imagem", {"fields": ("imagem", "imagem_local", "imagem_preview")}),
-        ("Exibicao", {"fields": ("ativo", "destaque")}),
+        (
+            "Imagem da atividade",
+            {
+                "fields": (
+                    "imagem",
+                    "imagem_local",
+                    "imagem_preview",
+                )
+            },
+        ),
+        (
+            "Conteúdo da atividade",
+            {
+                "fields": (
+                    "descricao",
+                    "temas_debatidos",
+                    "resultados_encaminhamentos",
+                ),
+                "description": "A descrição aparece primeiro. Os temas e resultados aparecem quando o visitante clicar em Ver mais.",
+            },
+        ),
+        (
+            "Exibição no site",
+            {
+                "fields": (
+                    "destaque",
+                    "ativo",
+                )
+            },
+        ),
     )
 
 

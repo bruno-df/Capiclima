@@ -2,106 +2,103 @@
 {% load static %}
 
 {% block title %}Atividades - CapiClima{% endblock %}
-{% block meta_description %}Atividades e projetos do Coletivo CapiClima pela justiça climática.{% endblock %}
+{% block meta_description %}Conheça as atividades realizadas pelo Coletivo CapiClima.{% endblock %}
 
 {% block content %}
 
-{# Page Header #}
-<section class="page-header">
-    <div class="container">
-        <h1>Atividades do CapiClima</h1>
-        <p>Conheça as atividades que realizamos em prol da justiça climática.</p>
-    </div>
-</section>
+    
+        Atividades
+        Conheça as ações, oficinas, formações e mobilizações realizadas pelo CapiClima.
+    
 
-<section class="section-padding">
-    <div class="container">
+    
 
-        {# Filtros por ano #}
-        {% if anos %}
-        <div class="filter-bar">
-            <a href="{% url 'ong:atividades' %}"
-               class="btn btn-cap btn-outline-cap btn-sm {% if not ano_selecionado %}active{% endif %}">
-                Todas
-            </a>
-            {% for ano in anos %}
-                <a href="{% url 'ong:atividades' %}?ano={{ ano.year }}"
-                   class="btn btn-cap btn-outline-cap btn-sm {% if ano_selecionado == ano.year|stringformat:'d' %}active{% endif %}">
-                    {{ ano.year }}
-                </a>
-            {% endfor %}
-        </div>
-        {% endif %}
-
-        {# Grid de atividades #}
-        <div class="row g-4">
+        
             {% for atividade in atividades %}
-                <div class="col-md-6 col-lg-4">
-                    <div class="card-cap">
-                        {% if atividade.imagem %}
-                            <img src="{{ atividade.imagem.url }}" class="card-img-top" alt="{{ atividade.nome }}">
-                        {% elif atividade.imagem_local %}
-                            <img src="{% static atividade.imagem_local %}" class="card-img-top" alt="{{ atividade.nome }}">
-                        {% else %}
-                            <div class="card-img-top d-flex align-items-center justify-content-center"
-                                 style="background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light));">
-                                <i class="fas fa-leaf fa-3x text-white"></i>
-                            </div>
-                        {% endif %}
-                        <div class="card-body">
-                            <h5 class="card-title">{{ atividade.nome }}</h5>
-                            <p class="card-text">{{ atividade.descricao|striptags|truncatewords:25 }}</p>
-                            <div class="card-meta">
-                                <span><i class="fas fa-calendar-alt"></i> {{ atividade.data|date:"d/m/Y" }}</span>
-                                {% if atividade.local %}
-                                    <span><i class="fas fa-map-marker-alt"></i> {{ atividade.local }}</span>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
+                    
+
+                        
+                            {% if atividade.imagem %}
+                                
+                            {% elif atividade.imagem_local %}
+                                
+                            {% else %}
+                                
+                                        Imagem indisponível
+                                    
+                            {% endif %}
+                        
+
+                        
+                            
+                                {{ atividade.nome }}
+                            
+
+                            {% if atividade.tipo %}
+                                Tipo da Atividade: {{ atividade.tipo }}
+                            {% endif %}
+
+                            {% if atividade.data %}
+                                Data: {{ atividade.data|date:"d/m/Y" }}
+                            {% endif %}
+
+                            {% if atividade.horario %}
+                                Horário: {{ atividade.horario }}
+                            {% endif %}
+
+                            {% if atividade.local %}
+                                Local: {{ atividade.local }}
+                            {% endif %}
+
+                            
+
+                            📌 Descrição Geral
+
+                            
+                                {{ atividade.descricao|safe }}
+                            
+
+                            {% if atividade.temas_debatidos or atividade.resultados_encaminhamentos %}
+                                
+
+                                    {% if atividade.temas_debatidos %}
+                                        🧩 Temas Debatidos
+                                        
+                                            {{ atividade.temas_debatidos|safe }}
+                                        
+                                    {% endif %}
+
+                                    {% if atividade.resultados_encaminhamentos %}
+                                        📍 Resultados e Encaminhamentos
+                                        
+                                            {{ atividade.resultados_encaminhamentos|safe }}
+                                        
+                                    {% endif %}
+
+                                    📸 Galeria de Fotos
+                                    
+                                        Galeria de fotos poderá ser adicionada futuramente.
+                                    
+                                
+
+                                
+                                    Ver mais
+                                
+                            {% endif %}
+                        
+                    
+                
             {% empty %}
-                <div class="col-12">
-                    <div class="empty-state">
-                        <i class="fas fa-calendar-xmark"></i>
-                        <h5>Nenhuma atividade encontrada</h5>
-                        <p>{% if ano_selecionado %}Não há atividades cadastradas para {{ ano_selecionado }}.{% else %}Ainda não há atividades cadastradas.{% endif %}</p>
-                        {% if ano_selecionado %}
-                            <a href="{% url 'ong:atividades' %}" class="btn btn-cap btn-outline-cap btn-sm mt-2">Ver todas</a>
-                        {% endif %}
-                    </div>
-                </div>
+                
+                    
+                        Nenhuma atividade cadastrada
+                        As atividades realizadas pelo CapiClima aparecerão aqui em breve.
+                    
+                
             {% endfor %}
-        </div>
+        
 
-        {# Paginação #}
-        {% if is_paginated %}
-        <nav class="mt-5 d-flex justify-content-center" aria-label="Paginação">
-            <ul class="pagination">
-                {% if page_obj.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link" href="?{% if ano_selecionado %}ano={{ ano_selecionado }}&{% endif %}page={{ page_obj.previous_page_number }}">
-                            <i class="fas fa-chevron-left"></i>
-                        </a>
-                    </li>
-                {% endif %}
-                {% for num in page_obj.paginator.page_range %}
-                    <li class="page-item {% if page_obj.number == num %}active{% endif %}">
-                        <a class="page-link" href="?{% if ano_selecionado %}ano={{ ano_selecionado }}&{% endif %}page={{ num }}">{{ num }}</a>
-                    </li>
-                {% endfor %}
-                {% if page_obj.has_next %}
-                    <li class="page-item">
-                        <a class="page-link" href="?{% if ano_selecionado %}ano={{ ano_selecionado }}&{% endif %}page={{ page_obj.next_page_number }}">
-                            <i class="fas fa-chevron-right"></i>
-                        </a>
-                    </li>
-                {% endif %}
-            </ul>
-        </nav>
-        {% endif %}
-
-    </div>
-</section>
+    
 
 {% endblock %}
