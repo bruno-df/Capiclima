@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static cloudinary_utils %}
 
 {% block title %}Atividades - CapiClima{% endblock %}
 {% block meta_description %}Atividades e projetos realizados pelo Coletivo CapiClima pela justiça climática.{% endblock %}
@@ -50,7 +50,7 @@
 
                                 <div class="atividade-thumb">
                                     {% if atividade.imagem %}
-                                        <img src="{{ atividade.imagem.url }}"
+                                        <img src="{{ atividade.imagem|cloudinary_optimized }}"
                                              alt="{{ atividade.nome }}">
                                     {% elif atividade.imagem_local %}
                                         <img src="{% static atividade.imagem_local %}"
@@ -111,7 +111,7 @@
 
                                 <div class="atividade-img-container-grande">
                                     {% if atividade.imagem %}
-                                        <img src="{{ atividade.imagem.url }}"
+                                        <img src="{{ atividade.imagem|cloudinary_optimized }}"
                                              alt="{{ atividade.nome }}"
                                              class="atividade-img-grande">
                                     {% elif atividade.imagem_local %}

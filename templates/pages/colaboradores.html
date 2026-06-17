@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static cloudinary_utils %}
 
 {% block title %}Colaboradores - CapiClima{% endblock %}
 {% block meta_description %}Conheça os colaboradores e a equipe do Coletivo CapiClima.{% endblock %}
@@ -23,7 +23,7 @@
 
                     <div class="colaborador-img-container">
                         {% if membro.foto %}
-                            <img src="{{ membro.foto.url }}" alt="{{ membro.nome }}">
+                            <img src="{{ membro.foto|cloudinary_optimized }}" alt="{{ membro.nome }}">
                         {% elif membro.foto_local %}
                             <img src="{% static membro.foto_local %}" alt="{{ membro.nome }}">
                         {% else %}

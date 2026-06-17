@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static cloudinary_utils %}
 
 {% block title %}CapiClima - Juventude, Educação e Meio Ambiente{% endblock %}
 {% block meta_description %}Coletivo CapiClima — Mobilizando a juventude pela justiça climática e educação ambiental.{% endblock %}
@@ -31,7 +31,7 @@
                     <div class="carousel-item h-100 {% if forloop.first %}active{% endif %}">
 
                         {% if destaque.imagem %}
-                            <img src="{{ destaque.imagem.url }}" alt="{{ destaque.titulo }}" class="hero-bg">
+                            <img src="{{ destaque.imagem|cloudinary_optimized }}" alt="{{ destaque.titulo }}" class="hero-bg">
                         {% else %}
                             <img src="{% static 'images/geral/img header principal.png' %}" alt="{{ destaque.titulo }}" class="hero-bg">
                         {% endif %}
@@ -179,7 +179,7 @@
                     {% endif %}
 
                             {% if parceiro.imagem %}
-                                <img src="{{ parceiro.imagem.url }}" alt="{{ parceiro.nome }}">
+                                <img src="{{ parceiro.imagem|cloudinary_optimized }}" alt="{{ parceiro.nome }}">
                             {% else %}
                                 {{ parceiro.nome }}
                             {% endif %}
