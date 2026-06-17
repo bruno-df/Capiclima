@@ -32,8 +32,6 @@
 
                         {% if destaque.imagem %}
                             <img src="{{ destaque.imagem.url }}" alt="{{ destaque.titulo }}" class="hero-bg">
-                        {% elif secao_home.imagem_banner %}
-                            <img src="{{ secao_home.imagem_banner.url }}" alt="{{ destaque.titulo }}" class="hero-bg">
                         {% else %}
                             <img src="{% static 'images/geral/img header principal.png' %}" alt="{{ destaque.titulo }}" class="hero-bg">
                         {% endif %}
@@ -74,27 +72,13 @@
 
     {% else %}
 
-        {% if secao_home.imagem_banner %}
-            <img src="{{ secao_home.imagem_banner.url }}" alt="Banner" class="hero-bg">
-        {% else %}
-            <img src="{% static 'images/geral/img header principal.png' %}" alt="Floresta" class="hero-bg">
-        {% endif %}
+        <img src="{% static 'images/geral/img header principal.png' %}" alt="Floresta" class="hero-bg">
 
         <div class="hero-overlay"></div>
 
         <div class="hero-content">
-            {% if secao_home.titulo_principal %}
-                <h1>{{ secao_home.titulo_principal }}</h1>
-            {% else %}
-                <h1>Junte-se a nós pela justiça climática!</h1>
-            {% endif %}
-
-            {% if secao_home.subtitulo %}
-                <p>{{ secao_home.subtitulo }}</p>
-            {% else %}
-                <p>Mobilizando a juventude para ações de educação ambiental e transformação social.</p>
-            {% endif %}
-
+            <h1>Junte-se a nós pela justiça climática!</h1>
+            <p>Mobilizando a juventude para ações de educação ambiental e transformação social.</p>
             <a href="{% url 'ong:sobre' %}" class="btn btn-hero">
                 Saiba Mais
             </a>
@@ -178,20 +162,40 @@
 </section>
 
 {# ==================== PARCEIROS ==================== #}
-<section class="section-padding" style="background:var(--color-surface);">
-    <div class="container text-center">
-        <div class="section-header">
-            <h2>{{ secao_home.titulo_parceiros|default:"Nossos Parceiros" }}</h2>
+<section class="section-padding parceiros-section">
+    <div class="container">
+        <div class="section-header text-center">
+            <h2>Nossos Parceiros</h2>
+            <p>Organizações que caminham com o CapiClima.</p>
         </div>
-        {% if secao_home.imagem_parceiros %}
-            <img src="{{ secao_home.imagem_parceiros.url }}" alt="{{ secao_home.titulo_parceiros }}"
-                 class="img-fluid" style="max-height:200px;">
+
+        {% if parceiros %}
+            <div class="parceiros-grid">
+                {% for parceiro in parceiros %}
+                    {% if parceiro.link %}
+                        <a href="{{ parceiro.link }}" class="parceiro-card" target="_blank" rel="noopener noreferrer">
+                    {% else %}
+                        <div class="parceiro-card">
+                    {% endif %}
+
+                            {% if parceiro.imagem %}
+                                <img src="{{ parceiro.imagem.url }}" alt="{{ parceiro.nome }}">
+                            {% else %}
+                                {{ parceiro.nome }}
+                            {% endif %}
+
+                    {% if parceiro.link %}
+                        </a>
+                    {% else %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
         {% else %}
-            <img src="{% static 'images/geral/CAPICLIMA - APOIADORES.png' %}" alt="Apoiadores"
-                 class="img-fluid" style="max-height:200px;">
-        {% endif %}
-        {% if secao_home.texto_parceiros %}
-            <div class="rich-text mt-3">{{ secao_home.texto_parceiros|safe }}</div>
+            <div class="empty-state">
+                <h5>Nenhum parceiro cadastrado</h5>
+                <p>Os parceiros aparecerão aqui quando forem cadastrados no admin.</p>
+            </div>
         {% endif %}
     </div>
 </section>

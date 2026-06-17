@@ -418,6 +418,88 @@ h1, h2, h3, h4, h5, h6 {
     color: rgba(255,255,255,0.8);
     padding: 2.5rem 0 0;
 }
+
+/* ============================================
+   CORREÇÃO HERO / CARROSSEL DA HOME
+   ============================================ */
+
+.hero-section {
+    position: relative;
+    min-height: 500px;
+    overflow: hidden;
+    margin-top: 56px;
+}
+
+/* Faz o carrossel ocupar o mesmo espaço do banner padrão */
+.hero-section #homeHeroCarousel {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Faz a estrutura interna do Bootstrap ocupar toda a altura */
+.hero-section #homeHeroCarousel .carousel-inner,
+.hero-section #homeHeroCarousel .carousel-item {
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+}
+
+/* Centraliza o conteúdo do slide como no banner original */
+.hero-section #homeHeroCarousel .carousel-item.active,
+.hero-section #homeHeroCarousel .carousel-item-next,
+.hero-section #homeHeroCarousel .carousel-item-prev {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Imagem do banner sempre em tela cheia */
+.hero-section .hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+/* Camada escura por cima da imagem */
+.hero-section .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+}
+
+/* Texto acima da imagem e do overlay */
+.hero-section .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Onda branca sempre acima do banner */
+.hero-section .hero-shapes {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    z-index: 4;
+    line-height: 0;
+}
+
+/* Controles e indicadores acima do overlay */
+.hero-section .carousel-control-prev,
+.hero-section .carousel-control-next,
+.hero-section .carousel-indicators {
+    z-index: 5;
+}
+
 .footer-cap h5 {
     color: #FFF;
     font-family: var(--font-heading);
@@ -894,6 +976,67 @@ h1, h2, h3, h4, h5, h6 {
     display: block;
     margin: 0 auto;
     border-radius: 10px;
+}
+
+/* ============================================
+   PARCEIROS — grid da página inicial
+   ============================================ */
+
+.parceiros-section {
+    background: var(--color-surface, #fff);
+}
+
+.parceiros-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.parceiro-card {
+    min-height: 130px;
+    background: #fff;
+    border: 1px solid var(--color-border, #dee2e6);
+    border-radius: 14px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    color: var(--color-primary, #198754);
+    font-weight: 700;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.parceiro-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.parceiro-card img {
+    width: 100%;
+    max-width: 190px;
+    max-height: 90px;
+    object-fit: contain;
+    display: block;
+}
+
+@media (max-width: 991px) {
+    .parceiros-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 767px) {
+    .parceiros-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 420px) {
+    .parceiros-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 576px) {

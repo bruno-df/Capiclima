@@ -3,13 +3,11 @@ from django.views.generic import ListView, TemplateView, View
 
 from .models import (
     Atividade,
-    ConteudoSobre,
     DestaqueInicio,
     MembroEquipe,
     Opportunity,
+    Parceiro,
     SecaoApoie,
-    SecaoHome,
-    SecaoSobre,
 )
 
 
@@ -32,8 +30,9 @@ class IndexView(TemplateView):
         context["total_atividades"] = Atividade.objects.filter(ativo=True).count()
         context["total_colaboradores"] = MembroEquipe.objects.count()
 
-        # Secao editavel da home (singleton)
-        context["secao_home"] = SecaoHome.load()
+        context["parceiros"] = Parceiro.objects.filter(
+            ativo=True
+        ).order_by("ordem", "nome")
         return context
 
 
@@ -43,6 +42,8 @@ class SobreView(TemplateView):
     template_name = "pages/sobre.html"
 
     def get_context_data(self, **kwargs):
+        from .models import ConteudoSobre, SecaoSobre
+
         context = super().get_context_data(**kwargs)
         context["title"] = "Sobre"
         context["secao_sobre"] = SecaoSobre.load()

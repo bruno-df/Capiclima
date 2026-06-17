@@ -5,13 +5,11 @@ from django.utils.html import format_html
 
 from .models import (
     Atividade,
-    ConteudoSobre,
     DestaqueInicio,
     MembroEquipe,
     Opportunity,
+    Parceiro,
     SecaoApoie,
-    SecaoHome,
-    SecaoSobre,
     SiteConfig,
 )
 from .permissions import user_has_cms_access
@@ -82,53 +80,6 @@ class SingletonAdminMixin:
 # ---------------------------------------------------------------------------
 
 # ===== INICIO =====
-
-@admin.register(SecaoHome)
-class SecaoHomeAdmin(SingletonAdminMixin, ImagePreviewMixin, admin.ModelAdmin):
-    readonly_fields = ("imagem_preview", "banner_preview", "parceiros_preview")
-    fieldsets = (
-        ("Banner Principal (Hero)", {
-            "fields": ("titulo_principal", "subtitulo", "imagem_banner", "banner_preview"),
-            "description": "Conteudo exibido no topo da pagina inicial.",
-        }),
-        ("Juventudes em Acao", {
-            "fields": ("titulo_juventudes", "texto_juventudes", "imagem_juventudes", "imagem_preview"),
-        }),
-        ("Parceiros", {
-            "fields": ("titulo_parceiros", "texto_parceiros", "imagem_parceiros", "parceiros_preview"),
-        }),
-        ("Chamada para Acao (CTA)", {
-            "fields": ("titulo_cta", "texto_cta", "link_cta"),
-            "description": "Bloco de chamada no final da pagina inicial.",
-        }),
-    )
-
-    @admin.display(description="Preview do Banner")
-    def banner_preview(self, obj):
-        if not obj.imagem_banner:
-            return "Sem imagem"
-        try:
-            url = obj.imagem_banner.url
-        except (AttributeError, ValueError):
-            return "Sem imagem"
-        return format_html(
-            '<img src="{}" style="max-width:300px;max-height:150px;object-fit:cover;border-radius:6px;" />',
-            url,
-        )
-
-    @admin.display(description="Preview dos Parceiros")
-    def parceiros_preview(self, obj):
-        if not obj.imagem_parceiros:
-            return "Sem imagem"
-        try:
-            url = obj.imagem_parceiros.url
-        except (AttributeError, ValueError):
-            return "Sem imagem"
-        return format_html(
-            '<img src="{}" style="max-width:300px;max-height:150px;object-fit:contain;border-radius:6px;" />',
-            url,
-        )
-
 
 @admin.register(Atividade)
 class AtividadeAdmin(ImagePreviewMixin, admin.ModelAdmin):
@@ -251,6 +202,38 @@ class DestaqueInicioAdmin(ImagePreviewMixin, admin.ModelAdmin):
     )
 
 
+@admin.register(Parceiro)
+class ParceiroAdmin(ImagePreviewMixin, admin.ModelAdmin):
+    list_display = ("nome", "ativo", "ordem", "link")
+    list_editable = ("ativo", "ordem")
+    list_filter = ("ativo",)
+    search_fields = ("nome", "link")
+
+    fieldsets = (
+        (
+            "Dados do parceiro",
+            {
+                "fields": (
+                    "nome",
+                    "imagem",
+                    "imagem_preview",
+                    "link",
+                ),
+                "description": "A imagem aparece na grid de parceiros da página inicial. Se houver link, a imagem fica clicável.",
+            },
+        ),
+        (
+            "Exibição",
+            {
+                "fields": (
+                    "ativo",
+                    "ordem",
+                )
+            },
+        ),
+    )
+
+
 # ===== APOIE =====
 
 @admin.register(SecaoApoie)
@@ -338,40 +321,6 @@ class OpportunityAdmin(admin.ModelAdmin):
         ),
     )
 
-
-# ===== SOBRE =====
-
-@admin.register(SecaoSobre)
-class SecaoSobreAdmin(SingletonAdminMixin, ImagePreviewMixin, admin.ModelAdmin):
-    readonly_fields = ("imagem_preview",)
-    fieldsets = (
-        ("Conteudo Principal", {
-            "fields": ("titulo", "texto_principal", "imagem", "imagem_preview"),
-            "description": "Texto institucional exibido na pagina Sobre.",
-        }),
-        ("Missao, Visao e Valores", {
-            "fields": ("missao", "visao", "valores"),
-            "classes": ("collapse",),
-            "description": "Campos opcionais. Se preenchidos, aparecem como secoes separadas.",
-        }),
-    )
-
-
-@admin.register(ConteudoSobre)
-class ConteudoSobreAdmin(ImagePreviewMixin, admin.ModelAdmin):
-    list_display = ("titulo_secao", "icone", "ordem")
-    list_editable = ("ordem",)
-    search_fields = ("titulo_secao", "texto_informativo")
-    fieldsets = (
-        ("Conteudo", {"fields": ("titulo_secao", "texto_informativo", "imagem", "imagem_preview")}),
-        (
-            "Aparencia",
-            {
-                "fields": ("icone", "ordem"),
-                "description": "Use icones do Font Awesome. Ex: fas fa-leaf",
-            },
-        ),
-    )
 
 
 # ===== CONFIGURACOES GLOBAIS =====

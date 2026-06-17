@@ -170,6 +170,36 @@ class DestaqueInicio(models.Model):
         ordering = ["ordem"]
 
 
+class Parceiro(models.Model):
+    nome = models.CharField("Nome do parceiro", max_length=120)
+
+    imagem = CloudinaryField(
+        "Imagem/logo",
+        folder="parceiros/",
+        blank=True,
+        null=True,
+        validators=[image_extension_validator],
+        help_text="Logo ou imagem do parceiro/apoiador.",
+    )
+
+    link = models.URLField(
+        "Link",
+        blank=True,
+        help_text="Ao clicar na imagem, o visitante será enviado para este link.",
+    )
+
+    ativo = models.BooleanField("Ativo?", default=True)
+    ordem = models.PositiveIntegerField("Ordem de exibição", default=0)
+
+    def __str__(self):
+        return self.nome
+
+    class Meta:
+        verbose_name = "Página Inicial — Parceiro"
+        verbose_name_plural = "Página Inicial — Parceiros"
+        ordering = ["ordem", "nome"]
+
+
 class ConteudoSobre(models.Model):
     titulo_secao = models.CharField("Titulo da Secao", max_length=100)
     texto_informativo = CKEditor5Field("Texto sobre a ONG", config_name="default")
