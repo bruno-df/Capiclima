@@ -32,15 +32,19 @@ CSRF_TRUSTED_ORIGINS = env_list("CSRF_TRUSTED_ORIGINS")
 
 
 INSTALLED_APPS = [
+    "jazzmin",
+
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    "cloudinary_storage",
     "django.contrib.staticfiles",
+
+    "cloudinary_storage",
     "cloudinary",
     "django_ckeditor_5",
+
     "apps.ong",
 ]
 
@@ -178,3 +182,79 @@ CKEDITOR_5_FILE_STORAGE = DEFAULT_FILE_STORAGE_BACKEND
 CKEDITOR_5_FILE_UPLOAD_PERMISSION = "staff"
 CKEDITOR_5_UPLOAD_FILE_TYPES = ["jpg", "jpeg", "png", "webp"]
 CKEDITOR_5_MAX_FILE_SIZE = 5
+
+
+JAZZMIN_SETTINGS = {
+    "site_title": "CapiClima Admin",
+    "site_header": "CapiClima",
+    "site_brand": "CapiClima",
+    "welcome_sign": "Painel de gerenciamento do CapiClima",
+    "copyright": "CapiClima",
+
+    "search_model": [
+        "ong.Atividade",
+        "ong.MembroEquipe",
+        "ong.Opportunity",
+    ],
+
+    "topmenu_links": [
+        {
+            "name": "Ver site",
+            "url": "/",
+            "new_window": True,
+        },
+        {
+            "name": "Admin",
+            "url": "admin:index",
+            "permissions": ["auth.view_user"],
+        },
+    ],
+
+    "show_sidebar": True,
+    "navigation_expanded": True,
+
+    "hide_apps": [],
+    "hide_models": [
+        "auth.Group",
+    ],
+
+    "order_with_respect_to": [
+        "ong.DestaqueInicio",
+        "ong.Parceiro",
+        "ong.Atividade",
+        "ong.Opportunity",
+        "ong.MembroEquipe",
+        "ong.SecaoApoie",
+        "ong.SiteConfig",
+        "auth.User",
+    ],
+
+    "icons": {
+        "auth.User": "fas fa-user",
+        "ong.DestaqueInicio": "fas fa-images",
+        "ong.Parceiro": "fas fa-handshake",
+        "ong.Atividade": "fas fa-leaf",
+        "ong.Opportunity": "fas fa-table",
+        "ong.MembroEquipe": "fas fa-users",
+        "ong.SecaoApoie": "fas fa-heart",
+        "ong.SiteConfig": "fas fa-cog",
+    },
+}
+
+
+JAZZMIN_UI_TWEAKS = {
+    "theme": "flatly",
+    "dark_mode_theme": None,
+    "navbar": "navbar-white navbar-light",
+    "sidebar": "sidebar-dark-success",
+    "brand_colour": "navbar-success",
+    "accent": "accent-success",
+    "button_classes": {
+        "primary": "btn-success",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success",
+    },
+}
