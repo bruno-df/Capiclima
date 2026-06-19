@@ -237,7 +237,9 @@ class ParceiroAdmin(ImagePreviewMixin, admin.ModelAdmin):
 # ===== APOIE =====
 
 @admin.register(SecaoApoie)
-class SecaoApoieAdmin(SingletonAdminMixin, admin.ModelAdmin):
+class SecaoApoieAdmin(SingletonAdminMixin, ImagePreviewMixin, admin.ModelAdmin):
+    readonly_fields = ("imagem_preview",)
+
     fieldsets = (
         ("Voluntariado", {
             "fields": ("texto_voluntariado", "link_voluntariado"),
@@ -246,6 +248,10 @@ class SecaoApoieAdmin(SingletonAdminMixin, admin.ModelAdmin):
         ("Doacao Financeira", {
             "fields": ("texto_doacao", "link_doacao"),
         }),
+        ("Pix / Doação", {
+            "fields": ("pix", "qrcode_pix", "imagem_preview"),
+            "description": "Chave Pix e QR Code exibidos na página Apoie.",
+        }),
         ("Parcerias Empresariais", {
             "fields": ("texto_parcerias", "link_parcerias"),
         }),
@@ -253,6 +259,9 @@ class SecaoApoieAdmin(SingletonAdminMixin, admin.ModelAdmin):
             "fields": ("texto_compartilhe",),
         }),
     )
+
+    def _get_preview_image(self, obj):
+        return getattr(obj, "qrcode_pix", None) or None
 
 
 @admin.register(Opportunity)
@@ -339,22 +348,17 @@ class MembroEquipeAdmin(ImagePreviewMixin, admin.ModelAdmin):
 
 @admin.register(SiteConfig)
 class SiteConfigAdmin(SingletonAdminMixin, ImagePreviewMixin, admin.ModelAdmin):
-    readonly_fields = ("imagem_preview", "logo_preview", "qrcode_preview")
+    readonly_fields = ("imagem_preview", "logo_preview")
     fieldsets = (
         ("Identidade do site", {"fields": ("nome_site", "slogan", "logo", "logo_preview", "favicon")}),
         ("Contato", {"fields": ("email", "telefone", "whatsapp", "endereco")}),
         ("Redes sociais", {"fields": ("instagram_url", "twitter_url", "facebook_url", "youtube_url")}),
-        ("Doacoes", {"fields": ("chave_pix", "qrcode_pix", "qrcode_preview")}),
         ("Rodape", {"fields": ("texto_rodape",)}),
     )
 
     @admin.display(description="Logo atual")
     def logo_preview(self, obj):
         return self._render_field_preview(obj, "logo")
-
-    @admin.display(description="QR Code atual")
-    def qrcode_preview(self, obj):
-        return self._render_field_preview(obj, "qrcode_pix")
 
     def _render_field_preview(self, obj, field_name):
         image = getattr(obj, field_name, None)

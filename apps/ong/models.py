@@ -371,21 +371,6 @@ class SiteConfig(SingletonMixin):
     twitter_url = models.URLField("Link do Twitter/X", blank=True)
     facebook_url = models.URLField("Link do Facebook", blank=True)
     youtube_url = models.URLField("Link do YouTube", blank=True)
-    chave_pix = models.CharField(
-        "Chave Pix",
-        max_length=100,
-        blank=True,
-        default="coletivocapiclima@gmail.com",
-        help_text="Chave Pix para doações (e-mail, CPF, telefone ou aleatória).",
-    )
-    qrcode_pix = CloudinaryField(
-        "QR Code Pix",
-        folder="config/",
-        blank=True,
-        null=True,
-        validators=[image_extension_validator],
-        help_text="Imagem do QR Code para pagamento via Pix.",
-    )
     texto_rodape = models.CharField(
         "Texto do Rodape",
         max_length=200,
@@ -543,6 +528,21 @@ class SecaoApoie(SingletonMixin):
     texto_compartilhe = CKEditor5Field(
         "Texto — Compartilhe", config_name="default", blank=True,
         help_text="Descrição da seção 'Compartilhe'.",
+    )
+    pix = models.CharField(
+        "Chave Pix",
+        max_length=100,
+        blank=True,
+        default="",
+        help_text="Chave Pix para doações (e-mail, CPF, telefone ou aleatória).",
+    )
+    qrcode_pix = CloudinaryField(
+        "QR Code Pix",
+        folder="apoie/",
+        blank=True,
+        null=True,
+        validators=[image_extension_validator],
+        help_text="Imagem do QR Code para pagamento via Pix.",
     )
 
     def __str__(self):

@@ -44,12 +44,12 @@
                     {% else %}
                         <p>Sua doação financia oficinas, materiais educativos e eventos comunitários.</p>
                     {% endif %}
-                    {% if config_site.chave_pix %}
+                    {% if secao_apoie.pix %}
                         <div class="pix-box mt-3">
                             <p class="mb-2"><strong>Chave Pix:</strong></p>
-                            <p class="pix-key mb-0">{{ config_site.chave_pix }}</p>
-                            {% if config_site.qrcode_pix %}
-                                <img src="{{ config_site.qrcode_pix|cloudinary_optimized }}" alt="QR Code Pix"
+                            <p class="pix-key mb-0">{{ secao_apoie.pix }}</p>
+                            {% if secao_apoie.qrcode_pix %}
+                                <img src="{{ secao_apoie.qrcode_pix|cloudinary_optimized }}" alt="QR Code Pix"
                                      class="img-fluid mt-3" style="max-width:200px;">
                             {% endif %}
                         </div>
