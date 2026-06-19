@@ -8,7 +8,7 @@ urlpatterns = [
     path('sobre/', views.SobreView.as_view(), name='sobre'),
     path('atividades/', views.AtividadesView.as_view(), name='atividades'),
     path('oportunidades/', views.OportunidadesView.as_view(), name='oportunidades'),
-    path('colaboradores/', views.ColaboradoresView.as_view(), name='colaboradores'),
+    path('equipe/', views.EquipeView.as_view(), name='equipe'),
     path('apoie/', views.ApoieView.as_view(), name='apoie'),
     path('api/stats/', views.StatsAPIView.as_view(), name='api_stats'),
 ]

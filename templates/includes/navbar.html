@@ -32,8 +32,8 @@
                        href="{% url 'ong:oportunidades' %}">Oportunidades</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if request.resolver_match.url_name == 'colaboradores' %}active{% endif %}"
-                       href="{% url 'ong:colaboradores' %}">Equipe</a>
+                    <a class="nav-link {% if request.resolver_match.url_name == 'equipe' %}active{% endif %}"
+                       href="{% url 'ong:equipe' %}">Equipe</a>
                 </li>
                 <li class="nav-item ms-lg-2">
                     <a href="{% url 'ong:apoie' %}" class="btn btn-apoie">

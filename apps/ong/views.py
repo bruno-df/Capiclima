@@ -28,7 +28,7 @@ class IndexView(TemplateView):
 
         # Contadores em tempo real
         context["total_atividades"] = Atividade.objects.filter(ativo=True).count()
-        context["total_colaboradores"] = MembroEquipe.objects.count()
+        context["total_equipe"] = MembroEquipe.objects.count()
 
         context["parceiros"] = Parceiro.objects.filter(
             ativo=True
@@ -49,6 +49,11 @@ class SobreView(TemplateView):
         context["secao_sobre"] = SecaoSobre.load()
         context["conteudos"] = ConteudoSobre.objects.all()
         context["equipe"] = MembroEquipe.objects.all()
+
+        # Contadores em tempo real
+        context["total_atividades"] = Atividade.objects.filter(ativo=True).count()
+        context["total_equipe"] = MembroEquipe.objects.count()
+
         return context
 
 
@@ -92,14 +97,14 @@ class OportunidadesView(TemplateView):
         return context
 
 
-class ColaboradoresView(TemplateView):
-    """Pagina Colaboradores — equipe e membros do CapiClima."""
+class EquipeView(TemplateView):
+    """Pagina Equipe — equipe e membros do CapiClima."""
 
-    template_name = "pages/colaboradores.html"
+    template_name = "pages/equipe.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["title"] = "Colaboradores"
+        context["title"] = "Equipe"
         context["equipe"] = MembroEquipe.objects.all()
         return context
 
@@ -122,6 +127,6 @@ class StatsAPIView(View):
     def get(self, request, *args, **kwargs):
         data = {
             "total_atividades": Atividade.objects.filter(ativo=True).count(),
-            "total_colaboradores": MembroEquipe.objects.count(),
+            "total_equipe": MembroEquipe.objects.count(),
         }
         return JsonResponse(data)
