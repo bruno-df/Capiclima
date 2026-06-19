@@ -498,37 +498,8 @@ class SecaoSobre(SingletonMixin):
 
 
 class SecaoApoie(SingletonMixin):
-    """Conteúdo editável da página Apoie."""
+    """Configuração de doação da página Apoie (apenas Pix)."""
 
-    texto_voluntariado = CKEditor5Field(
-        "Texto — Voluntariado", config_name="default", blank=True,
-        help_text="Descrição da seção de voluntariado.",
-    )
-    link_voluntariado = models.CharField(
-        "Link — Voluntariado", max_length=250, blank=True,
-        default="/oportunidades/",
-        help_text="URL do botão de voluntariado.",
-    )
-    texto_doacao = CKEditor5Field(
-        "Texto — Doação", config_name="default", blank=True,
-        help_text="Descrição da seção de doação financeira.",
-    )
-    link_doacao = models.CharField(
-        "Link — Doação", max_length=250, blank=True,
-        help_text="URL do botão de doação (opcional).",
-    )
-    texto_parcerias = CKEditor5Field(
-        "Texto — Parcerias", config_name="default", blank=True,
-        help_text="Descrição da seção de parcerias empresariais.",
-    )
-    link_parcerias = models.CharField(
-        "Link — Parcerias", max_length=250, blank=True,
-        help_text="URL do botão de parcerias (opcional).",
-    )
-    texto_compartilhe = CKEditor5Field(
-        "Texto — Compartilhe", config_name="default", blank=True,
-        help_text="Descrição da seção 'Compartilhe'.",
-    )
     pix = models.CharField(
         "Chave Pix",
         max_length=100,

@@ -241,22 +241,9 @@ class SecaoApoieAdmin(SingletonAdminMixin, ImagePreviewMixin, admin.ModelAdmin):
     readonly_fields = ("imagem_preview",)
 
     fieldsets = (
-        ("Voluntariado", {
-            "fields": ("texto_voluntariado", "link_voluntariado"),
-            "description": "Secao de voluntariado na pagina Apoie.",
-        }),
-        ("Doacao Financeira", {
-            "fields": ("texto_doacao", "link_doacao"),
-        }),
         ("Pix / Doação", {
             "fields": ("pix", "qrcode_pix", "imagem_preview"),
             "description": "Chave Pix e QR Code exibidos na página Apoie.",
-        }),
-        ("Parcerias Empresariais", {
-            "fields": ("texto_parcerias", "link_parcerias"),
-        }),
-        ("Compartilhe", {
-            "fields": ("texto_compartilhe",),
         }),
     )
 

@@ -26,12 +26,8 @@
                 {# Voluntariado #}
                 <div class="apoie-method">
                     <h5><i class="fas fa-handshake"></i> Voluntariado</h5>
-                    {% if secao_apoie.texto_voluntariado %}
-                        <div class="rich-text">{{ secao_apoie.texto_voluntariado|safe }}</div>
-                    {% else %}
-                        <p>Doe seu tempo e expertise! Conheça as oportunidades de voluntariado no CapiClima.</p>
-                    {% endif %}
-                    <a href="{{ secao_apoie.link_voluntariado|default:'/oportunidades/' }}" class="btn btn-cap btn-primary-cap btn-sm">
+                    <p>Doe seu tempo e expertise! Conheça as oportunidades de voluntariado no CapiClima.</p>
+                    <a href="/oportunidades/" class="btn btn-cap btn-primary-cap btn-sm">
                         Ver Oportunidades
                     </a>
                 </div>
@@ -39,11 +35,7 @@
                 {# Doação Financeira #}
                 <div class="apoie-method">
                     <h5><i class="fas fa-heart"></i> Doação Financeira</h5>
-                    {% if secao_apoie.texto_doacao %}
-                        <div class="rich-text">{{ secao_apoie.texto_doacao|safe }}</div>
-                    {% else %}
-                        <p>Sua doação financia oficinas, materiais educativos e eventos comunitários.</p>
-                    {% endif %}
+                    <p>Sua doação financia oficinas, materiais educativos e eventos comunitários.</p>
                     {% if secao_apoie.pix %}
                         <div class="pix-box mt-3">
                             <p class="mb-2"><strong>Chave Pix:</strong></p>
@@ -64,22 +56,14 @@
                 {# Parcerias #}
                 <div class="apoie-method">
                     <h5><i class="fas fa-building"></i> Parcerias Empresariais</h5>
-                    {% if secao_apoie.texto_parcerias %}
-                        <div class="rich-text">{{ secao_apoie.texto_parcerias|safe }}</div>
-                    {% else %}
-                        <p>Sua empresa pode apoiar nossas iniciativas através de parcerias estratégicas e patrocínios.</p>
-                        <p class="text-muted">Nos envie uma mensagem para discutir possibilidades!</p>
-                    {% endif %}
+                    <p>Sua empresa pode apoiar nossas iniciativas através de parcerias estratégicas e patrocínios.</p>
+                    <p class="text-muted">Nos envie uma mensagem para discutir possibilidades!</p>
                 </div>
 
                 {# Compartilhe #}
                 <div class="apoie-method">
                     <h5><i class="fas fa-share-nodes"></i> Compartilhe</h5>
-                    {% if secao_apoie.texto_compartilhe %}
-                        <div class="rich-text">{{ secao_apoie.texto_compartilhe|safe }}</div>
-                    {% else %}
-                        <p>Espalhe a palavra! Compartilhe nosso trabalho nas redes sociais e com seus amigos.</p>
-                    {% endif %}
+                    <p>Espalhe a palavra! Compartilhe nosso trabalho nas redes sociais e com seus amigos.</p>
                     <div class="d-flex flex-wrap gap-2 mt-2">
                         {% if config_site.instagram_url %}
                             <a href="{{ config_site.instagram_url }}" target="_blank" class="btn btn-cap btn-outline-cap btn-sm">
