@@ -371,13 +371,6 @@ class SiteConfig(SingletonMixin):
     twitter_url = models.URLField("Link do Twitter/X", blank=True)
     facebook_url = models.URLField("Link do Facebook", blank=True)
     youtube_url = models.URLField("Link do YouTube", blank=True)
-    texto_rodape = models.CharField(
-        "Texto do Rodape",
-        max_length=200,
-        blank=True,
-        default="Todos os direitos reservados.",
-    )
-
     def __str__(self):
         return self.nome_site
 

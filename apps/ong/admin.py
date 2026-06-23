@@ -340,7 +340,6 @@ class SiteConfigAdmin(SingletonAdminMixin, ImagePreviewMixin, admin.ModelAdmin):
         ("Identidade do site", {"fields": ("nome_site", "slogan", "logo", "logo_preview", "favicon")}),
         ("Contato", {"fields": ("email", "telefone", "whatsapp", "endereco")}),
         ("Redes sociais", {"fields": ("instagram_url", "twitter_url", "facebook_url", "youtube_url")}),
-        ("Rodape", {"fields": ("texto_rodape",)}),
     )
 
     @admin.display(description="Logo atual")
