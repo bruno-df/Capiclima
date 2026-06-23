@@ -51,7 +51,7 @@
             .then(function (r) { return r.json(); })
             .then(function (data) {
                 var elAtiv = document.getElementById('stat-atividades');
-                var elColab = document.getElementById('stat-colaboradores');
+                var elEquipe = document.getElementById('stat-equipe');
                 if (elAtiv && data.total_atividades !== undefined) {
                     var prev = parseInt(elAtiv.textContent, 10) || 0;
                     if (data.total_atividades !== prev) {
@@ -60,12 +60,12 @@
                         animateCounter(elAtiv);
                     }
                 }
-                if (elColab && data.total_colaboradores !== undefined) {
-                    var prev2 = parseInt(elColab.textContent, 10) || 0;
-                    if (data.total_colaboradores !== prev2) {
-                        elColab.dataset.target = data.total_colaboradores;
-                        elColab.dataset.animated = '';
-                        animateCounter(elColab);
+                if (elEquipe && data.total_equipe !== undefined) {
+                    var prev2 = parseInt(elEquipe.textContent, 10) || 0;
+                    if (data.total_equipe !== prev2) {
+                        elEquipe.dataset.target = data.total_equipe;
+                        elEquipe.dataset.animated = '';
+                        animateCounter(elEquipe);
                     }
                 }
             })

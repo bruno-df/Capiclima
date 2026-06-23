@@ -8,6 +8,7 @@ from .models import (
     Opportunity,
     Parceiro,
     SecaoApoie,
+    SecaoHome,
 )
 
 
@@ -19,6 +20,7 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = "Inicio"
+        context["secao_home"] = SecaoHome.load()
         context["destaques"] = DestaqueInicio.objects.filter(
             ativo=True
         ).order_by("ordem", "id")
@@ -52,7 +54,7 @@ class SobreView(TemplateView):
 
         # Contadores em tempo real
         context["total_atividades"] = Atividade.objects.filter(ativo=True).count()
-        context["total_equipe"] = MembroEquipe.objects.count()
+        context["total_colaboradores"] = MembroEquipe.objects.count()
 
         return context
 
