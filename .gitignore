@@ -33,6 +33,7 @@ ENV/
 # IDEs e Sistema Operacional
 # =========================
 .vscode/
+.vscode
 __MACOSX/
 .DS_Store
 Thumbs.db
