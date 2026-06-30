@@ -9,6 +9,7 @@ from .models import (
     Parceiro,
     SecaoApoie,
     SecaoHome,
+    SiteConfig,
 )
 
 
@@ -132,3 +133,19 @@ class StatsAPIView(View):
             "total_equipe": MembroEquipe.objects.count(),
         }
         return JsonResponse(data)
+
+
+def health_check(request):
+    """
+    Keep-alive endpoint para o Render e o Supabase.
+
+    Chamado periodicamente pelo UptimeRobot (a cada 14 min) para:
+    - Render: evitar a suspensão por inatividade (limite: 15 min).
+    - Supabase: evitar a pausa do projeto por inatividade (limite: 7 dias).
+
+    A query via SiteConfig.load() é a mesma usada pelas views públicas do
+    projeto — padrão SingletonMixin — e garante uma round-trip real ao banco
+    sem exigir autenticação nem dependências extras.
+    """
+    SiteConfig.load()
+    return JsonResponse({"status": "ok"})
