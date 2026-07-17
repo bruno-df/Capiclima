@@ -170,25 +170,27 @@
         </div>
 
         {% if parceiros %}
-            <div class="parceiros-grid">
+            <div class="parceiros-grid d-flex flex-wrap justify-content-center">
                 {% for parceiro in parceiros %}
-                    {% if parceiro.link %}
-                        <a href="{{ parceiro.link }}" class="parceiro-card" target="_blank" rel="noopener noreferrer">
-                    {% else %}
-                        <div class="parceiro-card">
-                    {% endif %}
+                    <div class="parceiro-item d-flex align-items-center justify-content-center">
+                        {% if parceiro.link %}
+                            <a href="{{ parceiro.link }}" class="parceiro-card" target="_blank" rel="noopener noreferrer">
+                        {% else %}
+                            <div class="parceiro-card">
+                        {% endif %}
 
-                            {% if parceiro.imagem %}
-                                <img src="{{ parceiro.imagem|cloudinary_optimized }}" alt="{{ parceiro.nome }}">
-                            {% else %}
-                                {{ parceiro.nome }}
-                            {% endif %}
+                                {% if parceiro.imagem %}
+                                    <img src="{{ parceiro.imagem|cloudinary_optimized }}" alt="{{ parceiro.nome }}">
+                                {% else %}
+                                    {{ parceiro.nome }}
+                                {% endif %}
 
-                    {% if parceiro.link %}
-                        </a>
-                    {% else %}
-                        </div>
-                    {% endif %}
+                        {% if parceiro.link %}
+                            </a>
+                        {% else %}
+                            </div>
+                        {% endif %}
+                    </div>
                 {% endfor %}
             </div>
         {% else %}

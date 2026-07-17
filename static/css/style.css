@@ -90,71 +90,7 @@ h1, h2, h3, h4, h5, h6 {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255,255,255,0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
-/* ============================================
-   HERO SECTION
-   ============================================ */
-.hero-section {
-    position: relative;
-    min-height: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    margin-top: 56px;
-}
-.hero-section .hero-bg {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-.hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-}
-.hero-content {
-    position: relative;
-    z-index: 2;
-    text-align: center;
-    padding: 2rem;
-    max-width: 800px;
-}
-.hero-content h1 {
-    font-size: clamp(1.8rem, 4vw, 3rem);
-    font-weight: 700;
-    color: #FFF;
-    margin-bottom: 1.5rem;
-}
-.hero-content p {
-    font-size: 1.1rem;
-    color: rgba(255,255,255,0.9);
-    margin-bottom: 1.5rem;
-}
-.btn-hero {
-    background-color: #28a745;
-    color: #FFF;
-    font-weight: 600;
-    font-size: 1rem;
-    padding: 0.6rem 2rem;
-    border-radius: var(--radius-sm);
-    border: none;
-    display: inline-block;
-}
-.btn-hero:hover {
-    background-color: #218838;
-    color: #FFF;
-}
-.hero-shapes {
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 100%;
-    z-index: 3;
-    line-height: 0;
-}
-.hero-shapes svg { width: 100%; height: auto; }
+/* HERO SECTION: consolidated later (carousel corrections block contains full rules) */
 
 /* ============================================
    SECTION STYLES
@@ -425,7 +361,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero-section {
     position: relative;
-    min-height: 500px;
+    min-height: 650px;
     overflow: hidden;
     margin-top: 56px;
 }
@@ -443,7 +379,7 @@ h1, h2, h3, h4, h5, h6 {
 .hero-section #homeHeroCarousel .carousel-item {
     width: 100%;
     height: 100%;
-    min-height: 500px;
+    min-height: 650px;
 }
 
 /* Centraliza o conteúdo do slide como no banner original */
@@ -462,7 +398,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: center top;
 }
 
 /* Camada escura por cima da imagem */
@@ -481,6 +417,32 @@ h1, h2, h3, h4, h5, h6 {
     padding: 2rem;
     max-width: 800px;
     margin: 0 auto;
+}
+
+.hero-section .hero-content h1 {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 700;
+    color: #FFF;
+    margin-bottom: 1.5rem;
+}
+.hero-section .hero-content p {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 1.5rem;
+}
+.btn-hero {
+    background-color: #28a745;
+    color: #FFF;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.6rem 2rem;
+    border-radius: var(--radius-sm);
+    border: none;
+    display: inline-block;
+}
+.btn-hero:hover {
+    background-color: #218838;
+    color: #FFF;
 }
 
 /* Onda branca sempre acima do banner */
@@ -612,7 +574,7 @@ h1, h2, h3, h4, h5, h6 {
    RESPONSIVE
    ============================================ */
 @media (max-width: 991px) {
-    .hero-section { min-height: 400px; }
+    .hero-section { min-height: 520px; }
     .section-padding { padding: 3rem 0; }
     .navbar-cap .navbar-collapse {
         background: var(--color-primary);
@@ -623,7 +585,7 @@ h1, h2, h3, h4, h5, h6 {
     .page-header { padding: 6rem 0 2.5rem; }
 }
 @media (max-width: 767px) {
-    .hero-section { min-height: 350px; }
+    .hero-section { min-height: 460px; }
     .section-padding { padding: 2.5rem 0; }
     .stat-item .stat-number { font-size: 2rem; }
     .page-header { padding: 5.5rem 0 2rem; }
@@ -669,7 +631,7 @@ h1, h2, h3, h4, h5, h6 {
 
 
 /* ============================================
-   PARCEIROS — grid da página inicial
+   PARCEIROS — grid da página inicial (4 por linha)
    ============================================ */
 
 .parceiros-section {
@@ -677,18 +639,58 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .parceiros-grid {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 320px);
+    gap: 1rem;
+    align-items: center;
+    justify-items: center;
+}
+
+/* Se a grade for usada junto com Bootstrap `.row`, resetamos o comportamento grid
+   para deixar o `row` e `col` do Bootstrap controlarem o layout e a centralização. */
+.parceiros-grid.row {
+    display: block;
+    grid-template-columns: none;
+    max-width: none;
+    margin: 0; /* container do Bootstrap cuida da centralização */
+}
+
+/* Se `.parceiros-grid` for usado como flex container (d-flex flex-wrap),
+   cada item `.parceiro-item` terá largura responsiva para formar até 4 colunas.
+   O próprio container com `justify-content-center` centraliza linhas incompletas. */
+.parceiros-grid.d-flex {
+    display: flex !important;
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
 }
 
+.parceiro-item {
+    flex: 0 0 25%;
+    max-width: 25%;
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 991.98px) {
+    .parceiro-item { flex: 0 0 33.3333%; max-width: 33.3333%; }
+}
+@media (max-width: 767.98px) {
+    .parceiro-item { flex: 0 0 50%; max-width: 50%; }
+}
+@media (max-width: 575.98px) {
+    .parceiro-item { flex: 0 0 100%; max-width: 100%; }
+}
+
 .parceiro-card {
-    max-width: 100px;
-    background: #fff;
-    border: 1px solid var(--color-border, #dee2e6);
-    border-radius: 8px;
-    padding: 0.5rem;
+    width: 100%;
+    max-width: 320px;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    padding: 0.25rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -696,14 +698,37 @@ h1, h2, h3, h4, h5, h6 {
     text-decoration: none;
     color: var(--color-primary, #198754);
     font-weight: 700;
+    min-height: 0;
+    transition: transform 180ms ease, box-shadow 180ms ease;
 }
 
 .parceiro-card img {
-    width: 100%;
-    max-width: 120px;
-    max-height: 70px;
+    width: auto;
+    max-width: 320px;
+    max-height: 240px;
     object-fit: contain;
     display: block;
+    transition: transform 220ms ease;
+}
+
+.parceiro-card:hover {
+    transform: translateY(-6px) scale(1.02);
+}
+.parceiro-card:hover img {
+    transform: scale(1.08);
+}
+
+/* Responsivo: ajustar número de colunas conforme a tela */
+@media (max-width: 1199px) {
+    .parceiros-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 767px) {
+    .parceiros-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .parceiro-card { max-width: 320px; }
+}
+@media (max-width: 575px) {
+    .parceiros-grid { grid-template-columns: 1fr; }
+    .parceiro-card { max-width: 420px; }
 }
 
 @media (max-width: 576px) {
@@ -721,60 +746,20 @@ h1, h2, h3, h4, h5, h6 {
 .atividade-detalhe-bloco {
     background: #fff;
     border: none;
-    border-top: 1px solid var(--color-border, #dee2e6);
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 1rem;
-    padding-top: 1.5rem;
-    margin-bottom: 0;
+    margin-bottom: 1rem;
 }
 
 .atividade-detalhe-bloco:last-child {
     margin-bottom: 0;
 }
 
-.atividade-extra .atividade-subtitulo {
+.atividade-extra .atividade-subtitulo,
+.atividade-subtitulo {
     margin-bottom: 0.75rem;
 }
-
-.atividade-img-container-grande {
-    width: 100%;
-    background: #fff;
-    border: none;
-    border-top: 1px solid var(--color-border, #dee2e6);
-    border-bottom: 1px solid var(--color-border, #dee2e6);
-    border-radius: 12px;
-    padding: 0.75rem;
-    margin: 1.25rem 0;
-    text-align: center;
-}
-
-.atividade-img-grande {
-    width: 100%;
-    height: auto;
-    max-height: 620px;
-    object-fit: contain;
-    display: block;
-    margin: 0 auto;
-    border-radius: 10px;
-}
-
-.atividade-detalhe-bloco {
-    background: #fff;
-    border: none;
-    border-top: 1px solid var(--color-border, #dee2e6);
-    border-radius: 12px;
-    padding: 1rem;
-    padding-top: 1.5rem;
-    margin-bottom: 0;
-}
-
-.atividade-detalhe-bloco:last-child {
-    margin-bottom: 0;
-}
-
-.atividade-extra .atividade-subtitulo {
-    margin-bottom: 0.75rem;
-}
+/* atividade blocks consolidated later in the file */
 
 /* ============================================
    COLABORADORES — card horizontal
@@ -1025,26 +1010,6 @@ h1, h2, h3, h4, h5, h6 {
     display: block;
     margin: 0 auto;
     border-radius: 6px;
-}
-
-.atividade-detalhe-bloco {
-    background: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 1rem;
-    margin-bottom: 1rem;
-}
-
-.atividade-detalhe-bloco:last-child {
-    margin-bottom: 0;
-}
-
-.atividade-subtitulo {
-    color: var(--color-primary, #198754);
-    font-size: 1.1rem;
-    border-bottom: none;
-    padding-bottom: 0.4rem;
-    margin-bottom: 0.75rem;
 }
 
 .img-placeholder {
