@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -257,3 +258,23 @@ JAZZMIN_UI_TWEAKS = {
         "success": "btn-success",
     },
 }
+
+
+# Security settings for production
+if not DEBUG:
+    # HTTPS and security headers
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_SECURITY_POLICY = {
+        "default-src": ("'self'",),
+        "script-src": ("'self'", "cdn.jsdelivr.net", "code.jquery.com"),
+        "style-src": ("'self'", "'unsafe-inline'", "cdn.jsdelivr.net"),
+        "img-src": ("'self'", "data:", "https:", "res.cloudinary.com"),
+        "font-src": ("'self'", "cdn.jsdelivr.net"),
+        "connect-src": ("'self'", "res.cloudinary.com"),
+    }
+    
+    # WhiteNoise cache configuration
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
