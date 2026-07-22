@@ -585,7 +585,41 @@ h1, h2, h3, h4, h5, h6 {
     .page-header { padding: 6rem 0 2.5rem; }
 }
 @media (max-width: 767px) {
-    .hero-section { min-height: 350px; }
+    .hero-section {
+        min-height: 0;
+    }
+
+    .hero-section #homeHeroCarousel {
+        position: relative;
+        height: auto !important;
+    }
+
+    .hero-section #homeHeroCarousel .carousel-inner,
+    .hero-section #homeHeroCarousel .carousel-item {
+        height: auto !important;
+        min-height: 0;
+    }
+
+    .hero-section #homeHeroCarousel .carousel-item {
+        padding: 4.25rem 1rem 6.5rem;
+    }
+
+    .hero-section .hero-content {
+        padding: 0 1rem;
+    }
+
+    .hero-section > .hero-content {
+        padding: 4.25rem 1rem 6.5rem;
+    }
+
+    .hero-section .hero-content h1 {
+        margin-bottom: 1rem;
+    }
+
+    .hero-section .hero-content p {
+        margin-bottom: 1.25rem;
+    }
+
     .section-padding { padding: 2.5rem 0; }
     .stat-item .stat-number { font-size: 2rem; }
     .page-header { padding: 5.5rem 0 2rem; }
