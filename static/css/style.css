@@ -138,6 +138,8 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: var(--radius-lg);
     overflow: hidden;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 .card-cap .card-img-top {
     height: 220px;
@@ -146,6 +148,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 .card-cap .card-body {
     padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 .card-cap .card-title {
     font-family: var(--font-heading);
@@ -158,6 +163,8 @@ h1, h2, h3, h4, h5, h6 {
     color: rgba(255,255,255,0.85);
     font-size: 0.9rem;
     line-height: 1.6;
+    flex: 1;
+    margin-bottom: 0.75rem;
 }
 .card-cap .card-meta {
     font-size: 0.85rem;
@@ -165,7 +172,7 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-top: 0.75rem;
+    margin-top: auto;
     padding-top: 0.75rem;
     border-top: 1px solid rgba(255,255,255,0.15);
 }
@@ -178,6 +185,9 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--color-text-light);
     border-radius: var(--radius-lg);
     border: none;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 .card-equipe img {
     width: 100px;
@@ -195,7 +205,19 @@ h1, h2, h3, h4, h5, h6 {
 .card-equipe .cargo {
     color: rgba(255,255,255,0.7);
     font-size: 0.85rem;
+    min-height: 2.5em;
     margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card-equipe .card-equipe-links {
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    min-height: 42px;
 }
 .card-equipe .bio {
     color: rgba(255,255,255,0.7);
