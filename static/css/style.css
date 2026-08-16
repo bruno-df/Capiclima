@@ -194,7 +194,9 @@ h1, h2, h3, h4, h5, h6 {
     height: 100px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 1rem;
+    object-position: center top;
+    display: block;
+    margin: 0 auto 1rem;
 }
 .card-equipe h5 {
     font-family: var(--font-heading);
